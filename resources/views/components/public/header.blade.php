@@ -1,7 +1,7 @@
 <div>
       <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Selecao Bootstrap Template</title>
+  <title>Sicape</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
