@@ -15,14 +15,19 @@ class VerifEmailController extends Controller
     }
     public function verifikasi(Request $request){
         $request->validate([
-            "email" => "required | email"
+            "email" => "required | email | unique:users,email"
+        ],[
+            "eamil.required" => "Email wajib di isi",
+            "email.email" => "yang anda inputkan bukan lah sebuah email",
+            "email.unique" => "Email sudah di pakai oleh user lain"
         ]);
+
 // bikin generate otp
         $otp = random_int(100000, 999999);
 // kirim email
         if($request->has("email")){
         Mail::to($request->email)->send(new verifEmail($otp));
-        session(["verifEmail" => true]);
+        session(["verifEmail" => true,"email_expired_at" => now()]);
         }
 
        $user =  User::create([

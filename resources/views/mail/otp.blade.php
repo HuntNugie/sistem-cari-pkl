@@ -27,7 +27,7 @@
             <tr>
               <td style="text-align: center; padding-top: 10px;">
                 <p style="color: #888; font-size: 14px;">
-                  Kode ini berlaku selama 10 menit. Jangan berikan kode ini kepada siapa pun.
+                  Kode ini berlaku selama 5 menit. Jangan berikan kode ini kepada siapa pun.
                 </p>
               </td>
             </tr>
