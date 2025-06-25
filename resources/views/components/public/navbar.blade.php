@@ -1,5 +1,5 @@
 <div>
-      <header id="header" class="header d-flex align-items-center fixed-top">
+      <header id="header" class="header d-flex align-items-center fixed-top" style="background-color: #1e1e2f">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
@@ -10,12 +10,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#beranda" class="active">Beranda</a></li>
-          <li><a href="#tentang">Tentang</a></li>
-          <li><a href="#layanan">Layanan</a></li>
-          <li><a href="#daftar">Daftar PKL</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#kontak">Kontak</a></li>
+          <li><a href="{{ route("beranda") }}#beranda" class="{{ request()->routeIs('public.myprofile') ? "" : "active" }}">Beranda</a></li>
+          <li><a href="{{ route("beranda") }}#tentang">Tentang</a></li>
+          <li><a href="{{ route("beranda") }}#layanan">Layanan</a></li>
+          <li><a href="{{ route("beranda") }}#daftar">Daftar PKL</a></li>
+          <li><a href="{{ route("beranda") }}#team">Team</a></li>
+          <li><a href="{{ route("beranda") }}#kontak">Kontak</a></li>
           @guest
 
           <li><a href="{{ route("public.login") }}">Login</a></li>
@@ -26,9 +26,10 @@
            <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
             <img src="lgn.jpg" alt="User" class="rounded-circle me-2" width="35" height="35">
+            {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="{{ route("public.myprofile") }}">My Profile</a></li>
               <li><a class="dropdown-item" href="#">Notifikasi</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>

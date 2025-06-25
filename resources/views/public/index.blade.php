@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <x-public.header/>
-</head>
-
-<body class="index-page">
-
-    <x-public.navbar/>
-
-  <main class="main">
-
+@extends("layout.public.public")
+@section("content")
     <!-- beranda Section -->
     <x-public.beranda/>
     <!-- /beranda Section -->
@@ -36,15 +25,4 @@
     <!-- Contact Section -->
     <x-public.kontak/>
    <!-- /Contact Section -->
-
-  </main>
-
- <x-public.footer/>
-
-
-
-  <x-public.script/>
-
-</body>
-
-</html>
+@endsection

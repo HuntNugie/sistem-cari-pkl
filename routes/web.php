@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VerifOtpController;
+use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\VerifEmailController;
 use App\Http\Controllers\public\auth\LoginController;
 use App\Http\Controllers\public\auth\RegisterController;
@@ -54,6 +55,12 @@ Route::prefix("register")->group(function(){
     Route::post("/register",[RegisterController::class,"register"])->name("public.register.aksi");
 });
 
+// myprofile
+Route::prefix("myprofile")->group(function(){
+    Route::get("/profile",[MyProfileController::class,"show"])->name("public.myprofile")->middleware("auth");
+
+
+});
 
 Route::get("/hapus",function(){
     User::truncate();
