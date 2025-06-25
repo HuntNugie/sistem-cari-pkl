@@ -31,6 +31,9 @@ class RegisterController extends Controller
         "password" => Hash::make($request->password)
        ]);
         Auth::login($user);
+        $request->session()->forget([
+            "verifEmail","email_expired_at","user_id"
+        ]);
         return redirect()->route("beranda");
     }
 }

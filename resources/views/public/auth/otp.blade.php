@@ -43,7 +43,7 @@
     <div class="card text-center shadow-lg" style="max-width: 400px; width: 100%;">
       <img src="https://via.placeholder.com/100" alt="User" class="otp-image mx-auto">
       <h4 class="mb-3">Verifikasi Kode OTP</h4>
-
+        <h5>Lihat kode otp di email {{ $email }}</h5>
       <form action="{{ route('public.otp.aksi') }}" method="post">
         @csrf
         <div class="mb-3 text-start">
@@ -58,6 +58,7 @@
 
       <div class="text-center mt-3">
         <p id="timer" class="mb-1 text-warning">Waktu tersisa: 05:00</p>
+        <a href="{{ route("public.verifEmail") }}" id="editEmail" class="resend-link text-decoration-none d-block mt-1">Salah email ? Edit email</a>
         <a href="{{ route("public.resend") }}" id="resendLink" class="resend-link disabled text-decoration-none d-block mt-1">Tidak ada kode otp ? Kirim ulang kode</a>
       </div>
     </div>

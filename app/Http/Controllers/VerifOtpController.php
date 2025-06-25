@@ -10,7 +10,9 @@ use Carbon\Carbon;
 class VerifOtpController extends Controller
 {
     public function show(){
-        return view("public.auth.otp");
+        $id = session("user_id");
+        $user = User::findOrFail($id);
+        return view("public.auth.otp",["email" => $user->email]);
     }
     public function verifOtp(Request $request){
         $request->validate([
@@ -18,7 +20,7 @@ class VerifOtpController extends Controller
         ]);
         $id = $request->session()->get("user_id");
         $user = User::findOrFail($id);
-        if(now()->diffInMinutes(Carbon::parse(session("email_expired_at"))) > 5){
+        if(intval(now()->diffInMinutes(session("email_expired_at"))) < -5 ){
             $user->otp = null;
             $user->save();
             return back()->withErrors(["gagal"=> "tidak dapat mealnjutkan otp sudah expired klik kirim ulang otp"]);

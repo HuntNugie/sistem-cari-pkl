@@ -28,6 +28,7 @@
 @endpush
 @section("auth")
  <div class="d-flex justify-content-center align-items-center min-vh-100">
+     <a href="{{ route("beranda") }}" class="btn btn-primary">Kembali</a>
     <div class="loginBox text-center">
       <img class="user" src="https://via.placeholder.com/100" alt="User">
       <h3 class="mb-2">Register Siswa</h3>
@@ -37,7 +38,7 @@
         @csrf
         <div class="mb-3 text-start">
           <label for="email" class="form-label">Alamat Email</label>
-          <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email aktif" required>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email aktif" value="{{ $email }}" required>
         </div>
 
         <div class="d-grid">

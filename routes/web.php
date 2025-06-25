@@ -45,6 +45,7 @@ Route::prefix("register")->group(function(){
     $user->otp = $otp;
     $user->save();
     Mail::to($email)->send(new verifEmail($otp));
+    session()->put("email_expired_at",now());
     return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
     })->name("public.resend")->middleware("jagaOtp");
 
