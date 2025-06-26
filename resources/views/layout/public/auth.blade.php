@@ -14,7 +14,6 @@
     @stack("style")
 </head>
 <body>
-
     @yield("auth")
 
   <!-- Bootstrap JS -->

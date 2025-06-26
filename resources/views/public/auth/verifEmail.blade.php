@@ -27,8 +27,10 @@
     </style>
 @endpush
 @section("auth")
+<div class="m-3">
+<a href="{{ route("public.login") }}" class="btn btn-dark">Kembali</a>
+</div>
  <div class="d-flex justify-content-center align-items-center min-vh-100">
-     <a href="{{ route("beranda") }}" class="btn btn-primary">Kembali</a>
     <div class="loginBox text-center">
       <img class="user" src="https://via.placeholder.com/100" alt="User">
       <h3 class="mb-2">Register Siswa</h3>

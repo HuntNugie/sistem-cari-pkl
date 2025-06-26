@@ -39,6 +39,9 @@
   </style>
 @endpush
 @section("auth")
+<div class="m-3">
+    <a href="{{ route("public.verifEmail") }}" class="btn btn-dark">Kembali</a>
+</div>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card text-center shadow-lg" style="max-width: 400px; width: 100%;">
       <img src="https://via.placeholder.com/100" alt="User" class="otp-image mx-auto">

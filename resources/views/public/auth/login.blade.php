@@ -1,6 +1,9 @@
 @extends("layout.public.auth")
 
 @section("auth")
+<div class="m-3">
+    <a href="{{ route("beranda") }}" class="btn btn-dark">Kembali</a>
+</div>
   <div class="loginBox">
     <img class="user" src="https://via.placeholder.com/100" alt="User" height="100" width="100">
     <h3>Login siswa</h3>
