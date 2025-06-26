@@ -90,7 +90,7 @@
     </div>
 
     <div class="text-end">
-      <a href="#" class="btn btn-orange">Edit Profil</a>
+      <a href="{{ route("public.myprofile.edit") }}" class="btn btn-orange">Edit Profil</a>
     </div>
   </div>
 </div>

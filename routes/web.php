@@ -49,7 +49,6 @@ Route::prefix("register")->group(function(){
     session()->put("email_expired_at",now());
     return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
     })->name("public.resend")->middleware("jagaOtp");
-
     // memasukkan data diri
     Route::get("/register",[RegisterController::class,"show"])->name("public.register");
     Route::post("/register",[RegisterController::class,"register"])->name("public.register.aksi");
@@ -58,9 +57,11 @@ Route::prefix("register")->group(function(){
 // myprofile
 Route::prefix("myprofile")->group(function(){
     Route::get("/profile",[MyProfileController::class,"show"])->name("public.myprofile")->middleware("auth");
-
-
+    Route::get("/edit",[MyProfileController::class,"edit"])->name("public.myprofile.edit")->middleware("auth");
 });
+
+
+
 
 Route::get("/hapus",function(){
     User::truncate();

@@ -10,7 +10,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route("beranda") }}#beranda" class="{{ request()->routeIs('public.myprofile') ? "" : "active" }}">Beranda</a></li>
+          <li><a href="{{ route("beranda") }}#beranda" class="{{ request()->routeIs('beranda') ? "active" : "" }}">Beranda</a></li>
           <li><a href="{{ route("beranda") }}#tentang">Tentang</a></li>
           <li><a href="{{ route("beranda") }}#layanan">Layanan</a></li>
           <li><a href="{{ route("beranda") }}#daftar">Daftar PKL</a></li>
@@ -29,7 +29,7 @@
             {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="{{ route("public.myprofile") }}">My Profile</a></li>
+              <li><a class="dropdown-item" href="{{ route("public.myprofile") }}" style="color:{{ request()->routeIs('public.myprofile') || request()->routeIs("public.myprofile.edit") ? "#ff6600" : "" }}">My Profile</a></li>
               <li><a class="dropdown-item" href="#">Notifikasi</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
