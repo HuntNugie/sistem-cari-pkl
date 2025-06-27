@@ -65,7 +65,7 @@ Route::prefix("myprofile")->group(function(){
 //Admin
 Route::prefix("admin")->group(function(){
     // auth
-    Route::get("/login", [LoginAdminController::class,"show"])->name("admin.login");
+    Route::get("/login", [LoginAdminController::class,"show"])->name("admin.login")->middleware("cekAuth:admin");
     Route::post("/login", [LoginAdminController::class,"login"])->name("admin.login.aksi");
     Route::post("/logout",function(Request $request){
         Auth::logout();
@@ -77,7 +77,7 @@ Route::prefix("admin")->group(function(){
     // dashboard
     Route::get("/dashboard",function(){
         return view("admin.dashboard");
-    })->name("admin.dashboard")->middleware("auth:admin");
+    })->name("admin.dashboard")->middleware(["auth:admin"]);
 });
 
 Route::get("/hapus",function(){

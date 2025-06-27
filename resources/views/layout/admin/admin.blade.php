@@ -11,11 +11,11 @@
     data-sidebar-position="fixed" data-header-position="fixed">
     <!-- Sidebar Start -->
 
-     @guest
+     @guest("admin")
             @yield("auth")
     @endguest
 
-    @auth
+    @auth("admin")
 
     <x-admin.sidebar />
 
