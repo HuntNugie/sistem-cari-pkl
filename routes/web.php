@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\admin\auth\LoginAdminController;
 use App\Models\User;
+
 use App\Mail\verifEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\VerifOtpController;
 use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\VerifEmailController;
 use App\Http\Controllers\public\auth\LoginController;
 use App\Http\Controllers\public\auth\RegisterController;
+use App\Http\Controllers\admin\auth\LoginAdminController;
 
 // landing page
 Route::get('/', function () {
@@ -75,9 +77,7 @@ Route::prefix("admin")->group(function(){
     })->name("admin.logout");
 
     // dashboard
-    Route::get("/dashboard",function(){
-        return view("admin.dashboard");
-    })->name("admin.dashboard")->middleware(["auth:admin"]);
+    Route::get("/dashboard",[AdminController::class,"index"])->name("admin.dashboard")->middleware(["auth:admin"]);
 });
 
 Route::get("/hapus",function(){
