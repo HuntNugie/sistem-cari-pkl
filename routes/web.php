@@ -2,6 +2,7 @@
 
 use App\Models\User;
 
+use App\Models\Sekolah;
 use App\Mail\verifEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,8 +88,16 @@ Route::get("/hapus",function(){
     return "berhasil";
 });
 
-Route::get("/apiSekolah",function(){
-    $response = Http::get("https://api-sekolah-indonesia.vercel.app/sekolah/SMK?page=1&perPage=1000");
-    $data = $response->json()["dataSekolah"];
-    return view("tes",compact("data"));
-});
+// Route::get("/apiSekolah",function(){
+//     $response = Http::get("https://api-sekolah-indonesia.vercel.app/sekolah/SMK?page=1&perPage=1000");
+//     $data = $response->json();
+//     foreach ($data["dataSekolah"] as $item) {
+//         Sekolah::create([
+//             "nama_sekolah" => $item["sekolah"],
+//             "npsn" => $item["npsn"],
+//             "provinsi" => $item["propinsi"],
+//             "alamat" => $item["kabupaten_kota"]." ".$item["kecamatan"]." ".$item["alamat_jalan"]
+//         ]);
+//     }
+//     return view("tes",compact("data"));
+// });
