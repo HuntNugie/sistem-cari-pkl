@@ -5,12 +5,13 @@ use App\Models\User;
 use App\Mail\verifEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\VerifOtpController;
 use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\VerifEmailController;
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\public\auth\LoginController;
 use App\Http\Controllers\public\auth\RegisterController;
 use App\Http\Controllers\admin\auth\LoginAdminController;
@@ -86,3 +87,8 @@ Route::get("/hapus",function(){
     return "berhasil";
 });
 
+Route::get("/apiSekolah",function(){
+    $response = Http::get("https://api-sekolah-indonesia.vercel.app/sekolah/SMK?page=1&perPage=1000");
+    $data = $response->json()["dataSekolah"];
+    return view("tes",compact("data"));
+});
