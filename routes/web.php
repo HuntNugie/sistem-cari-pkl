@@ -19,7 +19,7 @@ Route::get('/', function () {
 })->name("beranda");
 
 // login user
-Route::get("/login",[LoginController::class,"show"])->name("public.login");
+Route::get("/login",[LoginController::class,"show"])->name("public.login")->middleware("cekAuth");
 Route::post("/login",[LoginController::class,"login"])->name("public.login.aksi");
 Route::post("/logout",function(Request $request){
     Auth::logout();
@@ -31,11 +31,11 @@ Route::post("/logout",function(Request $request){
 // register user
 Route::prefix("register")->group(function(){
     // memasukkan email dan kirim kode otp lewat email
-    Route::get("/verifEmail",[VerifEmailController::class,"show"])->name("public.verifEmail");
-    Route::post("/verifEmail",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi");
+    Route::get("/verifikasi-email",[VerifEmailController::class,"show"])->name("public.verifEmail")->middleware("cekAuth");
+    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi");
 
     //memasukkan otp
-    Route::get("/otp",[VerifOtpController::class,"show"])->name("public.otp")->middleware("jagaOtp");
+    Route::get("/otp",[VerifOtpController::class,"show"])->name("public.otp")->middleware(["jagaOtp","cekAuth"]);
     Route::post("/otp",[VerifOtpController::class,"verifOtp"])->name("public.otp.aksi");
 
     // kirim ulang kode otp
@@ -49,10 +49,10 @@ Route::prefix("register")->group(function(){
     Mail::to($email)->send(new verifEmail($otp));
     session()->put("email_expired_at",now());
     return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
-    })->name("public.resend")->middleware("jagaOtp");
+    })->name("public.resend")->middleware(["jagaOtp","cekAuth"]);
     // memasukkan data diri
-    Route::get("/register",[RegisterController::class,"show"])->name("public.register");
-    Route::post("/register",[RegisterController::class,"register"])->name("public.register.aksi");
+    Route::get("/isi-data",[RegisterController::class,"show"])->name("public.register")->middleware("cekAuth");
+    Route::post("/isi-data",[RegisterController::class,"register"])->name("public.register.aksi");
 });
 
 // myprofile
