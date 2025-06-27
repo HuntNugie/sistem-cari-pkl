@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\auth\LoginAdminController;
 use App\Models\User;
 use App\Mail\verifEmail;
 use Illuminate\Http\Request;
@@ -61,7 +62,23 @@ Route::prefix("myprofile")->group(function(){
 });
 
 
+//Admin
+Route::prefix("admin")->group(function(){
+    // auth
+    Route::get("/login", [LoginAdminController::class,"show"])->name("admin.login");
+    Route::post("/login", [LoginAdminController::class,"login"])->name("admin.login.aksi");
+    Route::post("/logout",function(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route("admin.login");
+    })->name("admin.logout");
 
+    // dashboard
+    Route::get("/dashboard",function(){
+        return view("admin.dashboard");
+    })->name("admin.dashboard")->middleware("auth:admin");
+});
 
 Route::get("/hapus",function(){
     User::truncate();

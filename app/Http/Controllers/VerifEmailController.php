@@ -12,16 +12,16 @@ class VerifEmailController extends Controller
 {
     public function show(){
         if(session()->has("user_id")){
-               $id = session("user_id");
-        $user = User::findOrFail($id);
+            $id = session("user_id");
+            $user = User::findOrFail($id);
         }
         return view("public.auth.verifEmail",["email" => $user->email ?? null]);
     }
     public function verifikasi(Request $request){
         $request->validate([
             "email" => "required | email | unique:users,email"
-        ],[
-            "eamil.required" => "Email wajib di isi",
+        ],params: [
+            "email.required" => "Email wajib di isi",
             "email.email" => "yang anda inputkan bukan lah sebuah email",
             "email.unique" => "Email sudah di pakai oleh user lain"
         ]);
@@ -47,6 +47,7 @@ class VerifEmailController extends Controller
         session(["user_id" => $user->id]);
         return redirect()->intended(route("public.otp"));
     }
+    // mengirim ulang otp
     public function resendOtp($email,$otp){
             $id = session("user_id");
             $user = User::findOrFail($id);
