@@ -16,6 +16,8 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\public\auth\LoginController;
 use App\Http\Controllers\public\auth\RegisterController;
 use App\Http\Controllers\admin\auth\LoginAdminController;
+use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
+use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 
 // landing page
 Route::get('/', function () {
@@ -66,7 +68,7 @@ Route::prefix("myprofile")->group(function(){
 });
 
 
-//Admin
+//Admin route
 Route::prefix("admin")->group(function(){
     // auth
     Route::get("/login", [LoginAdminController::class,"show"])->name("admin.login")->middleware("cekAuth:admin");
@@ -83,11 +85,39 @@ Route::prefix("admin")->group(function(){
     Route::get("/dashboard",[AdminController::class,"index"])->name("admin.dashboard")->middleware(["auth:admin"]);
 });
 
-Route::get("/hapus",function(){
-    User::truncate();
-    session()->invalidate();
-    return "berhasil";
+// Perusahaan route
+Route::prefix("perusahaan")->group(function(){
+    //login perusahaan
+    Route::get("/login",[LoginPerusahaanController::class,"show"])->name("perusahaan.login")->middleware("cekAuth:perusahaan");
+    Route::post("/login",[LoginPerusahaanController::class,"login"])->name("perusahaan.login.aksi");
+
+    // register perusahaan
+    Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register")->middleware("cekAuth:perusahaan");
+    Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
+
+    // logout perusahaan
+    Route::post("/logout",function(Request $request){
+        Auth::guard("perusahaan")->logout();
+        $request->session()->invalidate();
+        $request->session()->flush();
+        $request->session()->regenerateToken();
+        return redirect()->route("perusahaan.login");
+    })->name("perusahaan.logout");
+
+    // dashboard perusahaan
+    Route::get("/dashboard",function(){
+        return view("perusahaan.dashboard");
+    })->name("perusahaan.dashboard")->middleware("auth:perusahaan");
+
 });
+
+
+
+// Route::get("/hapus",function(){
+//     User::truncate();
+//     session()->invalidate();
+//     return "berhasil";
+// });
 
 // Route::get("/apiSekolah",function(){
 //     $response = Http::get("https://api-sekolah-indonesia.vercel.app/sekolah/SMK?page=1&perPage=1000");
