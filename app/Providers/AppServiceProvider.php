@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
             Authenticate::redirectUsing(function ($request) {
                 return match(true){
                     $request->is('admin/*') => route('admin.login'),
+                    $request->is('perusahaan/*') => route('perusahaan.login'),
                     default => route('public.login'),
                 };
          });
