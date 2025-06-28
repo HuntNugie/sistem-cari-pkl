@@ -72,8 +72,9 @@ Route::prefix("admin")->group(function(){
     Route::get("/login", [LoginAdminController::class,"show"])->name("admin.login")->middleware("cekAuth:admin");
     Route::post("/login", [LoginAdminController::class,"login"])->name("admin.login.aksi");
     Route::post("/logout",function(Request $request){
-        Auth::logout();
+        Auth::guard("admin")->logout();
         $request->session()->invalidate();
+        $request->session()->flush();
         $request->session()->regenerateToken();
         return redirect()->route("admin.login");
     })->name("admin.logout");
