@@ -43,7 +43,7 @@
           <span></span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="docs/documentation.html">
+          <a class="nav-link" href="{{ route('perusahaan.daftar.riwayat') }}">
             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
             <span class="menu-title">Riwayat Siswa PKl</span>
           </a>

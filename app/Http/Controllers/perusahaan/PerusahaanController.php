@@ -41,4 +41,10 @@ class PerusahaanController extends Controller
         // Logic to fetch and display students currently doing internships
         return view("perusahaan.daftar-siswa-pkl", ["quote" => $quote]);
     }
+    public function daftarRiwayat()
+    {
+        $quote = $this->api->json();
+        // Logic to fetch and display internship history
+        return view("perusahaan.daftar-riwayat", ["quote" => $quote]);
+    }
 }

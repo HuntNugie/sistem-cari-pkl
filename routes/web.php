@@ -115,7 +115,10 @@ Route::prefix("perusahaan")->group(function(){
     Route::get("/daftar-siswa-baru",[PerusahaanController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru")->middleware("auth:perusahaan");
 
     // daftar siswa sedang pkl
-    Route::get("/daftar-siswa-sedang-pkl",[PerusahaanController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl")->middleware("auth:perusahaan");
+    Route::get("/daftar-siswa-pkl",[PerusahaanController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl")->middleware("auth:perusahaan");
+
+    // daftar siswa sedang pkl
+    Route::get("/daftar-siswa-riwayat",[PerusahaanController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat")->middleware("auth:perusahaan");
 });
 
 
