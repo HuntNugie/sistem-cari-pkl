@@ -34,7 +34,8 @@ Route::post("/logout",function(Request $request){
     $request->session()->regenerateToken();
     return redirect()->route("beranda");
 })->name("public.logout");
-
+Route::get("/auth/google", [LoginController::class, "redirectToGoogle"])->name("public.auth.google");
+Route::get("/auth/google/callback", [LoginController::class, "handleGoogleCallback"])->name("public.auth.google.callback");
 // register user
 Route::prefix("register")->group(function(){
     // memasukkan email dan kirim kode otp lewat email
