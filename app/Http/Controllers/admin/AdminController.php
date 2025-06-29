@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function dashboard(){
         $siswa = User::latest()->take(5)->get();
         $jumlah = User::all()->count();
          return view("admin.dashboard", compact(['siswa','jumlah']));

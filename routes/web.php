@@ -18,6 +18,7 @@ use App\Http\Controllers\public\auth\RegisterController;
 use App\Http\Controllers\admin\auth\LoginAdminController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
+use App\Http\Controllers\perusahaan\PerusahaanController;
 
 // landing page
 Route::get('/', function () {
@@ -82,7 +83,7 @@ Route::prefix("admin")->group(function(){
     })->name("admin.logout");
 
     // dashboard
-    Route::get("/dashboard",[AdminController::class,"index"])->name("admin.dashboard")->middleware(["auth:admin"]);
+    Route::get("/dashboard",[AdminController::class,"dashboard"])->name("admin.dashboard")->middleware(["auth:admin"]);
 });
 
 // Perusahaan route
@@ -105,9 +106,7 @@ Route::prefix("perusahaan")->group(function(){
     })->name("perusahaan.logout");
 
     // dashboard perusahaan
-    Route::get("/dashboard",function(){
-        return view("perusahaan.dashboard");
-    })->name("perusahaan.dashboard")->middleware("auth:perusahaan");
+    Route::get("/dashboard",[PerusahaanController::class,"dashboard"])->name("perusahaan.dashboard")->middleware("auth:perusahaan");
 
 });
 
