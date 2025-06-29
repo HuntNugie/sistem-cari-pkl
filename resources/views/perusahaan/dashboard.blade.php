@@ -1,173 +1,149 @@
 @extends("layout.perusahaan.perusahaan")
 
 @section("content")
-
-          <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Daftar siswa yang mendaftar</h4>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            Foto siswa
-                          </th>
-                          <th>
-                            Nama Lengkap Siswa
-                          </th>
-                          <th>
-                            Jenis Kelamin
-                          </th>
-                          <th>
-                            Lowongan PKL yang di ambil
-                          </th>
-                          <th>
-                            Detail
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face1.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face2.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face3.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face4.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Peter Meggik
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face5.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Edward
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 160.25
-                          </td>
-                          <td>
-                            May 03, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face6.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Doe
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 123.21
-                          </td>
-                          <td>
-                            April 05, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="images/faces/face7.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Henry Tom
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 150.00
-                          </td>
-                          <td>
-                            June 16, 2015
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card bg-primary d-flex align-items-center">
+            <div class="card-body py-5">
+                <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-account-plus text-white icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                        <h5 class="text-white font-weight-bold">{{ $jumlahSiswaBaru ?? 0 }} Siswa Baru</h5>
+                        <p class="mt-2 text-white card-text">Siswa yang baru mendaftar</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <!-- row end -->
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card bg-success d-flex align-items-center">
+            <div class="card-body py-5">
+                <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-school text-white icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                        <h5 class="text-white font-weight-bold">{{ $jumlahSiswaPkl ?? 0 }} Siswa PKL</h5>
+                        <p class="mt-2 text-white card-text">Siswa yang sedang PKL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card bg-info d-flex align-items-center">
+            <div class="card-body py-5">
+                <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                    <i class="mdi mdi-briefcase text-white icon-lg"></i>
+                    <div class="ml-3 ml-md-0 ml-xl-3">
+                        <h5 class="text-white font-weight-bold">{{ $jumlahLowongan ?? 0 }} Lowongan</h5>
+                        <p class="mt-2 text-white card-text">Lowongan PKL yang dibuat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-bold text-primary">
+                    <i class="mdi mdi-account-multiple-plus me-2"></i>
+                    Daftar 5 Siswa Baru Mendaftar
+                </h5>
+                <a href="#" class="btn btn-outline-primary btn-sm">
+                    <i class="mdi mdi-eye"></i> Lihat Semua
+                </a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-center">Foto</th>
+                                <th scope="col">Nama Lengkap</th>
+                                <th scope="col">Jenis Kelamin</th>
+                                <th scope="col">Lowongan PKL</th>
+                                <th scope="col" class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                    <img src="images/faces/face1.jpg" alt="Herman Beck" class="rounded-circle" width="48" height="48">
+                                </td>
+                                <td class="fw-semibold">Herman Beck</td>
+                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
+                                <td>Web Developer</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-info">
+                                        <i class="mdi mdi-information-outline"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <img src="images/faces/face2.jpg" alt="Messsy Adam" class="rounded-circle" width="48" height="48">
+                                </td>
+                                <td class="fw-semibold">Messsy Adam</td>
+                                <td><span class="badge bg-danger text-white">Perempuan</span></td>
+                                <td>UI/UX Designer</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-info">
+                                        <i class="mdi mdi-information-outline"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <img src="images/faces/face3.jpg" alt="John Richards" class="rounded-circle" width="48" height="48">
+                                </td>
+                                <td class="fw-semibold">John Richards</td>
+                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
+                                <td>Mobile Developer</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-info">
+                                        <i class="mdi mdi-information-outline"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <img src="images/faces/face4.jpg" alt="Peter Meggik" class="rounded-circle" width="48" height="48">
+                                </td>
+                                <td class="fw-semibold">Peter Meggik</td>
+                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
+                                <td>Network Engineer</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-info">
+                                        <i class="mdi mdi-information-outline"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    <img src="images/faces/face5.jpg" alt="Edward" class="rounded-circle" width="48" height="48">
+                                </td>
+                                <td class="fw-semibold">Edward</td>
+                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
+                                <td>Data Analyst</td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-info">
+                                        <i class="mdi mdi-information-outline"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white border-top-0">
+                <a href="#" class="btn btn-primary w-100 fw-semibold">
+                    <i class="mdi mdi-arrow-right-bold-circle-outline me-1"></i>
+                    Lihat Selengkapnya
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- row end -->
 @endsection

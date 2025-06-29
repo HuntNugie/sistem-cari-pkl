@@ -108,6 +108,8 @@ Route::prefix("perusahaan")->group(function(){
     // dashboard perusahaan
     Route::get("/dashboard",[PerusahaanController::class,"dashboard"])->name("perusahaan.dashboard")->middleware("auth:perusahaan");
 
+    // daftar lowongan kerja
+    Route::get("/daftar-lowongan",[PerusahaanController::class,"daftarLowongan"])->name("perusahaan.daftar.lowongan")->middleware("auth:perusahaan");
 });
 
 
