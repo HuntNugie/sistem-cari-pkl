@@ -33,19 +33,19 @@
           </a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="{{ route('perusahaan.daftar.siswa.pkl') }}">
             <i class="mdi mdi-hard-hat menu-icon"></i>
-            <span class="menu-title">Siswa sedang PKL</span>
+            <span class="menu-title">Siswa PKL</span>
           </a>
         </li>
         <li class="nav-item sidebar-category">
-          <p>Apps</p>
+          <p>Riwayat</p>
           <span></span>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="docs/documentation.html">
             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-            <span class="menu-title">Documentation</span>
+            <span class="menu-title">Riwayat Siswa PKl</span>
           </a>
         </li>
         <li class="nav-item">
