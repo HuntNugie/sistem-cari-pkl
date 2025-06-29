@@ -29,4 +29,10 @@ class PerusahaanController extends Controller
         // Logic to fetch and display job listings
         return view("perusahaan.daftar-lowongan", ["quote" => $quote]);
     }
+    public function daftarSiswaBaru()
+    {
+        $quote = $this->api->json();
+        // Logic to fetch and display new students
+        return view("perusahaan.daftar-siswa-baru", ["quote" => $quote]);
+    }
 }

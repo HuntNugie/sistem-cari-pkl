@@ -19,7 +19,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('perusahaan.daftar.lowongan') }}">
             <i class="mdi mdi-briefcase menu-icon"></i>
-            <span class="menu-title">Daftar lowongan kerja</span>
+            <span class="menu-title">Daftar lowongan PKL</span>
           </a>
         </li>
         <li class="nav-item sidebar-category">
@@ -27,7 +27,7 @@
           <span></span>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="{{ route('perusahaan.daftar.siswa.baru') }}">
             <i class="mdi mdi-school menu-icon"></i>
             <span class="menu-title">Siswa baru</span>
           </a>

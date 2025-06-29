@@ -110,6 +110,9 @@ Route::prefix("perusahaan")->group(function(){
 
     // daftar lowongan kerja
     Route::get("/daftar-lowongan",[PerusahaanController::class,"daftarLowongan"])->name("perusahaan.daftar.lowongan")->middleware("auth:perusahaan");
+
+    // daftar siswa baru
+    Route::get("/daftar-siswa-baru",[PerusahaanController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru")->middleware("auth:perusahaan");
 });
 
 
