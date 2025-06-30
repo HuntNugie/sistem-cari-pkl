@@ -3,96 +3,147 @@
 @push('style')
 <style>
     body{
-        background-image: url('../profile.jpg')
+        background-image: url('../profile.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
-  .profile-card {
-    background-color: #1e1e2f;
-    color: #ffffff;
-    border-radius: 15px;
-    padding: 30px;
-    max-width: 700px;
-    margin: auto;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  }
-
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-
-  .profile-header img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #ff6600;
-  }
-
-  .profile-title h2 {
-    margin: 0;
-    color: #ff6600;
-  }
-
-  .info-label {
-    font-weight: bold;
-    color: #cccccc;
-  }
-
-  .info-value {
-    color: #ffffff;
-  }
-
-  .btn-orange {
-    background-color: #ff6600;
-    color: white;
-  }
-
-  .btn-orange:hover {
-    background-color: #e65c00;
-  }
+    .profile-card {
+        background: rgba(30,30,47,0.97);
+        color: #fff;
+        border-radius: 18px;
+        padding: 40px 35px 30px 35px;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255,255,255,0.12);
+    }
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        margin-bottom: 35px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 24px;
+    }
+    .profile-header img {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #ff6600;
+        box-shadow: 0 2px 12px rgba(255,102,0,0.15);
+    }
+    .profile-title h2 {
+        margin: 0 0 6px 0;
+        color: #ff6600;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+    .profile-title p {
+        margin: 0;
+        color: #bbb;
+        font-size: 1.1rem;
+    }
+    .profile-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 40px;
+        margin-top: 18px;
+    }
+    .profile-info-col {
+        flex: 1 1 300px;
+    }
+    .info-row {
+        display: flex;
+        margin-bottom: 18px;
+    }
+    .info-label {
+        width: 140px;
+        font-weight: 600;
+        color: #ffb380;
+        flex-shrink: 0;
+    }
+    .info-value {
+        color: #fff;
+        font-weight: 400;
+    }
+    .btn-orange {
+        background-color: #ff6600;
+        color: white;
+        border-radius: 8px;
+        padding: 10px 28px;
+        font-weight: 600;
+        border: none;
+        transition: background 0.2s;
+    }
+    .btn-orange:hover {
+        background-color: #e65c00;
+    }
+    @media (max-width: 700px) {
+        .profile-card { padding: 20px 10px; }
+        .profile-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+        .profile-info { flex-direction: column; gap: 0; }
+        .profile-info-col { width: 100%; }
+        .info-label { width: 120px; }
+    }
 </style>
 @endpush
 
 @section('content')
 <div style="margin-top: 5rem">
-
-<div class="container py-5">
-  <div class="profile-card">
-    <div class="profile-header">
-      <img src="https://media.istockphoto.com/id/1485546774/id/foto/pria-botak-tersenyum-ke-kamera-berdiri-dengan-tangan-disilangkan.jpg?s=612x612&w=0&k=20&c=hzlkB5Rs5GS080SS5QU9e3pzweE4CIdRjbaMK-G25XQ=" alt="User Photo">
-      <div class="profile-title">
-        <h2>{{ auth()->user()->name }}</h2>
-        <p class="text-muted mb-0">Siswa SMK</p>
-      </div>
+    <div class="container py-5">
+        <div class="profile-card">
+            <div class="profile-header">
+                <img src="{{asset("storage") }}/{{ auth()->user()->user_profile->foto ?? auth()->user()->user_profile->avatar ?? "" }}" alt="User Photo">
+                <div class="profile-title">
+                    <h2>{{ auth()->user()->name }}</h2>
+                    <p>Siswa SMK</p>
+                </div>
+            </div>
+            <div class="profile-info">
+                <div class="profile-info-col">
+                    <div class="info-row">
+                        <div class="info-label">NIS</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->nis ?? '-' }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">{{ auth()->user()->email }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Kelas</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->kelas ?? '-' }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Jurusan</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->jurusan->nama_jurusan ?? '-' }}</div>
+                    </div>
+                </div>
+                <div class="profile-info-col">
+                    <div class="info-row">
+                        <div class="info-label">Tgl Lahir</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->tgl_lahir ?? '-' }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Asal Sekolah</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->sekolah->nama_sekolah ?? '-' }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Telepon</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->telepon ?? '-' }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Alamat</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->alamat ?? '-' }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end mt-4">
+                <a href="{{ route('public.myprofile.edit') }}" class="btn btn-orange">Edit Profil</a>
+            </div>
+        </div>
     </div>
-
-    <div class="row mb-3">
-      <div class="col-sm-4 info-label">Email</div>
-      <div class="col-sm-8 info-value"> {{ auth()->user()->email }} </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-sm-4 info-label">Kelas</div>
-      <div class="col-sm-8 info-value"> XII RPL 1 </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-sm-4 info-label">Asal Sekolah</div>
-      <div class="col-sm-8 info-value">?? SMK Negeri 1 Contoh </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-sm-4 info-label">Nomor Telepon</div>
-      <div class="col-sm-8 info-value"> 085157933682 </div>
-    </div>
-    <div class="row mb-4">
-      <div class="col-sm-4 info-label">Alamat</div>
-      <div class="col-sm-8 info-value">Perumahan bumi sangkuariang 4</div>
-    </div>
-
-    <div class="text-end">
-      <a href="{{ route("public.myprofile.edit") }}" class="btn btn-orange">Edit Profil</a>
-    </div>
-  </div>
-</div>
 </div>
 @endsection

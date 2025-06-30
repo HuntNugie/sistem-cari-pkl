@@ -11,6 +11,7 @@ class Perusahaan_profile extends Model
 {
     /** @use HasFactory<\Database\Factories\PerusahaanProfileFactory> */
     use HasFactory;
+    protected $guarded = ["id"];
     public function perusahaan():BelongsTo{
         return $this->belongsTo(Perusahaan::class);
     }

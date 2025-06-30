@@ -46,7 +46,12 @@ class LoginController extends Controller
             return redirect()->route("public.login")->withErrors(["gagal" => "Anda sudah terdaftar dengan akun manual silahkan login manual"]);
         }
 
-        // Lakukan proses login atau registrasi pengguna di sini
+        if($userManual && $userManual->google_id){
+            // jika pengguna sudah terdaftar dengan akun google
+            Auth::login($userManual);
+            return redirect()->route('beranda');
+        }
+                // Lakukan proses login atau registrasi pengguna di sini
         $user = User::updateOrCreate([
             "email" => $userGoogle->getEmail(),
         ], [

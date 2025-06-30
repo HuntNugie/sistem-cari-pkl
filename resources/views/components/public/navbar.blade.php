@@ -25,7 +25,7 @@
 
            <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-            <img src="lgn.jpg" alt="User" class="rounded-circle me-2" width="35" height="35">
+            <img src="{{asset("storage") }}/{{ auth()->user()->user_profile->foto ?? '' }}" alt="User" class="rounded-circle me-2" width="35" height="35">
             {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">

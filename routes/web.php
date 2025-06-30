@@ -36,6 +36,7 @@ Route::post("/logout",function(Request $request){
 })->name("public.logout");
 Route::get("/auth/google", [LoginController::class, "redirectToGoogle"])->name("public.auth.google");
 Route::get("/auth/google/callback", [LoginController::class, "handleGoogleCallback"])->name("public.auth.google.callback");
+
 // register user
 Route::prefix("register")->group(function(){
     // memasukkan email dan kirim kode otp lewat email
@@ -67,6 +68,7 @@ Route::prefix("register")->group(function(){
 Route::prefix("myprofile")->group(function(){
     Route::get("/profile",[MyProfileController::class,"show"])->name("public.myprofile")->middleware("auth");
     Route::get("/edit",[MyProfileController::class,"edit"])->name("public.myprofile.edit")->middleware("auth");
+    Route::put("/update/{siswa}",[MyProfileController::class,"update"])->name("public.myprofile.update")->middleware("auth");
 });
 
 
