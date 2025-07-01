@@ -13,4 +13,7 @@ class AdminController extends Controller
         $jumlah = User::all()->count();
          return view("admin.dashboard", compact(['siswa','jumlah']));
     }
+    public function siswaAktif(){
+        return view("admin.siswa-aktif");
+    }
 }

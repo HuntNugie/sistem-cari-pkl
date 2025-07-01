@@ -30,7 +30,7 @@
               <span class="hide-menu">Siswa</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{ route("admin.siswa.aktif") }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-school"></i>
                 </span>

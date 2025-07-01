@@ -103,6 +103,9 @@ Route::prefix("admin")->group(function(){
 
     // dashboard
     Route::get("/dashboard",[AdminController::class,"dashboard"])->name("admin.dashboard")->middleware(["auth:admin"]);
+
+    // daftar siswa aktif
+    Route::get("/siswa-aktif",[AdminController::class,"siswaAktif"])->name("admin.siswa.aktif")->middleware(["auth:admin"]);
 });
 
 // Perusahaan route
