@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\public\auth\LoginController;
 use App\Http\Controllers\public\auth\RegisterController;
 use App\Http\Controllers\admin\auth\LoginAdminController;
+use App\Http\Controllers\admin\myprofileAdminController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\perusahaan\PerusahaanController;
@@ -124,6 +125,13 @@ Route::prefix("admin")->group(function(){
 
     // kritik dan saran
     Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran")->middleware(["auth:admin"]);
+
+    // halaman my profile admin
+    Route::prefix("myprofile")->group(function(){
+        Route::get("/",[myprofileAdminController::class,"show"])->name("admin.myprofile")->middleware("auth:admin");
+        Route::get("/edit",[myprofileAdminController::class,"edit"])->name("admin.myprofile.edit")->middleware("auth:admin");
+        Route::put("/update/{admin:username}",[myprofileAdminController::class,"update"])->name("admin.myprofile.update")->middleware("auth:admin");
+    });
 });
 
 // Perusahaan route
