@@ -109,6 +109,9 @@ Route::prefix("admin")->group(function(){
 
     // daftar siswa pkl
     Route::get("/siswa-pkl",[AdminController::class,"siswaPkl"])->name("admin.siswa.pkl")->middleware(["auth:admin"]);
+
+    // daftar perusahaan terkonfirmasi
+    Route::get("/perusahaan-terkonfirmasi",[AdminController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi")->middleware(["auth:admin"]);
 });
 
 // Perusahaan route

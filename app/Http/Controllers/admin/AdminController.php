@@ -19,4 +19,7 @@ class AdminController extends Controller
     public function siswaPkl(){
         return view("admin.siswa-pkl");
     }
+    public function perkonf(){
+        return view("admin.perusahaan-konf");
+    }
 }
