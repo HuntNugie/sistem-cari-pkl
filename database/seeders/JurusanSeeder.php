@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Jurusan;
 use Illuminate\Support\Str;
+use App\Helpers\StringHelper;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -14,6 +15,7 @@ class JurusanSeeder extends Seeder
      */
     public function run(): void
     {
+
          $jurusans = [
             'Rekayasa Perangkat Lunak',
             'Teknik Komputer dan Jaringan',
@@ -57,8 +59,14 @@ class JurusanSeeder extends Seeder
         foreach ($jurusans as $jurusan) {
            Jurusan::create([
                 'nama_jurusan' => $jurusan,
-                'slug' => Str::slug($jurusan)
+                'slug' => Str::slug($jurusan),
+                'singkatan' => StringHelper::singkatan($jurusan),
             ]);
         }
+        // $jurus = Jurusan::all();
+        // foreach($jurus as $jurusan){
+        //     $jurusan->singkatan = StringHelper::singkatan($jurusan->nama_jurusan);
+        //     $jurusan->save();
+        // }
     }
 }

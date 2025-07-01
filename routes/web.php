@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\auth\LoginAdminController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\perusahaan\PerusahaanController;
+use App\Models\Jurusan;
 
 // landing page
 Route::get('/', function () {
