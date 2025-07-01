@@ -17,6 +17,7 @@
 
 @section("content")
     <section class="py-5 bg-light">
+        <a href="{{ route("beranda") }}" class="btn btn-secondary mb-4 ms-3">Kembali</a>
       <div class="container" data-aos="fade-up">
         <h2 class="mb-4 text-center">Daftar Tempat PKL</h2>
         <!-- Search Bar -->

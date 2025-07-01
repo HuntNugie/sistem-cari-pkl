@@ -69,7 +69,7 @@
       </div>
 
       <!-- Tambahkan card lainnya di sini -->
-    <a href="" class="btn btn-primary">Liat selengkapnya</a>
+    <a href="{{ route("public.daftar.pkl") }}" class="btn btn-secondary">Liat selengkapnya</a>
     </div>
   </div>
 </section>
