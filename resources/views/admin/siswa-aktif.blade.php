@@ -4,6 +4,13 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">Daftar Siswa Aktif</h5>
+            <!-- Search Form -->
+            <form method="GET" action="" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Cari nama siswa, NIS, atau kelas..." value="{{ request('search') }}">
+                    <button class="btn btn-primary" type="submit">Cari</button>
+                </div>
+            </form>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped align-middle">
                     <thead class="table-dark">
