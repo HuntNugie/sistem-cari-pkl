@@ -22,4 +22,7 @@ class AdminController extends Controller
     public function perkonf(){
         return view("admin.perusahaan-konf");
     }
+    public function pernonf(){
+        return view("admin.perusahaan-non");
+    }
 }
