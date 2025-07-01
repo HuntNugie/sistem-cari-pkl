@@ -31,4 +31,7 @@ class AdminController extends Controller
     public function tambahAdmin(){
         return view("admin.tambah-admin");
     }
+    public function kritikSaran(){
+        return view("admin.kritik-saran");
+    }
 }

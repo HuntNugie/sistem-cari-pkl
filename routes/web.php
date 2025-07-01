@@ -121,6 +121,9 @@ Route::prefix("admin")->group(function(){
 
     // tambah admin
     Route::get("/tambah-admin",[AdminController::class,"tambahAdmin"])->name("admin.tambah.admin")->middleware(["auth:admin"]);
+
+    // kritik dan saran
+    Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran")->middleware(["auth:admin"]);
 });
 
 // Perusahaan route
