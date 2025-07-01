@@ -16,4 +16,7 @@ class AdminController extends Controller
     public function siswaAktif(){
         return view("admin.siswa-aktif");
     }
+    public function siswaPkl(){
+        return view("admin.siswa-pkl");
+    }
 }
