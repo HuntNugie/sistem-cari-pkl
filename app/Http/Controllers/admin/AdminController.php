@@ -28,4 +28,7 @@ class AdminController extends Controller
     public function daftarAdmin(){
         return view("admin.daftar-admin");
     }
+    public function tambahAdmin(){
+        return view("admin.tambah-admin");
+    }
 }
