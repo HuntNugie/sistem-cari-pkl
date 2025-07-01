@@ -25,4 +25,7 @@ class AdminController extends Controller
     public function pernonf(){
         return view("admin.perusahaan-non");
     }
+    public function daftarAdmin(){
+        return view("admin.daftar-admin");
+    }
 }

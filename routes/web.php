@@ -115,6 +115,9 @@ Route::prefix("admin")->group(function(){
 
     // daftar perusahaan belum terkonfirmasi
     Route::get("/perusahaan-belum-terkonfirmasi",[AdminController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi")->middleware(["auth:admin"]);
+
+    // daftar admin
+    Route::get("/daftar-admin",[AdminController::class,"daftarAdmin"])->name("admin.daftar.admin")->middleware(["auth:admin"]);
 });
 
 // Perusahaan route
