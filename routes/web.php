@@ -25,7 +25,9 @@ use App\Models\Jurusan;
 Route::get('/', function () {
     return view('public.index');
 })->name("beranda");
-
+Route::get("/daftar-pkl",function(){
+    return view("public.daftar-pkl");
+})->name("public.daftar.pkl");
 // login user
 Route::get("/login",[LoginController::class,"show"])->name("public.login")->middleware("cekAuth");
 Route::post("/login",[LoginController::class,"login"])->name("public.login.aksi");
