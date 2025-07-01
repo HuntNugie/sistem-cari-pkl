@@ -96,7 +96,14 @@
     <div class="container py-5">
         <div class="profile-card">
             <div class="profile-header">
-                <img src="{{asset("storage") }}/{{ auth()->user()->user_profile->foto ?? auth()->user()->user_profile->avatar ?? "" }}" alt="User Photo">
+               @if (auth()->user()->user_profile->foto)
+                    <img src="{{ asset('storage/' . auth()->user()->user_profile->foto) }}" alt="User Photo">
+                @elseif (auth()->user()->avatar)
+                    <img src="{{ auth()->user()->avatar }}" alt="User Photo">
+                @else
+                    <img src="https://imgs.search.brave.com/DkxRxFg6OEhXbIGUQg14SHcmtPzWgVOKqolWbV9fESE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aW5zdGFncmFtLWRl/ZmF1bHQtdXNlci1w/cm9maWxlLXBpYy1m/bGlwLWZsb3BzLXYw/LWc5ODNvZmxmZWc0/ZDEuanBnP3dpZHRo/PTI2MiZmb3JtYXQ9/cGpwZyZhdXRvPXdl/YnAmcz1jNmVjMjMw/NTE5OWM2MzNmYzZk/NDYwMjM4ZDA0MDlm/NDE4MTJmZTc1" alt="User Photo">
+
+               @endif
                 <div class="profile-title">
                     <h2>{{ auth()->user()->name }}</h2>
                     <p>Siswa SMK</p>

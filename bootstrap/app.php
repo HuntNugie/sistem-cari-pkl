@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             "jagaOtp" => App\Http\Middleware\jagaOtp::class,
             "cekAuth" => App\Http\Middleware\cekAuth::class,
+            "jagaDaftar" => App\Http\Middleware\jagaDaftar::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

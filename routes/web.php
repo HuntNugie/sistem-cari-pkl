@@ -26,15 +26,19 @@ Route::get('/', function () {
     return view('public.index');
 })->name("beranda");
 
-Route::prefix("daftar-pkl")->group(function(){
+// daftar pkl
+Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
     // daftar seluruh pkl
     Route::get("/",function(){
         return view("public.daftar-pkl");
     })->name("public.daftar.pkl");
+
+    // detail pkl
     Route::get("/detail",function(){
         return view("public.detail-pkl");
-    })->name("public.detail.pkl");
+    })->name("public.detail.pkl")->middleware("jagaDaftar");
 });
+
 // login user
 Route::get("/login",[LoginController::class,"show"])->name("public.login")->middleware("cekAuth");
 Route::post("/login",[LoginController::class,"login"])->name("public.login.aksi");
@@ -44,6 +48,8 @@ Route::post("/logout",function(Request $request){
     $request->session()->regenerateToken();
     return redirect()->route("beranda");
 })->name("public.logout");
+
+// login with google
 Route::get("/auth/google", [LoginController::class, "redirectToGoogle"])->name("public.auth.google");
 Route::get("/auth/google/callback", [LoginController::class, "handleGoogleCallback"])->name("public.auth.google.callback");
 

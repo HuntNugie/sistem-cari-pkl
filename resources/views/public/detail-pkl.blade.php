@@ -3,7 +3,7 @@
 @push("style")
     <style>
     section {
-      background-image: url('../profile.jpg');
+      background-image: url('../lgn.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;}

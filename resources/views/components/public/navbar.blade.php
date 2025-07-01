@@ -25,7 +25,13 @@
 
            <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
-            <img src="{{asset("storage") }}/{{ auth()->user()->user_profile->foto ?? '' }}" alt="User" class="rounded-circle me-2" width="35" height="35">
+                @if (auth()->user()->user_profile->foto)
+                     <img src="{{asset("storage") }}/{{ auth()->user()->user_profile->foto }}" alt="User" class="rounded-circle me-2" width="35" height="35">
+                @elseif (auth()->user()->avatar)
+                     <img src="{{ auth()->user()->avatar }}" alt="User" class="rounded-circle me-2" width="35" height="35">
+                @else
+                     <img src="https://imgs.search.brave.com/DkxRxFg6OEhXbIGUQg14SHcmtPzWgVOKqolWbV9fESE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aW5zdGFncmFtLWRl/ZmF1bHQtdXNlci1w/cm9maWxlLXBpYy1m/bGlwLWZsb3BzLXYw/LWc5ODNvZmxmZWc0/ZDEuanBnP3dpZHRo/PTI2MiZmb3JtYXQ9/cGpwZyZhdXRvPXdl/YnAmcz1jNmVjMjMw/NTE5OWM2MzNmYzZk/NDYwMjM4ZDA0MDlm/NDE4MTJmZTc1" alt="User" class="rounded-circle me-2" width="35" height="35">
+                @endif
             {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
