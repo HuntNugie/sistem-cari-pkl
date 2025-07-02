@@ -6,7 +6,7 @@
 </div>
   <div class="loginBox">
 
-        <img class="user" src="{{ asset("logo.png") }}" alt="User" height="100%" width="100%" >
+        <img class="user" src="{{ asset("logo bodasx.ai") }}" alt="User" height="100%" width="100%" >
 
     <h3>Login siswa</h3>
 

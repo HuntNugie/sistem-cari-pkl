@@ -17,7 +17,7 @@ class jagaOtp
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!session()->has("verifEmail") || !session()->has("user_id") || !session()->has("email_expired_at")){
+        if(!session()->has("verifEmail") || !session()->has("user_id") && !session()->has("perusahaan_id") || !session()->has("email_expired_at")){
             return redirect()->back()->withErrors(["gagal" => "anda tidak dapat mengakses halaman ini"]);
         }
         return $next($request);

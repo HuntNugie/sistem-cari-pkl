@@ -21,6 +21,7 @@ use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\perusahaan\PerusahaanController;
 use App\Models\Jurusan;
+use App\Models\Perusahaan;
 
 // landing page
 Route::get('/', function () {
@@ -68,14 +69,15 @@ Route::prefix("register")->group(function(){
     Route::get("/kirim-ulang",function(){
         $otp = random_int(100000, 999999);
         $id = session("user_id");
-    $user = User::findOrFail($id);
-    $email = $user->email;
-    $user->otp = $otp;
-    $user->save();
-    Mail::to($email)->send(new verifEmail($otp));
-    session()->put("email_expired_at",now());
-    return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
+        $user = User::findOrFail($id);
+        $email = $user->email;
+        $user->otp = $otp;
+        $user->save();
+        Mail::to($email)->send(new verifEmail($otp));
+        session()->put("email_expired_at",now());
+        return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
     })->name("public.resend")->middleware(["jagaOtp","cekAuth"]);
+
     // memasukkan data diri
     Route::get("/isi-data",[RegisterController::class,"show"])->name("public.register")->middleware("cekAuth");
     Route::post("/isi-data",[RegisterController::class,"register"])->name("public.register.aksi");
@@ -140,10 +142,30 @@ Route::prefix("perusahaan")->group(function(){
     Route::get("/login",[LoginPerusahaanController::class,"show"])->name("perusahaan.login")->middleware("cekAuth:perusahaan");
     Route::post("/login",[LoginPerusahaanController::class,"login"])->name("perusahaan.login.aksi");
 
+    // verifikasi email perusahaan
+    Route::get("/verifikasi-email",[VerifEmailController::class,"showPerusahaan"])->name("perusahaan.verifEmail")->middleware("cekAuth:perusahaan");
+    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi");
+
+    // verifikasi otp email perusahaan
+    Route::get("/otp",[VerifOtpController::class,"otpPerusahaan"])->name("perusahaan.otp")->middleware(["cekAuth"]);
+    Route::post("/otp",[VerifOtpController::class,"verifOtpPerusahaan"])->name("perusahaan.otp.aksi");
+
     // register perusahaan
     Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register")->middleware("cekAuth:perusahaan");
     Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
 
+    // perusahaan resend_otp
+    Route::get("/kirim-ulang",function(){
+         $otp = random_int(100000, 999999);
+        $id = session("perusahaan_id");
+        $perusahaan = Perusahaan::findOrFail($id);
+        $email = $perusahaan->email;
+        $perusahaan->otp = $otp;
+        $perusahaan->save();
+        Mail::to($email)->send(new verifEmail($otp));
+        session()->put("email_expired_at",now());
+        return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
+    })->name("perusahaan.resendOtp")->middleware(["jagaOtp","cekAuth"]);
     // logout perusahaan
     Route::post("/logout",function(Request $request){
         Auth::guard("perusahaan")->logout();
@@ -167,6 +189,8 @@ Route::prefix("perusahaan")->group(function(){
 
     // daftar siswa sedang pkl
     Route::get("/daftar-siswa-riwayat",[PerusahaanController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat")->middleware("auth:perusahaan");
+
+
 });
 
 

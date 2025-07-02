@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Perusahaan;
 use Carbon\Carbon;
 
 class VerifOtpController extends Controller
 {
+    // menampilkan halaman verifikasi otp user
     public function show(){
         $id = session("user_id");
         $user = User::findOrFail($id);
@@ -34,5 +36,34 @@ class VerifOtpController extends Controller
         }
         return redirect()->back()->withErrors(["gagal" => "Kode otp yang anda masukkan tidak sesuai"]);
 
+    }
+    // menampilkan halaman verifikasi otp perusahaan
+    public function otpPerusahaan(){
+          $id = session("perusahaan_id");
+        $perusahaan = Perusahaan::findOrFail($id);
+        return view("perusahaan.auth.otp",["email" => $perusahaan->email]);
+    }
+    public function verifOtpPerusahaan(Request $request){
+        $request->validate([
+            "otp" => "required "
+        ]);
+
+        $id = session()->get("perusahaan_id");
+
+        // cek jika waktu sudah lebih dari 5 menit
+        $perusahaan = Perusahaan::findOrFail($id);
+            if(intval(now()->diffInMinutes(session("email_expired_at"))) < -5 ){
+            $perusahaan->otp = null;
+            $perusahaan->save();
+            return back()->withErrors(["gagal"=> "tidak dapat mealnjutkan otp sudah expired klik kirim ulang otp"]);
+        }
+        // cek verifikasi otp nya dan redirect ke halaman register
+        if($request->otp == $perusahaan->otp){
+            $perusahaan->email_verified_at = now();
+            $perusahaan->save();
+            $request->session()->forget("verifEmail");
+            return redirect()->intended(route("perusahaan.register"));
+        }
+        return redirect()->back()->withErrors(["gagal" => "anda gagal verifikasi email"]);
     }
 }

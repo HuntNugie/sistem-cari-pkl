@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class RegisterPerusahaanController extends Controller
 {
-    //
+    public function show(){
+        return view("perusahaan.auth.register");
+    }
 }
