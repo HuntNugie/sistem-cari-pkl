@@ -61,7 +61,6 @@ class VerifOtpController extends Controller
         if($request->otp == $perusahaan->otp){
             $perusahaan->email_verified_at = now();
             $perusahaan->save();
-            $request->session()->forget("verifEmail");
             return redirect()->intended(route("perusahaan.register"));
         }
         return redirect()->back()->withErrors(["gagal" => "anda gagal verifikasi email"]);

@@ -59,7 +59,7 @@ Route::get("/auth/google/callback", [LoginController::class, "handleGoogleCallba
 Route::prefix("register")->group(function(){
     // memasukkan email dan kirim kode otp lewat email
     Route::get("/verifikasi-email",[VerifEmailController::class,"show"])->name("public.verifEmail")->middleware("cekAuth");
-    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi");
+    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi")->middleware("gagalEmail");
 
     //memasukkan otp
     Route::get("/otp",[VerifOtpController::class,"show"])->name("public.otp")->middleware(["jagaOtp","cekAuth"]);
@@ -144,14 +144,14 @@ Route::prefix("perusahaan")->group(function(){
 
     // verifikasi email perusahaan
     Route::get("/verifikasi-email",[VerifEmailController::class,"showPerusahaan"])->name("perusahaan.verifEmail")->middleware("cekAuth:perusahaan");
-    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi");
+    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi")->middleware("gagalEmail");
 
     // verifikasi otp email perusahaan
-    Route::get("/otp",[VerifOtpController::class,"otpPerusahaan"])->name("perusahaan.otp")->middleware(["cekAuth"]);
+    Route::get("/otp",[VerifOtpController::class,"otpPerusahaan"])->name("perusahaan.otp")->middleware(["cekAuth:perusahaan","jagaOtp"]);
     Route::post("/otp",[VerifOtpController::class,"verifOtpPerusahaan"])->name("perusahaan.otp.aksi");
 
     // register perusahaan
-    Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register")->middleware("cekAuth:perusahaan");
+    Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register")->middleware(["cekAuth:perusahaan","jagaOtp"]);
     Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
 
     // perusahaan resend_otp

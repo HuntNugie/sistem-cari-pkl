@@ -30,12 +30,7 @@ class VerifEmailController extends Controller
 // bikin generate otp
         $otp = random_int(100000, 999999);
 
-// resend email
-        if(session()->has("user_id")){
-            if($this->resendOtp($request->email,$otp)){
-                return redirect()->intended(route("public.otp"));
-            }
-        }
+
 // kirim email
         if($request->has("email")){
         Mail::to($request->email)->send(new verifEmail($otp));
@@ -70,13 +65,6 @@ class VerifEmailController extends Controller
 
         // bikin generate otp
         $otp = random_int(100000, 999999);
-
-        // resend email
-        if(session()->has("perusahaan_id")){
-            if($this->resendOtpPerusahaan($request->email,$otp)){
-                return redirect()->intended(route("perusahaan.otp"));
-            }
-        }
         // kirim email
         if($request->has("email")){
             // kirim email nya
@@ -93,16 +81,6 @@ class VerifEmailController extends Controller
 
     }
     // mengirim ulang otp
-    public function resendOtp($email,$otp){
-            $id = session("user_id");
-            $user = User::findOrFail($id);
-            $user->email = $email;
-            $user->otp = $otp;
-            $user->save();
-           $user->notify(new verifEmail($otp));
-            session()->put("email_expired_at",now());
-            return true;
-    }
     public function resendOtpPerusahaan($email,$otp){
             $id = session("perusahaan_id");
             $perusahaan = Perusahaan::findOrFail($id);
