@@ -176,21 +176,22 @@ Route::prefix("perusahaan")->group(function(){
     })->name("perusahaan.logout");
 
     // dashboard perusahaan
-    Route::get("/dashboard",[PerusahaanController::class,"dashboard"])->name("perusahaan.dashboard")->middleware("auth:perusahaan");
+    Route::get("/dashboard",[PerusahaanController::class,"dashboard"])->name("perusahaan.dashboard")->middleware(["auth:perusahaan"]);
 
     // daftar lowongan kerja
-    Route::get("/daftar-lowongan",[PerusahaanController::class,"daftarLowongan"])->name("perusahaan.daftar.lowongan")->middleware("auth:perusahaan");
+    Route::get("/daftar-lowongan",[PerusahaanController::class,"daftarLowongan"])->name("perusahaan.daftar.lowongan")->middleware(["auth:perusahaan","cekTerkonfirmasi"]);
 
     // daftar siswa baru
-    Route::get("/daftar-siswa-baru",[PerusahaanController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru")->middleware("auth:perusahaan");
+    Route::get("/daftar-siswa-baru",[PerusahaanController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru")->middleware(["auth:perusahaan","cekTerkonfirmasi"]);
 
     // daftar siswa sedang pkl
-    Route::get("/daftar-siswa-pkl",[PerusahaanController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl")->middleware("auth:perusahaan");
+    Route::get("/daftar-siswa-pkl",[PerusahaanController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl")->middleware(["auth:perusahaan","cekTerkonfirmasi"]);
 
     // daftar siswa sedang pkl
-    Route::get("/daftar-siswa-riwayat",[PerusahaanController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat")->middleware("auth:perusahaan");
+    Route::get("/daftar-siswa-riwayat",[PerusahaanController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat")->middleware(["auth:perusahaan","cekTerkonfirmasi"]);
 
-
+    // ajuan konfirmasi
+    Route::get("/ajuan-konfirmasi",[PerusahaanController::class,"showAjuan"])->name("perusahaan.ajuan");
 });
 
 

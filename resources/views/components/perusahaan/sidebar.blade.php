@@ -12,6 +12,9 @@
           </a>
         </li>
 
+        @if (auth()->guard("perusahaan")->user()->perusahaanProfile->status == "terkonfirmasi")
+
+
         <li class="nav-item sidebar-category">
           <p>Lowongan PKL</p>
           <span></span>
@@ -33,7 +36,7 @@
           </a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="{{ route('perusahaan.daftar.siswa.pkl') }}">
+          <a class="nav-link" href="{{ route('perusahaan.daftar.siswa.pkl') }}" >
             <i class="mdi mdi-hard-hat menu-icon"></i>
             <span class="menu-title">Siswa PKL</span>
           </a>
@@ -56,6 +59,18 @@
             </form>
           </div>
         </li>
+        @else
+         <li class="nav-item sidebar-category">
+          <p>Ajuan</p>
+          <span></span>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{{ route("perusahaan.ajuan") }}">
+            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+            <span class="menu-title">Konfirmasi perusahaan</span>
+          </a>
+        </li>
+          @endif
       </ul>
     </nav>
 

@@ -39,4 +39,8 @@ class PerusahaanController extends Controller
         // Logic to fetch and display internship history
         return view("perusahaan.daftar-riwayat", ["quote" => $quote]);
     }
+    public function showAjuan(){
+        $quote = "Pengajuan Konfirmasi Perusahaan";
+        return view("perusahaan.ajuan",["quote" => $quote]);
+    }
 }
