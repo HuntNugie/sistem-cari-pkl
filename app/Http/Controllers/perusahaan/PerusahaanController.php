@@ -8,42 +8,34 @@ use Illuminate\Support\Facades\Http;
 
 class PerusahaanController extends Controller
 {
-    public $api;
-
-    public function __construct()
-    {
-        $this->api = Http::withoutVerifying()->get("https://api.quotable.io/random", [
-            'minLength' => 50,
-            'maxLength' => 80,
-        ]);
-    }
 
     public function dashboard()
     {
-        $quote = $this->api->json();
+    //  https://api.quotable.io/random?minLength=50&maxLength=80
+        $quote = "dashboard";
         return view("perusahaan.dashboard", ["quote" => $quote]);
     }
     public function daftarLowongan()
     {
-        $quote = $this->api->json();
+        $quote = "daftar lowongan";
         // Logic to fetch and display job listings
         return view("perusahaan.daftar-lowongan", ["quote" => $quote]);
     }
     public function daftarSiswaBaru()
     {
-        $quote = $this->api->json();
+        $quote = "Daftar siswa baru";
         // Logic to fetch and display new students
         return view("perusahaan.daftar-siswa-baru", ["quote" => $quote]);
     }
     public function daftarSiswaPkl()
     {
-        $quote = $this->api->json();
+        $quote = "Daftar siswa PKl";
         // Logic to fetch and display students currently doing internships
         return view("perusahaan.daftar-siswa-pkl", ["quote" => $quote]);
     }
     public function daftarRiwayat()
     {
-        $quote = $this->api->json();
+        $quote = "Daftar riwayat";
         // Logic to fetch and display internship history
         return view("perusahaan.daftar-riwayat", ["quote" => $quote]);
     }

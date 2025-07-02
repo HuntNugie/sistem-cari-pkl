@@ -115,7 +115,7 @@
        <ul class="navbar-nav mr-lg-2">
           <li class="nav-item d-none d-lg-block">
              <span class="navbar-text" style="font-size: 1.2rem; color: #6c757d; font-weight: normal;">
-                "{{ $slot }}"
+                {{ $slot }}
              </span>
           </li>
        </ul>
