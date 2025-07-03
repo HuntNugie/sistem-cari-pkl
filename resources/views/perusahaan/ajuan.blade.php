@@ -13,23 +13,19 @@
                     <!-- Info Profil Perusahaan (Readonly) -->
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Nama Perusahaan</label>
-                        <input type="text" class="form-control" value="Nama Perusahaan" readonly>
+                        <input type="text" class="form-control" value="{{ $perusahaan->nama_perusahaan }}" readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Pemilik</label>
-                        <input type="text" class="form-control" value="Nama Pemilik" readonly>
+                        <input type="text" class="form-control" value="{{ $perusahaan->pemilik }}" readonly>
                     </div>
                     <div class="col-md-12">
                         <label class="form-label fw-semibold">Alamat</label>
-                        <textarea class="form-control" rows="2" readonly>Alamat lengkap perusahaan</textarea>
+                        <textarea class="form-control" rows="2" readonly>{{ $perusahaan->alamat }}</textarea>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Website</label>
-                        <input type="text" class="form-control" value="https://website.com" readonly>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Deskripsi</label>
-                        <textarea class="form-control" rows="2" readonly>Deskripsi singkat tentang perusahaan</textarea>
+                        <input type="text" class="form-control" value="{{ $perusahaan->website }}" readonly>
                     </div>
 
                     <hr class="mt-4">
@@ -37,21 +33,28 @@
                     <!-- Nomor Izin Usaha -->
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Nomor Izin Usaha</label>
-                        <input type="text" class="form-control" placeholder="Masukkan nomor izin usaha">
+                        <input type="text" class="form-control" name="nomor_izin_usaha" placeholder="Masukkan nomor izin usaha">
                     </div>
 
                     <!-- Upload File PDF -->
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Upload File Bukti (PDF)</label>
-                        <input type="file" class="form-control" accept="application/pdf">
+                        <input type="file" class="form-control" name="file_pendukung" accept="application/pdf">
                         <small class="text-muted">Hanya file .pdf, maksimal 2MB</small>
                     </div>
                 </div>
 
                 <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-success px-4 shadow-sm">
+                        @if (!$perusahaan->nama_perusahaan || !$perusahaan->pemilik || !$perusahaan->alamat || !$perusahaan->telepon || !$perusahaan->website || !$perusahaan->logo)
+                    <button type="submit" class="btn btn-danger px-4 shadow-sm" disabled>
+                        <i class="bi bi-send"></i> Belum bisa mengajukan
+                    </button>
+                    <small class="text-danger">*Lengkapi Profile terlebih dahulu </small>
+                        @else
+                         <button type="submit" class="btn btn-success px-4 shadow-sm">
                         <i class="bi bi-send"></i> Ajukan Konfirmasi
                     </button>
+                        @endif
                 </div>
             </form>
         </div>

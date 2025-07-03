@@ -41,6 +41,7 @@ class PerusahaanController extends Controller
     }
     public function showAjuan(){
         $quote = "Pengajuan Konfirmasi Perusahaan";
-        return view("perusahaan.ajuan",["quote" => $quote]);
+        $perusahaan = auth()->guard("perusahaan")->user()->perusahaanProfile;
+        return view("perusahaan.ajuan",["quote" => $quote,"perusahaan" => $perusahaan]);
     }
 }

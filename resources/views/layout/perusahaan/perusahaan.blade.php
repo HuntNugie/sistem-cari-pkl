@@ -18,8 +18,7 @@
     <script>
         Swal.fire({
   icon: "error",
-  title: "Oops...",
-  text: "Something went wrong!",
+  title: "{{ session("gagal") }}",
   footer: '<a href="#">Why do I have this issue?</a>'
 });
     </script>
