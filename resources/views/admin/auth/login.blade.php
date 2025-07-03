@@ -12,9 +12,9 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                  <img src="{{ asset("Logo hitam.png") }}" width="300" alt="380">
                 </a>
-                <p class="text-center">Login Admin NGK Company</p>
+                <p class="text-center">Login Admin SICAPE</p>
                 <form action="{{ route('admin.login.aksi') }}" method="POST">
                   @csrf
                   <div class="mb-3">

@@ -5,6 +5,15 @@
     <x-perusahaan.header/>
 </head>
 <body>
+    @session("sukses")
+    <script>
+        Swal.fire({
+  title: "{{ session("sukses") }}",
+  icon: "success",
+  draggable: true
+});
+    </script>
+    @endsession
   <div class="container-scroller d-flex">
 
     @guest("perusahaan")

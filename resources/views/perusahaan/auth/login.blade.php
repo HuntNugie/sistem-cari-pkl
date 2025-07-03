@@ -7,7 +7,7 @@
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="{{ asset("Logo hitam.png") }}" alt="logo" height="120">
               </div>
               <h4>Login perusahaan</h4>
               <h6 class="font-weight-light">Happy to see you again!</h6>

@@ -44,7 +44,7 @@ class MyProfilePerusahaanController extends Controller
         }
 
         $perusahaan->perusahaanProfile->update($valid);
-        return redirect()->route("perusahaan.myprofile");
+        return redirect()->route("perusahaan.myprofile")->with("sukses","Berhasil mengupdate profile ".$perusahaan->perusahaanProfile->nama_perusahaan);
 
     }
 }

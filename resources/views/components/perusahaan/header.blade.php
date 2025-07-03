@@ -13,4 +13,5 @@
   <link rel="stylesheet" href="{{ asset('perusahaan/css/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('perusahaan/images/favicon.png') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </div>
