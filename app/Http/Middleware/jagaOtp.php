@@ -17,6 +17,7 @@ class jagaOtp
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // untuk menangani jika ada orang yang mau mengakses halaman langsung tanpa proses
         if(!session()->has("verifEmail") || !session()->has("user_id") && !session()->has("perusahaan_id") || !session()->has("email_expired_at")){
             return redirect()->back()->withErrors(["gagal" => "anda tidak dapat mengakses halaman ini"]);
         }

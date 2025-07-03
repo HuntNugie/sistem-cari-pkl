@@ -16,6 +16,7 @@ class cekAuth
      */
     public function handle(Request $request, Closure $next,$guard = null): Response
     {
+        // middleware untuk mengecek apakah sudah login
         $guard = $guard ?? "web";
         if(Auth::guard($guard)->check()){
             switch ($guard) {

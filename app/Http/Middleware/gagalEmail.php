@@ -19,6 +19,7 @@ class gagalEmail
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // untuk menangani jika ada orang yang berhenti di tengah jalan
         if($request->has("email")){
             // cek dulu apakah perusahaan seblumnya sudah berhasil mengisi data
            if( $perusahaan = Perusahaan::where("email", $request->email)->first()){

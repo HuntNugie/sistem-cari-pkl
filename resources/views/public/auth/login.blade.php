@@ -5,7 +5,6 @@
     <a href="{{ route("beranda") }}" class="btn btn-dark">Kembali</a>
 </div>
   <div class="loginBox">
-
         <img class="user" src="{{ asset("Logo putihh.png") }}" alt="User" height="200" width="280" >
 
     <h3>Login siswa</h3>
