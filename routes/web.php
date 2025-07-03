@@ -29,6 +29,7 @@ Route::get('/', function () {
     return view('public.index');
 })->name("beranda");
 
+
 // daftar pkl
 Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
     // daftar seluruh pkl
@@ -40,11 +41,22 @@ Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
     Route::get("/detail",function(){
         return view("public.detail-pkl");
     })->name("public.detail.pkl")->middleware("jagaDaftar");
+
+    // Route myprofile User
+    Route::prefix("myprofile")->group(function(){
+
+        // Halaman utama myprofile user
+        Route::get("/profile",[MyProfileController::class,"show"])->name("public.myprofile")->middleware("auth");
+
+        // Halaman Edit myprofile user
+        Route::get("/edit",[MyProfileController::class,"edit"])->name("public.myprofile.edit")->middleware("auth");
+
+        // Aksi Edit myprofile user
+        Route::put("/update/{siswa}",[MyProfileController::class,"update"])->name("public.myprofile.update")->middleware("auth");
+    });
 });
 
-// login user
-Route::get("/login",[LoginController::class,"show"])->name("public.login")->middleware("cekAuth");
-Route::post("/login",[LoginController::class,"login"])->name("public.login.aksi");
+// Halaman Logout
 Route::post("/logout",function(Request $request){
     Auth::logout();
     $request->session()->invalidate();
@@ -52,44 +64,59 @@ Route::post("/logout",function(Request $request){
     return redirect()->route("beranda");
 })->name("public.logout");
 
-// login with google
-Route::get("/auth/google", [LoginController::class, "redirectToGoogle"])->name("public.auth.google");
-Route::get("/auth/google/callback", [LoginController::class, "handleGoogleCallback"])->name("public.auth.google.callback");
+// Halaman yang jika sudah login user maka tidak dapat di akses
+Route::middleware("cekAuth")->group(function(){
 
-// register user
-Route::prefix("register")->group(function(){
-    // memasukkan email dan kirim kode otp lewat email
-    Route::get("/verifikasi-email",[VerifEmailController::class,"show"])->name("public.verifEmail")->middleware("cekAuth");
-    Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi")->middleware("gagalEmail");
+    //Halaman login user
+    Route::get("/login",[LoginController::class,"show"])->name("public.login");
 
-    //memasukkan otp
-    Route::get("/otp",[VerifOtpController::class,"show"])->name("public.otp")->middleware(["jagaOtp","cekAuth"]);
-    Route::post("/otp",[VerifOtpController::class,"verifOtp"])->name("public.otp.aksi");
+    // Aksi Login user
+    Route::post("/login",[LoginController::class,"login"])->name("public.login.aksi");
 
-    // kirim ulang kode otp
-    Route::get("/kirim-ulang",function(){
-        $otp = random_int(100000, 999999);
-        $id = session("user_id");
-        $user = User::findOrFail($id);
-        $email = $user->email;
-        $user->otp = $otp;
-        $user->save();
-        Mail::to($email)->send(new verifEmail($otp));
-        session()->put("email_expired_at",now());
-        return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
-    })->name("public.resend")->middleware(["jagaOtp","cekAuth"]);
+    // login with google
+    Route::get("/auth/google", [LoginController::class, "redirectToGoogle"])->name("public.auth.google");
 
-    // memasukkan data diri
-    Route::get("/isi-data",[RegisterController::class,"show"])->name("public.register")->middleware("cekAuth");
-    Route::post("/isi-data",[RegisterController::class,"register"])->name("public.register.aksi");
+    //redirect dari login with google
+    Route::get("/auth/google/callback", [LoginController::class, "handleGoogleCallback"])->name("public.auth.google.callback");
+
+    // register user
+    Route::prefix("register")->group(function(){
+
+        // memasukkan email dan kirim kode otp lewat email
+        Route::get("/verifikasi-email",[VerifEmailController::class,"show"])->name("public.verifEmail");
+
+        // aksi memasukkan email dan kirim kode opt lewat email
+        Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi")->middleware("gagalEmail");
+
+        // route untuk mengjaga jika ada yang mengakses langsung ke halaman
+       Route::middleware("jagaOtp")->group(function(){
+            //memasukkan otp
+            Route::get("/otp",[VerifOtpController::class,"show"])->name("public.otp");
+            Route::post("/otp",[VerifOtpController::class,"verifOtp"])->name("public.otp.aksi");
+
+            // kirim ulang kode otp
+            Route::get("/kirim-ulang",function(){
+                $otp = random_int(100000, 999999);
+                $id = session("user_id");
+                $user = User::findOrFail($id);
+                $email = $user->email;
+                $user->otp = $otp;
+                $user->save();
+                Mail::to($email)->send(new verifEmail($otp));
+                session()->put("email_expired_at",now());
+                return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
+            })->name("public.resend");
+       });
+
+        // memasukkan data diri
+        Route::get("/isi-data",[RegisterController::class,"show"])->name("public.register");
+
+        // aksi untuk memasukkan data diri
+        Route::post("/isi-data",[RegisterController::class,"register"])->name("public.register.aksi");
+    });
 });
 
-// myprofile
-Route::prefix("myprofile")->group(function(){
-    Route::get("/profile",[MyProfileController::class,"show"])->name("public.myprofile")->middleware("auth");
-    Route::get("/edit",[MyProfileController::class,"edit"])->name("public.myprofile.edit")->middleware("auth");
-    Route::put("/update/{siswa}",[MyProfileController::class,"update"])->name("public.myprofile.update")->middleware("auth");
-});
+
 
 
 //Admin route
