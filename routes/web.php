@@ -94,9 +94,14 @@ Route::prefix("myprofile")->group(function(){
 
 //Admin route
 Route::prefix("admin")->group(function(){
-    // auth
+
+    // Halaman Login Admin
     Route::get("/login", [LoginAdminController::class,"show"])->name("admin.login")->middleware("cekAuth:admin");
+
+    // Aksi login admin
     Route::post("/login", [LoginAdminController::class,"login"])->name("admin.login.aksi");
+
+    // Aksi Logout admin
     Route::post("/logout",function(Request $request){
         Auth::guard("admin")->logout();
         $request->session()->invalidate();
@@ -105,36 +110,45 @@ Route::prefix("admin")->group(function(){
         return redirect()->route("admin.login");
     })->name("admin.logout");
 
-    // dashboard
-    Route::get("/dashboard",[AdminController::class,"dashboard"])->name("admin.dashboard")->middleware(["auth:admin"]);
+    // Route yang hanya yang sudah login admin yang dapat akses
+    Route::middleware("auth:admin")->group(function(){
+        // Halaman Dashboard admin
+        Route::get("/dashboard",[AdminController::class,"dashboard"])->name("admin.dashboard");
 
-    // daftar siswa aktif
-    Route::get("/siswa-aktif",[AdminController::class,"siswaAktif"])->name("admin.siswa.aktif")->middleware(["auth:admin"]);
+        //Halaman daftar siswa aktif
+        Route::get("/siswa-aktif",[AdminController::class,"siswaAktif"])->name("admin.siswa.aktif");
 
-    // daftar siswa pkl
-    Route::get("/siswa-pkl",[AdminController::class,"siswaPkl"])->name("admin.siswa.pkl")->middleware(["auth:admin"]);
+        //Halaman daftar siswa pkl
+        Route::get("/siswa-pkl",[AdminController::class,"siswaPkl"])->name("admin.siswa.pkl");
 
-    // daftar perusahaan terkonfirmasi
-    Route::get("/perusahaan-terkonfirmasi",[AdminController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi")->middleware(["auth:admin"]);
+        //Halaman daftar perusahaan terkonfirmasi
+        Route::get("/perusahaan-terkonfirmasi",[AdminController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi");
 
-    // daftar perusahaan belum terkonfirmasi
-    Route::get("/perusahaan-belum-terkonfirmasi",[AdminController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi")->middleware(["auth:admin"]);
+        //Halaman daftar perusahaan belum terkonfirmasi
+        Route::get("/perusahaan-belum-terkonfirmasi",[AdminController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi");
 
-    // daftar admin
-    Route::get("/daftar-admin",[AdminController::class,"daftarAdmin"])->name("admin.daftar.admin")->middleware(["auth:admin"]);
+        //Halaman daftar admin
+        Route::get("/daftar-admin",[AdminController::class,"daftarAdmin"])->name("admin.daftar.admin");
 
-    // tambah admin
-    Route::get("/tambah-admin",[AdminController::class,"tambahAdmin"])->name("admin.tambah.admin")->middleware(["auth:admin"]);
+        //Halaman tambah admin
+        Route::get("/tambah-admin",[AdminController::class,"tambahAdmin"])->name("admin.tambah.admin");
 
-    // kritik dan saran
-    Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran")->middleware(["auth:admin"]);
+        //Halamam kritik dan saran
+        Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran");
 
-    // halaman my profile admin
-    Route::prefix("myprofile")->group(function(){
-        Route::get("/",[myprofileAdminController::class,"show"])->name("admin.myprofile")->middleware("auth:admin");
-        Route::get("/edit",[myprofileAdminController::class,"edit"])->name("admin.myprofile.edit")->middleware("auth:admin");
-        Route::put("/update/{admin:username}",[myprofileAdminController::class,"update"])->name("admin.myprofile.update")->middleware("auth:admin");
+        // halaman my profile admin
+        Route::prefix("myprofile")->group(function(){
+            // Halaman utama myprofile
+            Route::get("/",[myprofileAdminController::class,"show"])->name("admin.myprofile");
+
+            // Halaman edit Myprofile
+            Route::get("/edit",[myprofileAdminController::class,"edit"])->name("admin.myprofile.edit");
+
+            // Aksi edit myprofile
+            Route::put("/update/{admin:username}",[myprofileAdminController::class,"update"])->name("admin.myprofile.update");
+        });
     });
+
 });
 
 // Perusahaan route
