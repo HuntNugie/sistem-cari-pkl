@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\auth\LoginAdminController;
 use App\Http\Controllers\admin\myprofileAdminController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
+use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
 use App\Http\Controllers\perusahaan\PerusahaanController;
 use App\Models\Jurusan;
 use App\Models\Perusahaan;
@@ -153,6 +154,13 @@ Route::prefix("perusahaan")->group(function(){
     // register perusahaan
     Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register")->middleware(["cekAuth:perusahaan","jagaOtp"]);
     Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
+
+    //myprofile perusahaan
+    Route::prefix("myprofile")->group(function(){
+        Route::get("/",[MyProfilePerusahaanController::class,"index"])->name("perusahaan.myprofile")->middleware("auth:perusahaan");
+        Route::get("/edit",[MyProfilePerusahaanController::class,"edit"])->name("perusahaan.myprofile.edit")->middleware("auth:perusahaan");
+        Route::put("/edit/{perusahaan}",[MyProfilePerusahaanController::class,"update"])->name("perusahaan.myprofile.edit.aksi")->middleware("auth:perusahaan");
+    });
 
     // perusahaan resend_otp
     Route::get("/kirim-ulang",function(){

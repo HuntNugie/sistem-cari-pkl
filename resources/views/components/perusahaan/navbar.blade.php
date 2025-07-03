@@ -124,10 +124,11 @@
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
              <img src="images/faces/face5.jpg" alt="profile"/>
              <span class="nav-profile-name">{{ auth()->guard("perusahaan")->user()->perusahaanProfile->nama_perusahaan }}</span>
+            </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-             <a class="dropdown-item">
+             <a class="dropdown-item" href="{{ route("perusahaan.myprofile") }}">
                <i class="mdi mdi-settings text-primary"></i>
-               Settings
+              Myprofile
              </a>
              <form action="{{ route('perusahaan.logout') }}" method="post">
                @csrf
