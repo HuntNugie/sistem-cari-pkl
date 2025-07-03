@@ -35,7 +35,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
-     <x-perusahaan.navbar>{{ $quote}}</x-perusahaan.navbar>
+     <x-perusahaan.navbar>{{ $halaman }}</x-perusahaan.navbar>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">

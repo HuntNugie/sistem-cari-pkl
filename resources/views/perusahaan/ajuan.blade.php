@@ -7,25 +7,26 @@
             <h5 class="mb-0">Form Pengajuan Konfirmasi Perusahaan</h5>
         </div>
         <div class="card-body">
-            <form>
+            <form action="{{ route("perusahaan.ajuan.aksi") }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="row g-3">
 
                     <!-- Info Profil Perusahaan (Readonly) -->
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Nama Perusahaan</label>
-                        <input type="text" class="form-control" value="{{ $perusahaan->nama_perusahaan }}" readonly>
+                        <input type="text" class="form-control" value="{{ $perusahaan->nama_perusahaan }}" readonly disabled>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Pemilik</label>
-                        <input type="text" class="form-control" value="{{ $perusahaan->pemilik }}" readonly>
+                        <input type="text" class="form-control" value="{{ $perusahaan->pemilik }}" readonly disabled>
                     </div>
                     <div class="col-md-12">
                         <label class="form-label fw-semibold">Alamat</label>
-                        <textarea class="form-control" rows="2" readonly>{{ $perusahaan->alamat }}</textarea>
+                        <textarea class="form-control" rows="2" readonly disabled>{{ $perusahaan->alamat }}</textarea>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Website</label>
-                        <input type="text" class="form-control" value="{{ $perusahaan->website }}" readonly>
+                        <input type="text" class="form-control" value="{{ $perusahaan->website }}" readonly disabled>
                     </div>
 
                     <hr class="mt-4">

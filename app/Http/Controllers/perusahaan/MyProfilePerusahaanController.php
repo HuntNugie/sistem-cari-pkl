@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Storage;
 class MyProfilePerusahaanController extends Controller
 {
     public function Index(){
-        return view("perusahaan.myprofile",["quote" => "Halaman Profile"]);
+        return view("perusahaan.myprofile",["halaman" => "Halaman Profile"]);
     }
 
     public function edit(){
-        return view("perusahaan.edit-myprofile",["quote" => "Halaman Edit Profile"]);
+        return view("perusahaan.edit-myprofile",["halaman" => "Halaman Edit Profile"]);
     }
 
     public function update(Request $request,Perusahaan $perusahaan){

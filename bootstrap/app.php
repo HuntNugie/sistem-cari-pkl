@@ -16,7 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
             "cekAuth" => App\Http\Middleware\cekAuth::class,
             "jagaDaftar" => App\Http\Middleware\jagaDaftar::class,
             "gagalEmail" => App\Http\Middleware\gagalEmail::class,
-            "cekTerkonfirmasi" => App\Http\Middleware\cekTerkonfirmasi::class
+            "cekTerkonfirmasi" => App\Http\Middleware\cekTerkonfirmasi::class,
+            "terkonfirmasi" => App\Http\Middleware\terkonfirmasi::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
