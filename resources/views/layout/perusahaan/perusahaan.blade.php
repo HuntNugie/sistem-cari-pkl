@@ -14,6 +14,16 @@
 });
     </script>
     @endsession
+    @session("gagal")
+    <script>
+        Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: '<a href="#">Why do I have this issue?</a>'
+});
+    </script>
+    @endsession
   <div class="container-scroller d-flex">
 
     @guest("perusahaan")
