@@ -26,24 +26,23 @@
                     </thead>
                     <tbody>
                         <!-- Data perusahaan akan ditampilkan di sini -->
+                        @foreach ($perusahaan as $non)
                         <tr>
-                            <td>1</td>
-                            <td>PT Maju Jaya</td>
-                            <td>1234567890</td>
-                            <td>Budi Santoso</td>
-                            <td>081234567890</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $non->nama_perusahaan }}</td>
+                            <td>{{ $non->nomor_izin_usaha }}</td>
+                            <td>{{ $non->pemilik }}</td>
+                            <td>{{ $non->telepon }}</td>
                             <td>
-                                <img src="{{ asset('images/logo1.png') }}" alt="Logo PT Maju Jaya" width="50">
+                                <img src="{{ asset("storage") }}/{{ $non->logo }}" alt="Logo PT Maju Jaya" width="50">
                             </td>
                             <td>
                                 <div class="d-flex gap-2 flex-wrap">
-                                    <button class="btn btn-success btn-sm">Konfirmasi</button>
-                                    <button class="btn btn-warning btn-sm">Tolak</button>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
                                     <button class="btn btn-info btn-sm">Detail</button>
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
 
                         <!-- Tambahkan baris lain sesuai kebutuhan -->
                     </tbody>

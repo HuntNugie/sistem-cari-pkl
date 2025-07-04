@@ -63,7 +63,7 @@ class PerusahaanController extends Controller
             "file_pendukung" => $path,
             "perusahaan_id" => $id
         ]);
-        $ajuan->perusahaann->perusahaanProfile()->update(
+        $ajuan->perusahaan->perusahaanProfile()->update(
             ["nomor_izin_usaha" => $request->nomor_izin_usaha]
         );
         return redirect()->back()->with("sukses","Berhasil mengirim ajuan ke admin, mohon menunggu admin untuk konfirmasi");

@@ -65,6 +65,14 @@
                 <span class="hide-menu">Perusahaan non-konfirmasi </span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route("admin.ajuan") }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-stack"></i>
+                </span>
+                <span class="hide-menu">Ajuan perusahaan</span>
+              </a>
+            </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Admin</span>

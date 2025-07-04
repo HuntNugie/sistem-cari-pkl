@@ -174,6 +174,13 @@ Route::prefix("admin")->group(function(){
             // Aksi edit myprofile
             Route::put("/update/{admin:username}",[myprofileAdminController::class,"update"])->name("admin.myprofile.update");
         });
+
+        // Halaman Daftar Ajuan Perusahaan
+        Route::get("/daftar-ajuan",[AdminController::class,"showAjuan"])->name("admin.ajuan");
+
+        // mengupdate konfirmasi ajuan perusahaan
+        Route::put("/daftar-ajuan/konfirmasi/{pengajuan}",[AdminController::class,"konfirmasiAjuan"])->name("admin.ajuan.aksi");
+
     });
 
 });
