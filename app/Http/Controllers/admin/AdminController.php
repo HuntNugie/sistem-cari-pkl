@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Mail\pemberitahuan_ditolak;
 use App\Models\Pengajuan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\pemberitahuan_diterima;
 use App\Models\Perusahaan;
 use App\Models\Perusahaan_profile;
+use Mail;
 
 class AdminController extends Controller
 {
@@ -64,7 +67,8 @@ class AdminController extends Controller
                     "alasan" => $request->alasan,
                     "status_verifikasi" => "diterima"
                 ]
-                );
+            );
+            $this->emailAjuan($pengajuan,pemberitahuan_diterima::class);
             return redirect()->back()->with("sukses","Berhasil konfirmasi selesai perusahaan".$pengajuan->perusahaan->perusahaanProfile->nama_perusahaan);
         }else{
             // ubah status_verifikasi di pengajuan dan masukkan alasan
@@ -73,7 +77,8 @@ class AdminController extends Controller
                     "alasan" => $request->alasan,
                     "status_verifikasi" => "ditolak"
                 ]
-                );
+            );
+            $this->emailAjuan($pengajuan,pemberitahuan_ditolak::class);
             return redirect()->back()->with("sukses","Berhasil Menolak perusahaan".$pengajuan->perusahaan->perusahaanProfile->nama_perusahaan);
         }
     }

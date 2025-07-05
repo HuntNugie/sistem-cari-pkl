@@ -23,6 +23,16 @@
 });
     </script>
     @endsession
+@if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Terjadi Kesalahan!",
+            html: `{!! implode('<br>', $errors->all()) !!}`
+        });
+    </script>
+@endif
+
   <div class="container-scroller d-flex">
 
     @guest("perusahaan")
