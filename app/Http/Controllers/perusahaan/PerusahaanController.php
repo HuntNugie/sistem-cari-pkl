@@ -5,8 +5,10 @@ namespace App\Http\Controllers\perusahaan;
 use App\Models\Pengajuan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\pemberitahuan_admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class PerusahaanController extends Controller
 {
@@ -66,6 +68,12 @@ class PerusahaanController extends Controller
         $ajuan->perusahaan->perusahaanProfile()->update(
             ["nomor_izin_usaha" => $request->nomor_izin_usaha]
         );
+        $nama = $ajuan->perusahaan->perusahaanProfile->nama_perusahaan;
+        $pemilik = $ajuan->perusahaan->perusahaanProfile->pemilik;
+        $email = $ajuan->perusahaan->email;
+        $tanggal = now()->format('d F Y H:i');
+        Mail::to("huntcode99@gmail.com")->send(new pemberitahuan_admin($nama,$pemilik,$email,$tanggal));
+
         return redirect()->back()->with("sukses","Berhasil mengirim ajuan ke admin, mohon menunggu admin untuk konfirmasi");
 
     }
