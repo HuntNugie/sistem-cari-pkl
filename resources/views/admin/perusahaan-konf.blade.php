@@ -26,12 +26,14 @@
                     </thead>
                     <tbody>
                         <!-- Data perusahaan akan ditampilkan di sini -->
+                        @foreach ($perusahaan as $konfir )
+
                         <tr>
-                            <td>1</td>
-                            <td>PT Maju Jaya</td>
-                            <td>1234567890</td>
-                            <td>Budi Santoso</td>
-                            <td>081234567890</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $konfir->nama_perusahaan }}</td>
+                            <td>{{ $konfir->nomor_izin_usaha }}</td>
+                            <td>{{ $konfir->pemilik }}</td>
+                            <td>{{ $konfir->telepon }}</td>
                             <td>
                                 <img src="{{ asset('images/logo1.png') }}" alt="Logo PT Maju Jaya" width="50">
                             </td>
@@ -39,20 +41,7 @@
                                 <button class="btn btn-info btn-sm">Detail</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>CV Sukses Bersama</td>
-                            <td>0987654321</td>
-                            <td>Siti Aminah</td>
-                            <td>082345678901</td>
-                            <td>
-                                <img src="{{ asset('images/logo2.png') }}" alt="Logo CV Sukses Bersama" width="50">
-                            </td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
-                            </td>
-                        </tr>
-                        <!-- Tambahkan baris lain sesuai kebutuhan -->
+                        @endforeach
                     </tbody>
                 </table>
             </div>

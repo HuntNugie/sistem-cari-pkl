@@ -15,7 +15,8 @@ class cekTerkonfirmasi
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->guard("perusahaan")->user()->status !== "terkonfirmasi"){
+        // middleware untuk tidak mengijinkan akses jika status nya sudah belum terkonfirmasi
+        if(auth()->guard("perusahaan")->user()->perusahaanProfile->status !== "terkonfirmasi"){
             return redirect()->back()->with("gagal","Anda tiidak dapat mengakses halaman ini");
         }
         return $next($request);

@@ -15,6 +15,7 @@ class terkonfirmasi
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // tidak akan di ijinkan jika status nya sudah terkonfirmasi
         if(auth()->guard("perusahaan")->user()->perusahaanProfile->status === "terkonfirmasi"){
             return redirect()->back()->with("gagal","Anda tidak bisa mengakses halaman ini");
         }

@@ -26,6 +26,7 @@ class gagalEmail
                 if($perusahaan->password){
                     return redirect()->back()->with("gagal","akun anda telah terdaftar silahkan login");
                 }else{
+                    // jika gagal di ijinkan ke route otp dan akan mengirim ulang kode otp
                     $otp = random_int(100000, 999999);
                     Mail::to($perusahaan->email)->send(new verifEmail($otp));
                     $perusahaan->otp = $otp;
