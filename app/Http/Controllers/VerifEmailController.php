@@ -21,14 +21,34 @@ class VerifEmailController extends Controller
     }
     public function verifikasi(Request $request){
         $request->validate([
-            "email" => "required | email | unique:users,email"
-        ],params: [
+            "email" => "required | email"
+        ], [
             "email.required" => "Email wajib di isi",
             "email.email" => "yang anda inputkan bukan lah sebuah email",
-            "email.unique" => "Email sudah di pakai oleh user lain"
         ]);
-// bikin generate otp
         $otp = random_int(100000, 999999);
+        $id = session("user_id");
+        if(session()->has("user_id")){
+            $user = User::where("id",$id)->first();
+            $user->email = $request->email;
+            Mail::to($user->email)->send(new verifEmail($otp));
+                    $user->otp = $otp;
+                    $user->save();
+                    session(["verifEmail" => true,"email_expired_at" => now(),"user_id" => $user->id]);
+                    return redirect()->intended(route("public.otp"));
+        }
+
+         if( $user = User::where("email", $request->email)->first()){
+                if($user->password){
+                    return redirect()->back()->with("gagal","akun anda telah terdaftar silahkan login");
+                }else{
+                    Mail::to($user->email)->send(new verifEmail($otp));
+                    $user->otp = $otp;
+                    $user->save();
+                    session(["verifEmail" => true,"email_expired_at" => now(),"user_id" => $user->id]);
+                    return redirect()->intended(route("public.otp"));
+                }
+           }
 
 
 // kirim email
@@ -56,15 +76,36 @@ class VerifEmailController extends Controller
     // menjalankan verifikasi email perusahaan
     public function verifikasiPerusahaan(Request $request){
         $request->validate([
-            "email" => "required | email | unique:users,email"
+            "email" => "required | email"
         ],[
             "email.required" => "Email wajib di isi",
             "email.email" => "yang anda inputkan bukan lah sebuah email",
-            "email.unique" => "Email sudah di pakai oleh user lain"
         ]);
 
         // bikin generate otp
         $otp = random_int(100000, 999999);
+                $id = session("perusahaan_id");
+        if(session()->has("perusahaan_id")){
+            $perusahaan = Perusahaan::where("id",$id)->first();
+            $perusahaan->email = $request->email;
+            Mail::to($perusahaan->email)->send(new verifEmail($otp));
+                    $perusahaan->otp = $otp;
+                    $perusahaan->save();
+                    session(["verifEmail" => true,"email_expired_at" => now(),"perusahaan_id" => $perusahaan->id]);
+                    return redirect()->intended(route("perusahaan.otp"));
+        }
+         if( $perusahaan = Perusahaan::where("email", $request->email)->first()){
+                if($perusahaan->password){
+                    return redirect()->back()->with("gagal","akun anda telah terdaftar silahkan login");
+                }else{
+                    // jika gagal di ijinkan ke route otp dan akan mengirim ulang kode otp
+                    Mail::to($perusahaan->email)->send(new verifEmail($otp));
+                    $perusahaan->otp = $otp;
+                    $perusahaan->save();
+                    session(["verifEmail" => true,"email_expired_at" => now(),"perusahaan_id" => $perusahaan->id]);
+                    return redirect()->intended(route("perusahaan.otp"))->with("sukses","silahkan cek email anda");
+                }
+            }
         // kirim email
         if($request->has("email")){
             // kirim email nya
@@ -77,7 +118,7 @@ class VerifEmailController extends Controller
             "otp" => $otp
         ]);
         session(["perusahaan_id" => $perusahaan->id]);
-        return redirect()->intended(route("perusahaan.otp"));
+        return redirect()->intended(route("perusahaan.otp"))->with("sukses","silahkan cek email anda");
 
     }
     // mengirim ulang otp

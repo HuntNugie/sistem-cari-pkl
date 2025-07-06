@@ -44,7 +44,7 @@
 </div>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card text-center shadow-lg" style="max-width: 400px; width: 100%;">
-      <img src="https://via.placeholder.com/100" alt="User" class="otp-image mx-auto">
+      <img src="" alt="User" class="otp-image mx-auto">
       <h4 class="mb-3">Verifikasi Kode OTP</h4>
         <h5>Lihat kode otp di email {{ $email }}</h5>
       <form action="{{ route('public.otp.aksi') }}" method="post">

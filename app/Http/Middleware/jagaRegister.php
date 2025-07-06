@@ -3,12 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Carbon\Carbon;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class jagaOtp
+class jagaRegister
 {
     /**
      * Handle an incoming request.
@@ -17,10 +15,8 @@ class jagaOtp
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        // untuk menangani jika ada orang yang mau mengakses halaman langsung tanpa proses
-        if(!session()->has("verifEmail") || !session()->has("user_id") && !session()->has("perusahaan_id") || !session()->has("email_expired_at")){
-            return redirect()->back()->withErrors(["gagal" => "anda tidak dapat mengakses halaman ini"]);
+        if(!session()->has("verifRegister") || !session()->has("user_id") && !session()->has("perusahaan_id") ){
+            return redirect()->back()->with("gagal","anda gagal mengakses halaman ini");
         }
         return $next($request);
     }

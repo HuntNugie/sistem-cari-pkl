@@ -32,6 +32,8 @@ class VerifOtpController extends Controller
             $user->email_verified_at = now();
             $user->save();
             $request->session()->forget("verifEmail");
+            $request->session()->forget("email_expired_at");
+            session(["verifRegister" => true]);
             return redirect()->intended(route("public.register"));
         }
         return redirect()->back()->withErrors(["gagal" => "Kode otp yang anda masukkan tidak sesuai"]);
@@ -61,6 +63,9 @@ class VerifOtpController extends Controller
         if($request->otp == $perusahaan->otp){
             $perusahaan->email_verified_at = now();
             $perusahaan->save();
+            $request->session()->forget("verifEmail");
+            $request->session()->forget("email_expired_at");
+            session(["verifRegister" => true]);
             return redirect()->intended(route("perusahaan.register"));
         }
         return redirect()->back()->withErrors(["gagal" => "anda gagal verifikasi email"]);

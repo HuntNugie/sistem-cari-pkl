@@ -42,7 +42,7 @@ class RegisterController extends Controller
     //    user langsung login setelah register
         Auth::login($user);
         $request->session()->forget([
-            "verifEmail","email_expired_at","user_id"
+            "verifRegister","user_id"
         ]);
         return redirect()->route("beranda");
     }

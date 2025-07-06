@@ -86,7 +86,7 @@ Route::middleware("cekAuth")->group(function(){
         Route::get("/verifikasi-email",[VerifEmailController::class,"show"])->name("public.verifEmail");
 
         // aksi memasukkan email dan kirim kode opt lewat email
-        Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi")->middleware("gagalEmail");
+        Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasi"])->name("public.verifEmail.aksi");
 
         // route untuk mengjaga jika ada yang mengakses langsung ke halaman
        Route::middleware("jagaOtp")->group(function(){
@@ -108,11 +108,13 @@ Route::middleware("cekAuth")->group(function(){
             })->name("public.resend");
        });
 
-        // memasukkan data diri
+      Route::middleware("jagaRegister")->group(function(){
+          // memasukkan data diri
         Route::get("/isi-data",[RegisterController::class,"show"])->name("public.register");
 
         // aksi untuk memasukkan data diri
         Route::post("/isi-data",[RegisterController::class,"register"])->name("public.register.aksi");
+      });
     });
 });
 
@@ -212,24 +214,27 @@ Route::prefix("perusahaan")->group(function(){
         Route::get("/verifikasi-email",[VerifEmailController::class,"showPerusahaan"])->name("perusahaan.verifEmail");
 
         //Aksi verifikasi email perusahaan
-        Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi")->middleware("gagalEmail");
+        Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi");
 
 
+        Route::middleware("jagaRegister")->group(function(){
+            //Halaman register perusahaan
+            Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register");
 
-        //Aksi verifikasi otp email perusahaan
-        Route::post("/otp",[VerifOtpController::class,"verifOtpPerusahaan"])->name("perusahaan.otp.aksi");
-
-
-        // Aksi register perusahaan
-        Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
+            // Aksi register perusahaan
+            Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
+        });
 
         // Route jika
         Route::middleware("jagaOtp")->group(function(){
             //Halaman verifikasi otp email perusahaan
             Route::get("/otp",[VerifOtpController::class,"otpPerusahaan"])->name("perusahaan.otp");
 
-            //Halaman register perusahaan
-            Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register");
+
+            //Aksi verifikasi otp email perusahaan
+            Route::post("/otp",[VerifOtpController::class,"verifOtpPerusahaan"])->name("perusahaan.otp.aksi");
+
+
 
              // perusahaan resend_otp
             Route::get("/kirim-ulang",function(){

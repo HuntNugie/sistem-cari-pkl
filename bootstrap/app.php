@@ -15,10 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
             "jagaOtp" => App\Http\Middleware\jagaOtp::class,
             "cekAuth" => App\Http\Middleware\cekAuth::class,
             "jagaDaftar" => App\Http\Middleware\jagaDaftar::class,
-            "gagalEmail" => App\Http\Middleware\gagalEmail::class,
             "cekTerkonfirmasi" => App\Http\Middleware\cekTerkonfirmasi::class,
             "terkonfirmasi" => App\Http\Middleware\terkonfirmasi::class,
-            "superadmin" => App\Http\Middleware\superadmin::class
+            "superadmin" => App\Http\Middleware\superadmin::class,
+            "jagaRegister" => App\Http\Middleware\jagaRegister::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

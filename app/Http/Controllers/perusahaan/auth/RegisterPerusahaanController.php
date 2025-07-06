@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class RegisterPerusahaanController extends Controller
 {
     public function show(){
+
         return view("perusahaan.auth.register");
     }
     public function register(Request $request){
@@ -34,6 +35,9 @@ class RegisterPerusahaanController extends Controller
         ]);
         $perusahaan->perusahaanProfile()->create($perusahaan_profile);
         Auth::guard("perusahaan")->login($perusahaan);
+           $request->session()->forget([
+            "verifRegister","perusahaan_id"
+        ]);
         return redirect()->intended(route("perusahaan.dashboard"));
     }
 }

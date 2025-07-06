@@ -32,7 +32,7 @@
 </div>
  <div class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="loginBox text-center">
-      <img class="user" src="https://via.placeholder.com/100" alt="User">
+      <img class="user" src="" alt="User">
       <h3 class="mb-2">Register Siswa</h3>
       <h5 class="mb-4 text-warning">Verifikasi Email</h5>
 
