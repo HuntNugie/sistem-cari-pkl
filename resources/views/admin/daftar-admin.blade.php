@@ -26,31 +26,27 @@
                     </thead>
                     <tbody>
                         <!-- Data admin akan ditampilkan di sini -->
+                        @foreach ($admin as $min)
+
+
                         <tr>
-                            <td>1</td>
-                            <td>Andi Pratama</td>
-                            <td>andi@email.com</td>
-                            <td>081234567890</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $min->profile->name }}</td>
+                            <td>{{ $min->profile->email }}</td>
+                            <td>{{ $min->profile->phone ?? "-" }}</td>
                             <td>
-                                <img src="{{ asset('images/admin1.png') }}" alt="Foto Andi Pratama" width="50">
+                                <img src="{{ asset('storage') }}/{{ $min->profile->foto ?? "" }}" alt="Foto Andi Pratama" width="50">
                             </td>
                             <td>
                                 <button class="btn btn-warning btn-sm">Ubah jadi Superadmin</button>
+                                <form action="" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus admin ini?')">Hapus</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Dewi Lestari</td>
-                            <td>dewi@email.com</td>
-                            <td>082345678901</td>
-                            <td>
-                                <img src="{{ asset('images/admin2.png') }}" alt="Foto Dewi Lestari" width="50">
-                            </td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">Ubah jadi Superadmin</button>
-                            </td>
-                        </tr>
-                        <!-- Tambahkan baris lain sesuai kebutuhan -->
+                        @endforeach
                     </tbody>
                 </table>
             </div>

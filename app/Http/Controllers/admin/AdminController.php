@@ -2,43 +2,61 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Mail\pemberitahuan_ditolak;
-use App\Models\Pengajuan;
+use Mail;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Pengajuan;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
+use App\Models\Perusahaan_profile;
+use App\Mail\pemberitahuan_ditolak;
 use App\Http\Controllers\Controller;
 use App\Mail\pemberitahuan_diterima;
-use App\Models\Perusahaan;
-use App\Models\Perusahaan_profile;
-use Mail;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    // halaman dashboard admin
     public function dashboard(){
         $siswa = User::latest()->take(5)->get();
         $jumlah = User::all()->count();
          return view("admin.dashboard", compact(['siswa','jumlah']));
     }
+
+    // halaman siswa aktif
     public function siswaAktif(){
         return view("admin.siswa-aktif");
     }
+
+    // halaman siswa pkl
     public function siswaPkl(){
         return view("admin.siswa-pkl");
     }
+
+    // halaman perusahaan terkonfirmasi
     public function perkonf(){
         $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->get();
         return view("admin.perusahaan-konf",compact("perusahaan"));
     }
+
+    // halaman perusahaan belum terkonfirmasi
     public function pernonf(){
         $perusahaan = Perusahaan_profile::where("status", "belum terkonfirmasi")->get();
         return view("admin.perusahaan-non",compact("perusahaan"));
     }
+
+    // halaman daftar admin
     public function daftarAdmin(){
-        return view("admin.daftar-admin");
+        $admin = Admin::where("id","!=",auth()->guard("admin")->user()->id)->get();
+        return view("admin.daftar-admin",compact("admin"));
     }
+
+    // halaman tambah admin
     public function tambahAdmin(){
         return view("admin.tambah-admin");
     }
+
+    // halaman kritik dan saran
     public function kritikSaran(){
         return view("admin.kritik-saran");
     }
@@ -81,6 +99,45 @@ class AdminController extends Controller
             $this->emailAjuan($pengajuan,pemberitahuan_ditolak::class);
             return redirect()->back()->with("sukses","Berhasil Menolak perusahaan".$pengajuan->perusahaan->perusahaanProfile->nama_perusahaan);
         }
+    }
+
+    // aksi tambah admin
+    public function storeAdmin(Request $request){
+        $request->validate([
+            "username" => "required | string | unique:admins",
+            "name" => "required | string",
+            "email" => "required | email | unique:admin_profiles",
+            "password" => "required",
+            "konfirmasi_password" => "required"
+        ],[
+            "username.required" => "username wajib di isi",
+            "username.string" => "username wajib string atau teks",
+            "username.unique" => "username sudah di gunakan orang lain",
+            "name.required" => "Nama admin wajib di isi",
+            "name.string" => "nama admin harus lah string atau teks",
+            "email.required" => "email wajib di isi",
+            "email.email" => "email harus lah berupa email",
+            "email.unique" => "email sudah di gunakan oleh orang lain",
+            "password.required" => "password wajib di isi",
+            "konfirmasi_password" => "konfirmasi password wajib di isi"
+        ]);
+
+        // jika password tidak sama dengan konfirmasi password
+        if($request->password !== $request->konfirmasi_password){
+            return redirect()->back()->with("gagal","Password dan konfirmasi password tidak sama");
+        }
+
+        $admin = Admin::create([
+             "username" => $request->username,
+                "password" => Hash::make($request->password)
+        ]);
+
+        $adminProfile = $admin->profile()->create([
+           "name" => $request->name,
+           "email" => $request->email
+        ]);
+
+        return redirect()->route("admin.tambah.admin")->with("sukses","Berhasil membuat daftar admin");
     }
 
 }
