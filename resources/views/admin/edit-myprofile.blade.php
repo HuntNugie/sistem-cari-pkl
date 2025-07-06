@@ -52,7 +52,7 @@
                             <button type="submit" class="btn btn-light px-4 shadow-sm text-primary">
                                 <i class="bi bi-save"></i> Simpan Perubahan
                             </button>
-                            <a href="#" class="btn btn-outline-light px-4 shadow-sm">
+                            <a href="{{ route("admin.myprofile") }}" class="btn btn-outline-light px-4 shadow-sm">
                                 Batal
                             </a>
                         </div>

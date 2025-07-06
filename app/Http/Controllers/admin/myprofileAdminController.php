@@ -22,6 +22,7 @@ class myprofileAdminController extends Controller
         $valid = $request->validate([
             'name' => 'string|max:255',
             'email' => 'email|max:255',
+            'phone' => "numeric",
             'nomor_pegawai' => 'string|max:20',
             'foto' => 'image|nullable',
         ]);
