@@ -54,6 +54,10 @@ class PerusahaanController extends Controller
             "file_pendukung" => "required | file | mimes:pdf"
         ]);
 
+        $ajuan = auth()->guard("perusahaan")->user()->ajuan()->where("status_verifikasi","pending")->latest()->first();
+        if($ajuan){
+            return redirect()->back()->with("gagal","anda tidak dapat mengajukan karna masih pending");
+        }
         // ganti nama file
         $file = $request->file("file_pendukung");
         $namaBaru = time()."-".Str::random(5)."-".$file->getClientOriginalName();

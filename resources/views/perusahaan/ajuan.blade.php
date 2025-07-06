@@ -45,12 +45,18 @@
                     </div>
                 </div>
 
+
                 <div class="text-end mt-4">
-                        @if (!$perusahaan->nama_perusahaan || !$perusahaan->pemilik || !$perusahaan->alamat || !$perusahaan->telepon || !$perusahaan->website || !$perusahaan->logo)
+                        @if (!$perusahaan->nama_perusahaan || !$perusahaan->pemilik || !$perusahaan->alamat || !$perusahaan->telepon || !$perusahaan->website || !$perusahaan->logo )
                     <button type="submit" class="btn btn-danger px-4 shadow-sm" disabled>
                         <i class="bi bi-send"></i> Belum bisa mengajukan
                     </button>
                     <small class="text-danger">*Lengkapi Profile terlebih dahulu </small>
+                        @elseif (auth()->guard("perusahaan")->user()->ajuan()->where("status_verifikasi","pending")->latest()->first())
+                          <button type="submit" class="btn btn-primary px-4 shadow-sm" disabled>
+                        <i class="bi bi-send"></i> Belum bisa mengajukan
+                    </button>
+                    <small class="text-primary">*Ajuan anda sebelumnya belum di verifikasi oleh admin dan masih pending</small>
                         @else
                          <button type="submit" class="btn btn-success px-4 shadow-sm">
                         <i class="bi bi-send"></i> Ajukan Konfirmasi
