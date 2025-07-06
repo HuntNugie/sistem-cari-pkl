@@ -48,8 +48,9 @@ class AdminController extends Controller
 
     // halaman daftar admin
     public function daftarAdmin(){
-        $admin = Admin::where("id","!=",auth()->guard("admin")->user()->id)->get();
-        return view("admin.daftar-admin",compact("admin"));
+        $superadmin = Admin::where("id","!=",auth()->guard("admin")->user()->id)->where("role","!=","admin")->get();
+        $admin =  Admin::where("id","!=",auth()->guard("admin")->user()->id)->where("role","!=","super_admin")->get();
+        return view("admin.daftar-admin",compact(["admin","superadmin"]));
     }
 
     // halaman tambah admin
@@ -149,5 +150,12 @@ class AdminController extends Controller
         }
         $admin->delete();
         return redirect()->back()->with("sukses","Berhasil menghapus data admin");
+    }
+
+    // function mengubah role
+    public function ubahRole(Admin $admin,$role){
+        $admin->role = $role;
+        $admin->save();
+        return redirect()->back()->with("sukses","Berhasil mengubah ".$admin->profile->name." menjadi super admin");
     }
 }

@@ -38,11 +38,14 @@
                                 <img src="{{ asset('storage') }}/{{ $min->profile->foto ?? "" }}" alt="Foto Andi Pratama" width="50">
                             </td>
                             <td>
-                                <button class="btn btn-warning btn-sm">Ubah jadi Superadmin</button>
+                                <form action="{{ route("admin.ubah.role",[$min->id,"super_admin"]) }}" method="post">
+                                    @csrf
+                                    <button type="button" class="btn btn-warning btn-sm btn-konfirmasi-role">Ubah jadi Superadmin</button>
+                                </form>
                                 <form action="{{ route("admin.hapus.admin.aksi",$min->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm" id="btn-konfirmasi">Hapus</button>
+                                    <button type="button" class="btn btn-danger btn-sm btn-konfirmasi" >Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -77,31 +80,23 @@
                     </thead>
                     <tbody>
                         <!-- Data super admin akan ditampilkan di sini -->
+                        @foreach ($superadmin as $min)
                         <tr>
-                            <td>1</td>
-                            <td>Sri Wahyuni</td>
-                            <td>sri@email.com</td>
-                            <td>083456789012</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $min->profile->name }}</td>
+                            <td>{{ $min->profile->email }}</td>
+                            <td>{{ $min->profile->phone }}</td>
                             <td>
-                                <img src="{{ asset('images/superadmin1.png') }}" alt="Foto Sri Wahyuni" width="50">
+                                <img src="{{ asset('storage') }}/{{ $min->profile->foto ?? "" }}" alt="" width="50">
                             </td>
                             <td>
-                                <button class="btn btn-secondary btn-sm">Ubah jadi Admin</button>
+                                <form action="{{ route("admin.ubah.role",[$min->id,"admin"]) }}" method="post">
+                                    @csrf
+                                    <button type="button" class="btn btn-primary btn-sm btn-konfirmasi-role-admin">Ubah jadi Admin</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Rizal Hakim</td>
-                            <td>rizal@email.com</td>
-                            <td>084567890123</td>
-                            <td>
-                                <img src="{{ asset('images/superadmin2.png') }}" alt="Foto Rizal Hakim" width="50">
-                            </td>
-                            <td>
-                                <button class="btn btn-secondary btn-sm">Ubah jadi Admin</button>
-                            </td>
-                        </tr>
-                        <!-- Tambahkan baris lain sesuai kebutuhan -->
+                   @endforeach
                     </tbody>
                 </table>
             </div>
@@ -111,7 +106,7 @@
 @endsection
 @push("script")
     <script>
-  document.querySelectorAll('#btn-konfirmasi').forEach(button => {
+  document.querySelectorAll('.btn-konfirmasi').forEach(button => {
     button.addEventListener('click', function () {
         const form = this.closest('form');
         Swal.fire({
@@ -121,6 +116,45 @@
             showCancelButton: true,
             confirmButtonText: "Ya, hapus!",
             cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+
+document.querySelectorAll('.btn-konfirmasi-role').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Ubah Role Admin?",
+            text: "Apakah kamu yakin ingin menjadikan admin ini sebagai Superadmin?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Ya, ubah!",
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+document.querySelectorAll('.btn-konfirmasi-role-admin').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Ubah Role Admin?",
+            text: "Apakah kamu yakin ingin menjadikan admin ini sebagai Admin?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Ya, ubah!",
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
         }).then((result) => {
             if (result.isConfirmed) {
                 form.submit();

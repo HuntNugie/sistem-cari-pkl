@@ -167,7 +167,11 @@ Route::prefix("admin")->group(function(){
 
             // aksi hapus admin
             Route::delete("/hapus-admin/{admin}",[AdminController::class,"destroyAdmin"])->name("admin.hapus.admin.aksi");
+
+            // aksi mengubah role admin
+            Route::post("/role/{admin}/{role}",[AdminController::class,"ubahRole"])->name("admin.ubah.role");
         });
+
 
         //Halamam kritik dan saran
         Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran");
