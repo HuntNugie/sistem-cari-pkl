@@ -13,6 +13,7 @@ use App\Mail\pemberitahuan_ditolak;
 use App\Http\Controllers\Controller;
 use App\Mail\pemberitahuan_diterima;
 use Illuminate\Support\Facades\Hash;
+use Storage;
 
 class AdminController extends Controller
 {
@@ -140,4 +141,13 @@ class AdminController extends Controller
         return redirect()->route("admin.tambah.admin")->with("sukses","Berhasil membuat daftar admin");
     }
 
+    public function destroyAdmin(Admin $admin){
+        // jika admin mempunyai foto maka hapus fotonya
+        $foto = $admin->profile->foto;
+        if($foto && Storage::disk("public")->exists($foto)){
+            Storage::disk("public")->delete($foto);
+        }
+        $admin->delete();
+        return redirect()->back()->with("sukses","Berhasil menghapus data admin");
+    }
 }

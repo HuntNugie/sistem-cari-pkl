@@ -163,6 +163,9 @@ Route::prefix("admin")->group(function(){
         // aksi tambah admin
         Route::post("/tambah-admin",[AdminController::class,"storeAdmin"])->name("admin.tambah.admin.aksi");
 
+        // aksi hapus admin
+        Route::delete("/hapus-admin/{admin}",[AdminController::class,"destroyAdmin"])->name("admin.hapus.admin.aksi");
+
         //Halamam kritik dan saran
         Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran");
 

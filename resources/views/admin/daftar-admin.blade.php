@@ -39,10 +39,10 @@
                             </td>
                             <td>
                                 <button class="btn btn-warning btn-sm">Ubah jadi Superadmin</button>
-                                <form action="" method="POST" style="display:inline;">
+                                <form action="{{ route("admin.hapus.admin.aksi",$min->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus admin ini?')">Hapus</button>
+                                    <button type="button" class="btn btn-danger btn-sm" id="btn-konfirmasi">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -109,3 +109,25 @@
     </div>
 </div>
 @endsection
+@push("script")
+    <script>
+  document.querySelectorAll('#btn-konfirmasi').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Yakin ingin menghapus?",
+            text: "Data ini tidak bisa dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+
+    </script>
+@endpush
