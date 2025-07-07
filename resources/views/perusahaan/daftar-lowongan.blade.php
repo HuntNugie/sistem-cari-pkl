@@ -10,7 +10,7 @@
                         <h2 class="fw-bold text-primary mb-1">Daftar Lowongan PKL</h2>
                         <span class="badge bg-primary bg-opacity-10 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Lowongan PKL untuk siswa SMK</span>
                     </div>
-                    <a href="#" class="btn btn-gradient-primary rounded-pill px-4 py-2 shadow-sm d-flex align-items-center gap-2" style="background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%); border: none; color: #fff;">
+                    <a href="{{ route("perusahaan.tambah.lowongan") }}" class="btn btn-gradient-primary rounded-pill px-4 py-2 shadow-sm d-flex align-items-center gap-2" style="background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%); border: none; color: #fff;">
                         <i class="mdi mdi-plus fs-5"></i> Tambah Lowongan
                     </a>
                 </div>

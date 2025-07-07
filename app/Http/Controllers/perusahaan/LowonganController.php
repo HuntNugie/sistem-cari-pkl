@@ -14,6 +14,7 @@ class LowonganController extends Controller
         return view("perusahaan.daftar-lowongan", ["halaman" => $halaman]);
     }
     public function create(){
-        return view("perusahaan.tambah-lowongan");
+        $halaman = "Form tambah lowongan";
+        return view("perusahaan.tambah-lowongan",compact("halaman"));
     }
 }
