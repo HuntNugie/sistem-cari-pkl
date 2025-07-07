@@ -35,8 +35,13 @@ class AdminController extends Controller
     }
 
     // halaman perusahaan terkonfirmasi
-    public function perkonf(){
+    public function perkonf(Request $request){
         $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->get();
+        if($request->has("search")){
+            $hasil = $request->search;
+            $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->where("nama_perusahaan","LIKE","%".$hasil."%")->get();
+        }
+
         return view("admin.perusahaan-konf",compact("perusahaan"));
     }
 

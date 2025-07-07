@@ -34,7 +34,7 @@
                             <td>{{ $non->pemilik }}</td>
                             <td>{{ $non->telepon }}</td>
                             <td>
-                                <img src="{{ asset("storage") }}/{{ $non->logo }}" alt="Logo PT Maju Jaya" width="50">
+                                <img src="{{ asset("storage") }}/{{ $non->logo ?? "-" }}" alt="Logo PT Maju Jaya" width="50">
                             </td>
                             <td>
                                 <div class="d-flex gap-2 flex-wrap">

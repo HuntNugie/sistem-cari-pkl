@@ -25,6 +25,8 @@
                         </tr>
                     </thead>
                     <tbody>
+
+
                         <!-- Data perusahaan akan ditampilkan di sini -->
                         @foreach ($perusahaan as $konfir )
 
@@ -35,13 +37,19 @@
                             <td>{{ $konfir->pemilik }}</td>
                             <td>{{ $konfir->telepon }}</td>
                             <td>
-                                <img src="{{ asset('images/logo1.png') }}" alt="Logo PT Maju Jaya" width="50">
+                                <img src="{{ asset('storage') }}/{{ $konfir->logo ?? "-" }}" alt="Logo PT Maju Jaya" width="50">
                             </td>
                             <td>
                                 <button class="btn btn-info btn-sm">Detail</button>
                             </td>
                         </tr>
                         @endforeach
+
+                    @if($perusahaan->isEmpty())
+                        <tr>
+                            <td colspan="7" class="text-center">Tidak ada perusahaan dengan nama {{ request("search") }}</td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>
