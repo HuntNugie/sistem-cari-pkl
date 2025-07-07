@@ -17,4 +17,13 @@ class Admin extends Authenticatable
     {
         return $this->hasOne(AdminProfile::class, 'admin_id');
     }
+    public function scopeFilter($query,$keyword){
+        return $query->when($keyword,function($query,$keyword){
+            $query->whereHas("profile",function($q) use ($keyword){
+                $q->where("name","LIKE","%".$keyword."%")
+                ->orWhere("email","LIKE","%".$keyword."%")
+                ->orWhere("nomor_pegawai","LIKE","%".$keyword."%");
+            });
+        });
+    }
 }

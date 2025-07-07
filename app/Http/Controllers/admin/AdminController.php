@@ -53,9 +53,9 @@ class AdminController extends Controller
     }
 
     // halaman daftar admin
-    public function daftarAdmin(){
-        $superadmin = Admin::where("id","!=",auth()->guard("admin")->user()->id)->where("role","!=","admin")->get();
-        $admin =  Admin::where("id","!=",auth()->guard("admin")->user()->id)->where("role","!=","super_admin")->get();
+    public function daftarAdmin(Request $request){
+        $superadmin = Admin::where("id","!=",auth()->guard("admin")->user()->id)->where("role","!=","admin")->filter($request->superadmin)->paginate(5)->withQueryString();
+        $admin =  Admin::where("id","!=",auth()->guard("admin")->user()->id)->where("role","!=","super_admin")->filter($request->admin)->paginate(5)->withQueryString();
         return view("admin.daftar-admin",compact(["admin","superadmin"]));
     }
 

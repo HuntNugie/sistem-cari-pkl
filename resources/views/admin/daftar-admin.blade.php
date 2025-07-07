@@ -8,7 +8,7 @@
             <!-- Search Form -->
             <form method="GET" action="" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Cari nama admin, email, atau nomor telepon..." value="{{ request('search') }}">
+                    <input type="text" name="admin" class="form-control" placeholder="Cari nama admin, email, atau nomor telepon..." value="{{ request('search') }}">
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </form>
@@ -18,6 +18,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Admin</th>
+                            <th>Nomor pegawai</th>
                             <th>Email</th>
                             <th>No Telepon</th>
                             <th>Foto</th>
@@ -32,6 +33,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $min->profile->name }}</td>
+                            <td>{{ $min->profile->nomor_pegawai }}</td>
                             <td>{{ $min->profile->email }}</td>
                             <td>{{ $min->profile->phone ?? "-" }}</td>
                             <td>
@@ -50,6 +52,7 @@
                             </td>
                         </tr>
                         @endforeach
+                        {{ $admin->links("pagination::bootstrap-5") }}
                     </tbody>
                 </table>
             </div>
@@ -62,7 +65,7 @@
             <!-- Search Form -->
             <form method="GET" action="" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="search_superadmin" class="form-control" placeholder="Cari nama super admin, email, atau nomor telepon..." value="{{ request('search_superadmin') }}">
+                    <input type="text" name="superadmin" class="form-control" placeholder="Cari nama super admin, email, atau nomor telepon..." value="{{ request('search_superadmin') }}">
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </form>
@@ -72,6 +75,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Super Admin</th>
+                            <th>Nomor Pegawai</th>
                             <th>Email</th>
                             <th>No Telepon</th>
                             <th>Foto</th>
@@ -84,6 +88,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $min->profile->name }}</td>
+                            <td>{{ $min->profile->nomor_pegawai }}</td>
                             <td>{{ $min->profile->email }}</td>
                             <td>{{ $min->profile->phone }}</td>
                             <td>
