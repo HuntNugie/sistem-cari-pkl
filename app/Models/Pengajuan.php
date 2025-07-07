@@ -13,4 +13,15 @@ class Pengajuan extends Model
     public function perusahaan():BelongsTo{
         return $this->belongsTo(Perusahaan::class,"perusahaan_id");
     }
+    public function scopeFilter($query,$keyword){
+        return $query->when($keyword,function($query,$keyword){
+            $query->whereHas('perusahaan',function($q) use($keyword){
+                $q->whereHas('perusahaanProfile',function($q) use($keyword){
+                    $q->where("nama_perusahaan","LIKE","%".$keyword."%")
+                    ->orWhere("nomor_izin_usaha","LIKE","%".$keyword."%")
+                    ->orWhere("pemilik","LIKE","%".$keyword."%");
+                });
+            });
+        });
+    }
 }

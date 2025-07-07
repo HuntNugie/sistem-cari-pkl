@@ -36,18 +36,19 @@ class AdminController extends Controller
 
     // halaman perusahaan terkonfirmasi
     public function perkonf(Request $request){
-        $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->get();
-        if($request->has("search")){
-            $hasil = $request->search;
-            $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->where("nama_perusahaan","LIKE","%".$hasil."%")->get();
-        }
+        $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->filter($request->search)->paginate(5)->withQueryString();
+        // if($request->has("search")){
+        //     $hasil = $request->search;
+        //     $perusahaan = Perusahaan_profile::where("status","terkonfirmasi")->where("nama_perusahaan","LIKE","%".$hasil."%")->get();
+        // }
 
         return view("admin.perusahaan-konf",compact("perusahaan"));
     }
 
     // halaman perusahaan belum terkonfirmasi
-    public function pernonf(){
-        $perusahaan = Perusahaan_profile::where("status", "belum terkonfirmasi")->get();
+    public function pernonf(Request $request){
+        $perusahaan = Perusahaan_profile::where("status", "belum terkonfirmasi")->filter($request->search)->paginate(5)->withQueryString();
+
         return view("admin.perusahaan-non",compact("perusahaan"));
     }
 
@@ -69,8 +70,8 @@ class AdminController extends Controller
     }
 
     // menampilkan halaman konfirmasi ajuan
-    public function showAjuan(){
-        $ajuan = Pengajuan::where("status_verifikasi","pending")->get();
+    public function showAjuan(Request $request){
+        $ajuan = Pengajuan::where("status_verifikasi","pending")->filter($request->search)->paginate(5)->withQueryString();
         return view("admin.ajuan",compact("ajuan"));
     }
 

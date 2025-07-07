@@ -43,7 +43,7 @@
                             </td>
                         </tr>
                         @endforeach
-
+                        {{ $perusahaan->links("pagination::bootstrap-5") }}
                         <!-- Tambahkan baris lain sesuai kebutuhan -->
                     </tbody>
                 </table>

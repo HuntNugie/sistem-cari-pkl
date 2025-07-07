@@ -44,7 +44,7 @@
                             </td>
                         </tr>
                         @endforeach
-
+                        {{ $perusahaan->links("pagination::bootstrap-5") }}
                     @if($perusahaan->isEmpty())
                         <tr>
                             <td colspan="7" class="text-center">Tidak ada perusahaan dengan nama {{ request("search") }}</td>
