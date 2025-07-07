@@ -2,45 +2,49 @@
 
 use App\Models\User;
 
-use App\Models\Sekolah;
 use App\Mail\verifEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VerifOtpController;
 use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\VerifEmailController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\AjuanController;
 use App\Http\Controllers\public\auth\LoginController;
 use App\Http\Controllers\public\auth\RegisterController;
 use App\Http\Controllers\admin\auth\LoginAdminController;
+use App\Http\Controllers\admin\DaftarSiswaAktifController;
+use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\admin\InfoPerusahaanController;
+use App\Http\Controllers\admin\KritikDanSaranController;
 use App\Http\Controllers\admin\myprofileAdminController;
+use App\Http\Controllers\perusahaan\AjuanPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
+use App\Http\Controllers\perusahaan\DaftarRiwayatPklController;
+use App\Http\Controllers\perusahaan\DaftarSiswaBaruController;
+use App\Http\Controllers\perusahaan\DaftarSiswaPklController;
+use App\Http\Controllers\perusahaan\DashboardController;
+use App\Http\Controllers\perusahaan\LowonganController;
 use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
-use App\Http\Controllers\perusahaan\PerusahaanController;
-use App\Models\Jurusan;
+use App\Http\Controllers\public\BerandaController;
+use App\Http\Controllers\public\DaftarPklController;
 use App\Models\Perusahaan;
 
 // landing page
-Route::get('/', function () {
-    return view('public.index');
-})->name("beranda");
+Route::get('/', [BerandaController::class,"index"])->name("beranda");
 
 
 // daftar pkl
 Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
     // daftar seluruh pkl
-    Route::get("/",function(){
-        return view("public.daftar-pkl");
-    })->name("public.daftar.pkl");
+    Route::get("/",[DaftarPklController::class,"daftarPkl"])->name("public.daftar.pkl");
 
     // detail pkl
-    Route::get("/detail",function(){
-        return view("public.detail-pkl");
-    })->name("public.detail.pkl")->middleware("jagaDaftar");
+    Route::get("/detail",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl")->middleware("jagaDaftar");
 
     // Route myprofile User
     Route::prefix("myprofile")->group(function(){
@@ -142,19 +146,19 @@ Route::prefix("admin")->group(function(){
     // Route yang hanya yang sudah login admin yang dapat akses
     Route::middleware("auth:admin")->group(function(){
         // Halaman Dashboard admin
-        Route::get("/dashboard",[AdminController::class,"dashboard"])->name("admin.dashboard");
+        Route::get("/dashboard",[AdminDashboardController::class,"dashboard"])->name("admin.dashboard");
 
         //Halaman daftar siswa aktif
-        Route::get("/siswa-aktif",[AdminController::class,"siswaAktif"])->name("admin.siswa.aktif");
+        Route::get("/siswa-aktif",[DaftarSiswaAktifController::class,"siswaAktif"])->name("admin.siswa.aktif");
 
         //Halaman daftar siswa pkl
-        Route::get("/siswa-pkl",[AdminController::class,"siswaPkl"])->name("admin.siswa.pkl");
+        Route::get("/siswa-pkl",[AdminDaftarSiswaPklController::class,"siswaPkl"])->name("admin.siswa.pkl");
 
         //Halaman daftar perusahaan terkonfirmasi
-        Route::get("/perusahaan-terkonfirmasi",[AdminController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi");
+        Route::get("/perusahaan-terkonfirmasi",[InfoPerusahaanController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi");
 
         //Halaman daftar perusahaan belum terkonfirmasi
-        Route::get("/perusahaan-belum-terkonfirmasi",[AdminController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi");
+        Route::get("/perusahaan-belum-terkonfirmasi",[InfoPerusahaanController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi");
 
         // route middleware unutk superadmin saja
         Route::middleware("superadmin")->group(function(){
@@ -176,7 +180,7 @@ Route::prefix("admin")->group(function(){
 
 
         //Halamam kritik dan saran
-        Route::get("/kritik-saran",[AdminController::class,"kritikSaran"])->name("admin.kritik.saran");
+        Route::get("/kritik-saran",[KritikDanSaranController::class,"kritikSaran"])->name("admin.kritik.saran");
 
         // halaman my profile admin
         Route::prefix("myprofile")->group(function(){
@@ -190,11 +194,13 @@ Route::prefix("admin")->group(function(){
             Route::put("/update/{admin:username}",[myprofileAdminController::class,"update"])->name("admin.myprofile.update");
         });
 
-        // Halaman Daftar Ajuan Perusahaan
-        Route::get("/daftar-ajuan",[AdminController::class,"showAjuan"])->name("admin.ajuan");
+        Route::prefix("daftar-ajuan")->group(function(){
+            // Halaman Daftar Ajuan Perusahaan
+            Route::get("/",[AjuanController::class,"showAjuan"])->name("admin.ajuan");
 
-        // mengupdate konfirmasi ajuan perusahaan
-        Route::put("/daftar-ajuan/konfirmasi/{pengajuan}",[AdminController::class,"konfirmasiAjuan"])->name("admin.ajuan.aksi");
+            // mengupdate konfirmasi ajuan perusahaan
+            Route::put("/konfirmasi/{pengajuan}",[AjuanController::class,"konfirmasiAjuan"])->name("admin.ajuan.aksi");
+        });
 
     });
 
@@ -210,45 +216,48 @@ Route::prefix("perusahaan")->group(function(){
         //aksi login perusahaan
         Route::post("/login",[LoginPerusahaanController::class,"login"])->name("perusahaan.login.aksi");
 
-        //Halaman verifikasi email perusahaan
-        Route::get("/verifikasi-email",[VerifEmailController::class,"showPerusahaan"])->name("perusahaan.verifEmail");
+        // Route untuk register
+        Route::prefix("register")->group(function(){
+            //Halaman verifikasi email perusahaan
+            Route::get("/verifikasi-email",[VerifEmailController::class,"showPerusahaan"])->name("perusahaan.verifEmail");
 
-        //Aksi verifikasi email perusahaan
-        Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi");
-
-
-        Route::middleware("jagaRegister")->group(function(){
-            //Halaman register perusahaan
-            Route::get("/register",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register");
-
-            // Aksi register perusahaan
-            Route::post("/register",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
-        });
-
-        // Route jika
-        Route::middleware("jagaOtp")->group(function(){
-            //Halaman verifikasi otp email perusahaan
-            Route::get("/otp",[VerifOtpController::class,"otpPerusahaan"])->name("perusahaan.otp");
+            //Aksi verifikasi email perusahaan
+            Route::post("/verifikasi-email",[VerifEmailController::class,"verifikasiPerusahaan"])->name("perusahaan.verifEmail.aksi");
 
 
-            //Aksi verifikasi otp email perusahaan
-            Route::post("/otp",[VerifOtpController::class,"verifOtpPerusahaan"])->name("perusahaan.otp.aksi");
+            Route::middleware("jagaRegister")->group(function(){
+                //Halaman register perusahaan
+                Route::get("/isi-data",[RegisterPerusahaanController::class,"show"])->name("perusahaan.register");
+
+                // Aksi register perusahaan
+                Route::post("/isi-data",[RegisterPerusahaanController::class,"register"])->name("perusahaan.register.aksi");
+            });
+
+            // Route jika
+            Route::middleware("jagaOtp")->group(function(){
+                //Halaman verifikasi otp email perusahaan
+                Route::get("/otp",[VerifOtpController::class,"otpPerusahaan"])->name("perusahaan.otp");
+
+
+                //Aksi verifikasi otp email perusahaan
+                Route::post("/otp",[VerifOtpController::class,"verifOtpPerusahaan"])->name("perusahaan.otp.aksi");
 
 
 
-             // perusahaan resend_otp
-            Route::get("/kirim-ulang",function(){
-                $otp = random_int(100000, 999999);
-                $id = session("perusahaan_id");
-                $perusahaan = Perusahaan::findOrFail($id);
-                $email = $perusahaan->email;
-                $perusahaan->otp = $otp;
-                $perusahaan->save();
-                Mail::to($email)->send(new verifEmail($otp));
-                session()->put("email_expired_at",now());
-                return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
-            })->name("perusahaan.resendOtp");
+                // perusahaan resend_otp
+                Route::get("/kirim-ulang",function(){
+                    $otp = random_int(100000, 999999);
+                    $id = session("perusahaan_id");
+                    $perusahaan = Perusahaan::findOrFail($id);
+                    $email = $perusahaan->email;
+                    $perusahaan->otp = $otp;
+                    $perusahaan->save();
+                    Mail::to($email)->send(new verifEmail($otp));
+                    session()->put("email_expired_at",now());
+                    return redirect()->back()->with(["sukses" => "Berhasil mengirimkan kode otp ke $email silahkan cek email anda"]);
+                })->name("perusahaan.resendOtp");
 
+            });
         });
 
     });
@@ -266,22 +275,28 @@ Route::prefix("perusahaan")->group(function(){
     // route untuk auth perusahaan setelah login
    Route::middleware(['auth:perusahaan'])->group(function () {
         // dashboard perusahaan
-        Route::get("/dashboard",[PerusahaanController::class,"dashboard"])->name("perusahaan.dashboard")->middleware(["auth:perusahaan"]);
+        Route::get("/dashboard",[DashboardController::class,"dashboard"])->name("perusahaan.dashboard")->middleware(["auth:perusahaan"]);
 
         // route jika status di ijinkan terkonfirmasi
         Route::middleware(["cekTerkonfirmasi"])->group(function(){
 
-            // daftar lowongan kerja
-            Route::get("/daftar-lowongan",[PerusahaanController::class,"daftarLowongan"])->name("perusahaan.daftar.lowongan");
-
             // daftar siswa baru
-            Route::get("/daftar-siswa-baru",[PerusahaanController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru");
+            Route::get("/daftar-siswa-baru",[DaftarSiswaBaruController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru");
 
             // daftar siswa sedang pkl
-            Route::get("/daftar-siswa-pkl",[PerusahaanController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");
+            Route::get("/daftar-siswa-pkl",[DaftarSiswaPklController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");
 
             // daftar siswa sedang pkl
-            Route::get("/daftar-siswa-riwayat",[PerusahaanController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat");
+            Route::get("/daftar-siswa-riwayat",[DaftarRiwayatPklController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat");
+
+            // Halaman lowongan
+            Route::prefix("lowongan")->group(function(){
+                 // daftar lowongan kerja
+                Route::get("/daftar-lowongan",[LowonganController::class,"daftarLowongan"])->name("perusahaan.daftar.lowongan");
+
+                // Halaman tambah lowongan
+                Route::get("/tambah",[LowonganController::class,"create"])->name("perusahaan.tambah.lowongan");
+            });
         });
 
         //myprofile perusahaan
@@ -300,10 +315,10 @@ Route::prefix("perusahaan")->group(function(){
         Route::middleware("terkonfirmasi")->group(function(){
 
         // ajuan konfirmasi
-        Route::get("/ajuan-konfirmasi",[PerusahaanController::class,"showAjuan"])->name("perusahaan.ajuan");
+        Route::get("/ajuan-konfirmasi",[AjuanPerusahaanController::class,"showAjuan"])->name("perusahaan.ajuan");
 
         // ajuan konfirmasi aksi
-        Route::post("/ajuan-konfirmasi",[PerusahaanController::class,"aksiAjuan"])->name("perusahaan.ajuan.aksi");
+        Route::post("/ajuan-konfirmasi",[AjuanPerusahaanController::class,"aksiAjuan"])->name("perusahaan.ajuan.aksi");
         });
    });
 });
