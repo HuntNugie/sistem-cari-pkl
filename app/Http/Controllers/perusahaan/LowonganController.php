@@ -12,7 +12,7 @@ class LowonganController extends Controller
      public function daftarLowongan()
     {
         $halaman = "daftar lowongan";
-        $lowongan = Lowongan::where("perusahaan_id",auth()->guard("perusahaan")->user()->id)->get();
+        $lowongan = Lowongan::with("perusahaan")->where("perusahaan_id",auth()->guard("perusahaan")->user()->id)->get();
         // Logic to fetch and display job listings
         return view("perusahaan.daftar-lowongan", ["halaman" => $halaman,"lowongan" => $lowongan]);
     }
@@ -70,5 +70,12 @@ class LowonganController extends Controller
     public function showLowongan(Lowongan $lowongan){
         $halaman = "Halaman detial lowongan";
         return view("perusahaan.detail-lowongan",compact(["lowongan","halaman"]));
+    }
+
+    // halaman edit lowongan
+    public function editLowongan(Lowongan $lowongan){
+        $halaman = "Halaman Edit Lowongan";
+        $jurusan = Jurusan::all();
+        return view("perusahaan.edit-lowongan",compact(["halaman","jurusan","lowongan"]));
     }
 }
