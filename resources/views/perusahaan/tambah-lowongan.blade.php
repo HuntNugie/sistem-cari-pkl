@@ -38,10 +38,6 @@
                     <textarea class="form-control border-secondary" id="deskripsi" name="deskripsi" rows="5" placeholder="Tuliskan deskripsi singkat mengenai lowongan ini..." required></textarea>
                 </div>
 
-                <div class="mb-5">
-                    <label for="batas_akhir" class="form-label fw-semibold">Batas Akhir Pendaftaran</label>
-                    <input type="date" class="form-control border-secondary" id="batas_akhir" name="batas_akhir" required>
-                </div>
 
                 {{-- Syarat --}}
                 <div class="mb-4">
