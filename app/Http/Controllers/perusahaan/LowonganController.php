@@ -53,7 +53,7 @@ class LowonganController extends Controller
     // tambahkan ke dalam databse syarat dari lowongan nya
     foreach($request->syarat as $isi){
         if(trim($isi) !== ""){
-            $lowongan->syarta()->create([
+            $lowongan->syarat()->create([
                 "isi_syarat" => $isi
             ]);
         }

@@ -13,7 +13,7 @@
 <x-public.layanan/>
 
 {{-- daftar section --}}
-<x-public.daftar/>
+<x-public.daftar :lowongans="$lowongan"></x-public.daftar>
 {{-- end daftar section --}}
 
 
