@@ -36,86 +36,36 @@
     <!-- List PKL Cards -->
     <div class="row" id="pklList">
 
-      <!-- Card 1 -->
-      <div class="col-lg-4 col-md-6 mb-4 pkl-item">
-        <div class="card shadow-sm h-100 border-0">
-          <div class="card-body p-3">
-            <div class="d-flex align-items-start gap-3 mb-3">
-              <img src="img/perusahaan1.jpg" alt="Foto Perusahaan" class="rounded-circle border shadow-sm" width="60" height="60">
-              <div>
-                <h6 class="mb-1 fw-bold">PT. Software Nusantara</h6>
-                <span class="badge bg-success">Tersedia</span>
-                <p class="mb-0 small text-muted">Kuota: 5 siswa | RPL, TKJ</p>
-              </div>
-            </div>
-            <h6 class="fw-semibold mb-2">Frontend Developer Intern</h6>
-            <p class="mb-1 small text-muted">
-              <i class="bi bi-envelope-fill me-1"></i> hrd@nusantara.com
-            </p>
-            <p class="mb-2 small">
-              <i class="bi bi-geo-alt-fill me-1"></i> Bandung, Jawa Barat
-            </p>
-            <p class="small mb-3">Perusahaan IT yang fokus pada pengembangan web dan aplikasi mobile.</p>
-            <a href="pkl-detail.html" class="btn btn-outline-primary btn-sm w-100">
-              <i class="bi bi-search"></i> Lihat Detail
-            </a>
-          </div>
-        </div>
-      </div>
+        @foreach ($lowongan as $low)
 
-      <!-- Card 2 -->
-      <div class="col-lg-4 col-md-6 mb-4 pkl-item">
-        <div class="card shadow-sm h-100 border-0">
-          <div class="card-body p-3">
-            <div class="d-flex align-items-start gap-3 mb-3">
-              <img src="img/perusahaan2.jpg" alt="Foto Perusahaan" class="rounded-circle border shadow-sm" width="60" height="60">
-              <div>
-                <h6 class="mb-1 fw-bold">CV. Digital Kreatif</h6>
-                <span class="badge bg-warning text-dark">Penuh</span>
-                <p class="mb-0 small text-muted">Kuota: 3 siswa | RPL</p>
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6 mb-4 pkl-item">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <img src="{{ asset("storage") }}/{{ $low->perusahaan->perusahaanProfile->logo ?? "-" }}" alt="Foto Perusahaan" class="rounded-circle border shadow-sm" width="60" height="60">
+                        <div>
+                <h6 class="mb-1 fw-bold">{{ $low->perusahaan->perusahaanProfile->nama_perusahaan }}</h6>
+                <span class="badge bg-success">{{ $low->status  }}</span>
+                <p class="mb-0 small text-muted">Kuota: {{ $low->kuota }} siswa | {{ $low->jurusan->singkatan }}</p>
               </div>
             </div>
-            <h6 class="fw-semibold mb-2">UI/UX Design Intern</h6>
+            <h6 class="fw-semibold mb-2">{{ $low->judul_lowongan }}</h6>
             <p class="mb-1 small text-muted">
-              <i class="bi bi-envelope-fill me-1"></i> kreatif@cvdigital.com
+              <i class="bi bi-envelope-fill me-1"></i> {{ $low->perusahaan->email }}
             </p>
             <p class="mb-2 small">
-              <i class="bi bi-geo-alt-fill me-1"></i> Jakarta, DKI Jakarta
+              <i class="bi bi-geo-alt-fill me-1"></i> {{ $low->perusahaan->perusahaanProfile->alamat }}
             </p>
-            <p class="small mb-3">CV yang bergerak di bidang desain dan konsultasi UI/UX untuk berbagai startup.</p>
+            <p class="small mb-3">{{ Str::limit($low->deskripsi_lowongan,100) }}</p>
             <a href="pkl-detail.html" class="btn btn-outline-primary btn-sm w-100">
-              <i class="bi bi-search"></i> Lihat Detail
+                <i class="bi bi-search"></i> Lihat Detail
             </a>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+@endforeach
 
-      <!-- Card 3 -->
-      <div class="col-lg-4 col-md-6 mb-4 pkl-item">
-        <div class="card shadow-sm h-100 border-0">
-          <div class="card-body p-3">
-            <div class="d-flex align-items-start gap-3 mb-3">
-              <img src="img/perusahaan3.jpg" alt="Foto Perusahaan" class="rounded-circle border shadow-sm" width="60" height="60">
-              <div>
-                <h6 class="mb-1 fw-bold">PT. Teknologi Maju</h6>
-                <span class="badge bg-success">Tersedia</span>
-                <p class="mb-0 small text-muted">Kuota: 4 siswa | TKJ</p>
-              </div>
-            </div>
-            <h6 class="fw-semibold mb-2">Network Support Intern</h6>
-            <p class="mb-1 small text-muted">
-              <i class="bi bi-envelope-fill me-1"></i> info@tekmaju.co.id
-            </p>
-            <p class="mb-2 small">
-              <i class="bi bi-geo-alt-fill me-1"></i> Surabaya, Jawa Timur
-            </p>
-            <p class="small mb-3">Pelatihan infrastruktur jaringan dan troubleshooting perangkat keras & server.</p>
-            <a href="pkl-detail.html" class="btn btn-outline-primary btn-sm w-100">
-              <i class="bi bi-search"></i> Lihat Detail
-            </a>
-          </div>
-        </div>
-      </div>
 
       <!-- Tambahkan card lainnya di sini -->
 
