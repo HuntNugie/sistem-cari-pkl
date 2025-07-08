@@ -56,7 +56,11 @@
                                 <td class="text-center">
                                     <button type="button" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
                                     <button type="button" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1" title="Hapus"><i class="mdi mdi-delete"></i></button>
+                                    <form action="{{ route("perusahaan.hapus.lowongan",$low->id) }}" method="post">
+                                    @csrf
+                                    @method("DELETE")
+                                        <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1 btn-konfirmasi" title="Hapus"><i class="mdi mdi-delete"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -71,3 +75,25 @@
     </div>
 </div>
 @endsection
+
+@push("script")
+    <script>
+          document.querySelectorAll('.btn-konfirmasi').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Yakin ingin menghapus?",
+            text: "Data ini tidak bisa dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+    </script>
+@endpush

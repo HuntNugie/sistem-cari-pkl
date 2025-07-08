@@ -299,6 +299,9 @@ Route::prefix("perusahaan")->group(function(){
 
                 // aksi tambah lowongan
                 Route::post("/tambah",[LowonganController::class,"storeLowongan"])->name("perusahaan.tambah.lowongan.aksi");
+
+                // aksi hapus lowongan
+                Route::delete("/hapus/{lowongan}",[LowonganController::class,"destroyLowongan"])->name("perusahaan.hapus.lowongan");
             });
         });
 

@@ -59,4 +59,10 @@ class LowonganController extends Controller
     return redirect()->back()->with("sukses","berhasil membuat lowongan pkl");
 
     }
+
+    // untuk menghapus lowongan yang sudah di buat
+    public function destroyLowongan(Lowongan $lowongan){
+        $lowongan->delete();
+        return redirect()->back()->with("sukses","Berhasil menghapus lowongan");
+    }
 }
