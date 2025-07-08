@@ -12,8 +12,9 @@ class LowonganController extends Controller
      public function daftarLowongan()
     {
         $halaman = "daftar lowongan";
+        $lowongan = Lowongan::where("perusahaan_id",auth()->guard("perusahaan")->user()->id)->get();
         // Logic to fetch and display job listings
-        return view("perusahaan.daftar-lowongan", ["halaman" => $halaman]);
+        return view("perusahaan.daftar-lowongan", ["halaman" => $halaman,"lowongan" => $lowongan]);
     }
     public function create(){
         $halaman = "Form tambah lowongan";

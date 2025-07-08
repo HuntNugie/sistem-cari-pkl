@@ -122,7 +122,7 @@
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-             <img src="images/faces/face5.jpg" alt="profile"/>
+             <img src="{{ asset("storage") }}/{{ auth()->guard("perusahaan")->user()->perusahaanProfile->logo }}" alt="profile"/>
              <span class="nav-profile-name">{{ auth()->guard("perusahaan")->user()->perusahaanProfile->nama_perusahaan }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

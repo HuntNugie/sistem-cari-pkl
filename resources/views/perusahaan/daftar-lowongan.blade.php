@@ -36,21 +36,22 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                            @foreach ($lowongan as $low)
                             <tr>
-                                <td class="fw-semibold text-dark">1</td>
+                                <td class="fw-semibold text-dark">{{ $loop->iteration }}</td>
                                 <td>
-                                    <strong class="text-dark">Desain Grafis</strong>
-                                    <div class="text-muted small">Divisi Kreatif</div>
+                                    <strong class="text-dark">{{ $low->judul_lowongan }}</strong>
                                 </td>
                                 <td>
-                                    <span class="badge bg-primary bg-opacity-10 text-white px-3 py-2 rounded-pill">Jakarta</span>
+                                    <span class="badge bg-primary bg-opacity-10 text-white px-3 py-2 rounded-pill">{{ $low->perusahaan->perusahaanProfile->alamat }}</span>
                                 </td>
-                                <td class="text-dark">25 Juni 2025</td>
+                                <td class="text-dark">{{ $low->created_at->diffForHumans() }}</td>
                                 <td>
-                                    <span class="badge bg-secondary bg-opacity-75 text-white px-3 py-2 rounded-pill">5/5</span>
+                                    <span class="badge bg-secondary bg-opacity-75 text-white px-3 py-2 rounded-pill">{{ $low->kuota }}</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-danger bg-opacity-75 px-3 py-2 rounded-pill text-white">Penuh</span>
+                                    <span class="badge bg-{{ $low->status == "tersedia" ? "success" : "danger" }} bg-opacity-75 px-3 py-2 rounded-pill text-white">{{ Str::upper($low->status) }}</span>
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
@@ -58,55 +59,12 @@
                                     <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1" title="Hapus"><i class="mdi mdi-delete"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="fw-semibold text-dark">2</td>
-                                <td>
-                                    <strong class="text-dark">Teknik Komputer Jaringan</strong>
-                                    <div class="text-muted small">Divisi IT</div>
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary bg-opacity-10 text-white px-3 py-2 rounded-pill">Bandung</span>
-                                </td>
-                                <td class="text-dark">20 Juni 2025</td>
-                                <td>
-                                    <span class="badge bg-secondary bg-opacity-75 text-white px-3 py-2 rounded-pill">3/10</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success bg-opacity-75 px-3 py-2 rounded-pill text-white">Tersedia</span>
-                                </td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
-                                    <button type="button" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1" title="Hapus"><i class="mdi mdi-delete"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-semibold text-dark">3</td>
-                                <td>
-                                    <strong class="text-dark">Multimedia</strong>
-                                    <div class="text-muted small">Divisi Produksi</div>
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary bg-opacity-10 text-white px-3 py-2 rounded-pill">Surabaya</span>
-                                </td>
-                                <td class="text-dark">18 Juni 2025</td>
-                                <td>
-                                    <span class="badge bg-secondary bg-opacity-75 text-white px-3 py-2 rounded-pill">7/100</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success bg-opacity-75 px-3 py-2 rounded-pill text-white">Tersedia</span>
-                                </td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
-                                    <button type="button" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1" title="Hapus"><i class="mdi mdi-delete"></i></button>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="mt-4 text-end">
-                    <span class="badge bg-primary bg-opacity-25 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Total: 3 lowongan</span>
+                    <span class="badge bg-primary bg-opacity-25 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Total: {{ $lowongan->count() }} lowongan</span>
                 </div>
             </div>
         </div>
