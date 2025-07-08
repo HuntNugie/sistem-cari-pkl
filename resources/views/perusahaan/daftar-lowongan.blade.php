@@ -16,10 +16,14 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-md-5">
-                        <div class="input-group shadow rounded-pill overflow-hidden">
-                            <input type="text" class="form-control border-0 bg-light" placeholder="Cari lowongan..." aria-label="Cari lowongan">
-                            <button class="btn btn-light border-0" type="button"><i class="mdi mdi-magnify text-primary"></i></button>
-                        </div>
+                        <form action="" class="w-100">
+                            <div class="input-group shadow rounded-pill overflow-hidden">
+                                <input type="text" class="form-control border-0 bg-light" placeholder="Cari lowongan..." aria-label="Cari lowongan" name="search">
+                                <button class="btn btn-light border-0" type="submit">
+                                    <i class="mdi mdi-magnify text-primary"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="table-responsive rounded-4 shadow-sm">
@@ -71,6 +75,7 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        {{ $lowongan->links("pagination::bootstrap-5") }}
                     </table>
                 </div>
                 <div class="mt-4 text-end">

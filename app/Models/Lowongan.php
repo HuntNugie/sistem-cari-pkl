@@ -20,4 +20,9 @@ class Lowongan extends Model
     public function syarat():HasMany{
         return $this->hasMany(Syarat::class,"lowongan_id");
     }
+    public function scopeFilter($query,$keyword){
+        return $query->when($keyword,function($query,$keyword){
+            $query->where("judul_lowongan","LIKE","%".$keyword."%");
+        });
+    }
 }

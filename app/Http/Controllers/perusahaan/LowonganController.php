@@ -9,10 +9,10 @@ use App\Http\Controllers\Controller;
 
 class LowonganController extends Controller
 {
-     public function daftarLowongan()
+     public function daftarLowongan(Request $request)
     {
         $halaman = "daftar lowongan";
-        $lowongan = Lowongan::with("perusahaan")->where("perusahaan_id",auth()->guard("perusahaan")->user()->id)->get();
+        $lowongan = Lowongan::with("perusahaan")->where("perusahaan_id",auth()->guard("perusahaan")->user()->id)->filter($request->search)->paginate(5)->withQueryString();
         // Logic to fetch and display job listings
         return view("perusahaan.daftar-lowongan", ["halaman" => $halaman,"lowongan" => $lowongan]);
     }
