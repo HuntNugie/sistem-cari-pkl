@@ -296,6 +296,9 @@ Route::prefix("perusahaan")->group(function(){
 
                 // Halaman tambah lowongan
                 Route::get("/tambah",[LowonganController::class,"create"])->name("perusahaan.tambah.lowongan");
+
+                // aksi tambah lowongan
+                Route::post("/tambah",[LowonganController::class,"storeLowongan"])->name("perusahaan.tambah.lowongan.aksi");
             });
         });
 

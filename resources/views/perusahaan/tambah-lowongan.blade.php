@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="card-body px-5 py-5 bg-light">
-            <form action="" method="POST" class="needs-validation" novalidate>
+            <form action="{{ route("perusahaan.tambah.lowongan.aksi") }}" method="POST" class="needs-validation" novalidate>
                 @csrf
 
                 <div class="mb-4">
@@ -22,9 +22,9 @@
                     <label for="jurusan" class="form-label fw-semibold">Jurusan yang Dibutuhkan</label>
                     <select class="form-select border-secondary" id="jurusan" name="jurusan_id" required>
                         <option selected disabled value="">-- Pilih Jurusan --</option>
-                        <option value="1">Rekayasa Perangkat Lunak</option>
-                        <option value="2">Teknik Komputer dan Jaringan</option>
-                        <option value="3">Multimedia</option>
+                        @foreach ($jurusan as $jur)
+                            <option value="{{ $jur->id }}">{{ $jur->nama_jurusan }}</option>
+                        @endforeach
                     </select>
                 </div>
 

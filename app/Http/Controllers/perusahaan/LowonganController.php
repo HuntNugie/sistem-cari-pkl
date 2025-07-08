@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\perusahaan;
 
-use App\Http\Controllers\Controller;
+use App\Models\Jurusan;
+use App\Models\Lowongan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LowonganController extends Controller
 {
@@ -15,6 +17,45 @@ class LowonganController extends Controller
     }
     public function create(){
         $halaman = "Form tambah lowongan";
-        return view("perusahaan.tambah-lowongan",compact("halaman"));
+        $jurusan = Jurusan::all();
+        return view("perusahaan.tambah-lowongan",compact(["halaman","jurusan"]));
+    }
+    public function storeLowongan(Request $request){
+       $request->validate([
+        "judul" => "required | string",
+        "jurusan_id" => "required ",
+        "kuota" => "required | integer",
+        "deskripsi" => "required | string",
+        "syarat" => "required"
+       ],[
+        "judul.required" => "Judul lowongan PKL wajib di isi",
+        "judul.string" => "Judul harus berupa Teks",
+        "jurusan_id.required" => "jurusan wajib di isi",
+        "kuota.required" => "Kuota wajib di isi",
+        "kuota.integer" => "Kuota harus berupa angka",
+        "deskripsi.required" => "Deskripsi wajib di isi",
+        "deskripsi.string" => "Deskripsi harus berupa teks",
+        "syarat.required" => "syarat wajib di isi"
+       ]);
+
+
+
+    //    Masukkan ke dalam database
+    $perusahaan = auth()->guard("perusahaan")->user();
+    $lowongan = $perusahaan->lowongan()->create([
+        "jurusan_id" => $request->jurusan_id,
+        "judul_lowongan" => $request->judul,
+        "kuota" => $request->kuota,
+        "deskripsi_lowongan" => $request->deskripsi
+    ]);
+
+    // tambahkan ke dalam databse syarat dari lowongan nya
+    foreach($request->syarat as $isi){
+        $lowongan->syarat()->create([
+          "isi_syarat" => $isi
+        ]);
+    }
+    return redirect()->back()->with("sukses","berhasil membuat lowongan pkl");
+
     }
 }

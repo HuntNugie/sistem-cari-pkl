@@ -21,6 +21,6 @@ class Perusahaan extends Authenticatable
         return $this->hasMany(Pengajuan::class,"perusahaan_id");
     }
     public function lowongan():HasMany{
-        return $this->hasMany(Lowongan::class,"lowongan_id");
+        return $this->hasMany(Lowongan::class,"perusahaan_id");
     }
 }
