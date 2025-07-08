@@ -32,7 +32,7 @@
 
         <p class="small mb-3">{{ Str::limit($lowongan->deskripsi_lowongan, 100, '...') }}</p>
 
-        <a href="detail-lowongan.html" class="btn btn-outline-primary btn-sm w-100">
+        <a href="{{ route("public.detail.pkl",$lowongan->id) }}" class="btn btn-outline-primary btn-sm w-100">
             <i class="bi bi-search"></i> Lihat Detail
         </a>
     </div>

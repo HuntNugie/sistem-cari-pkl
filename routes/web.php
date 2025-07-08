@@ -44,7 +44,7 @@ Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
     Route::get("/",[DaftarPklController::class,"daftarPkl"])->name("public.daftar.pkl");
 
     // detail pkl
-    Route::get("/detail",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl")->middleware("jagaDaftar");
+    Route::get("/detail/{lowongan}",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl")->middleware("jagaDaftar");
 
     // Route myprofile User
     Route::prefix("myprofile")->group(function(){

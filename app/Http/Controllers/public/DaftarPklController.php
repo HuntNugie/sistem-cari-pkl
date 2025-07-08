@@ -12,7 +12,7 @@ class DaftarPklController extends Controller
         $lowongan = Lowongan::with(["perusahaan","jurusan","syarat"])->where("status","tersedia")->get();
         return view("public.daftar-pkl",compact("lowongan"));
     }
-    public function detailPkl(){
-        return view("public.detail-pkl");
+    public function detailPkl(Lowongan $lowongan){
+        return view("public.detail-pkl",compact("lowongan"));
     }
 }

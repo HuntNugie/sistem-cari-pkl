@@ -27,24 +27,24 @@
 
         <!-- Header -->
         <div class="d-flex align-items-start gap-3 mb-4">
-          <img src="{{ asset('img/perusahaan1.jpg') }}" alt="Logo Perusahaan" class="rounded-circle border shadow-sm" width="70" height="70">
+          <img src="{{ asset('storage') }}/{{ $lowongan->perusahaan->perusahaanProfile->logo }}" alt="Logo Perusahaan" class="rounded-circle border shadow-sm" width="70" height="70">
           <div>
-            <h4 class="fw-bold mb-1">PT. Software Nusantara</h4>
-            <p class="text-muted mb-0">Bandung, Jawa Barat</p>
+            <h4 class="fw-bold mb-1">{{ $lowongan->perusahaan->perusahaanProfile->nama_perusahaan }}</h4>
+            <p class="text-muted mb-0">{{ $lowongan->perusahaan->perusahaanProfile->alamat }}</p>
           </div>
         </div>
 
         <!-- Info Utama -->
         <div class="row g-4 mb-4">
           <div class="col-md-6">
-            <p class="mb-1"><i class="bi bi-mortarboard me-2"></i><strong>Jurusan Diterima:</strong> RPL, TKJ</p>
-            <p class="mb-1"><i class="bi bi-people me-2"></i><strong>Kuota:</strong> 5 siswa</p>
+            <p class="mb-1"><i class="bi bi-mortarboard me-2"></i><strong>Jurusan Diterima:</strong> {{ $lowongan->jurusan->singkatan }}</p>
+            <p class="mb-1"><i class="bi bi-people me-2"></i><strong>Kuota:</strong> {{ $lowongan->kuota }} siswa</p>
             <p class="mb-1"><i class="bi bi-check-circle me-2"></i><strong>Status:</strong> <span class="badge bg-success">Tersedia</span></p>
           </div>
           <div class="col-md-6">
-            <p class="mb-1"><i class="bi bi-envelope me-2"></i><strong>Email:</strong> hrd@softwarenusantara.com</p>
-            <p class="mb-1"><i class="bi bi-telephone me-2"></i><strong>Telepon:</strong> 022-12345678</p>
-            <p class="mb-1"><i class="bi bi-globe me-2"></i><strong>Website:</strong> <a href="#" target="_blank">www.softwarenusantara.com</a></p>
+            <p class="mb-1"><i class="bi bi-envelope me-2"></i><strong>Email:</strong> {{ $lowongan->perusahaan->email }}</p>
+            <p class="mb-1"><i class="bi bi-telephone me-2"></i><strong>Telepon:</strong> {{ $lowongan->perusahaan->perusahaanProfile->telepon }}</p>
+            <p class="mb-1"><i class="bi bi-globe me-2"></i><strong>Website:</strong> <a href="#" target="_blank">{{ $lowongan->perusahaan->perusahaanProfile->website }}</a></p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@
         <div class="mb-4">
           <h5 class="fw-semibold">Deskripsi Perusahaan</h5>
           <p class="text-muted mb-0">
-            PT. Software Nusantara merupakan perusahaan IT yang berfokus pada pengembangan aplikasi berbasis web dan mobile. Kami membuka kesempatan bagi siswa SMK untuk mengikuti PKL dan terlibat langsung dalam proyek kami.
+            {{ $lowongan->deskripsi_lowongan }}
           </p>
         </div>
 
@@ -60,9 +60,9 @@
         <div class="mb-4">
           <h5 class="fw-semibold">Syarat Pendaftaran</h5>
           <ul class="text-muted">
-            <li>Surat pengantar dari sekolah</li>
-            <li>CV atau biodata sederhana</li>
-            <li>Minimal kelas XI</li>
+            @foreach ($lowongan->syarat as $syarat)
+                <li>{{ $syarat->isi_syarat }}</li>
+            @endforeach
           </ul>
         </div>
 

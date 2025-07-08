@@ -58,7 +58,7 @@
               <i class="bi bi-geo-alt-fill me-1"></i> {{ $low->perusahaan->perusahaanProfile->alamat }}
             </p>
             <p class="small mb-3">{{ Str::limit($low->deskripsi_lowongan,100) }}</p>
-            <a href="pkl-detail.html" class="btn btn-outline-primary btn-sm w-100">
+            <a href="{{ route("public.detail.pkl",$low->id) }}" class="btn btn-outline-primary btn-sm w-100">
                 <i class="bi bi-search"></i> Lihat Detail
             </a>
         </div>
