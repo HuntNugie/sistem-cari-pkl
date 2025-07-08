@@ -52,9 +52,11 @@ class LowonganController extends Controller
 
     // tambahkan ke dalam databse syarat dari lowongan nya
     foreach($request->syarat as $isi){
-        $lowongan->syarat()->create([
-          "isi_syarat" => $isi
-        ]);
+        if(trim($isi) !== ""){
+            $lowongan->syarta()->create([
+                "isi_syarat" => $isi
+            ]);
+        }
     }
     return redirect()->back()->with("sukses","berhasil membuat lowongan pkl");
 
@@ -78,4 +80,47 @@ class LowonganController extends Controller
         $jurusan = Jurusan::all();
         return view("perusahaan.edit-lowongan",compact(["halaman","jurusan","lowongan"]));
     }
+
+    // Aksi halaman edit lowongan
+    public function updateLowongan(Request $request,Lowongan $lowongan){
+    $request->validate([
+        "judul" => "required | string",
+        "jurusan_id" => "required ",
+        "kuota" => "required | integer",
+        "deskripsi" => "required | string",
+        "syarat" => "required"
+       ],[
+        "judul.required" => "Judul lowongan PKL wajib di isi",
+        "judul.string" => "Judul harus berupa Teks",
+        "jurusan_id.required" => "jurusan wajib di isi",
+        "kuota.required" => "Kuota wajib di isi",
+        "kuota.integer" => "Kuota harus berupa angka",
+        "deskripsi.required" => "Deskripsi wajib di isi",
+        "deskripsi.string" => "Deskripsi harus berupa teks",
+        "syarat.required" => "syarat wajib di isi"
+       ]);
+
+      $low = $lowongan->update([
+        "judul_lowongan" => $request->judul,
+        "jurusan_id" => $request->jurusan_id,
+        "kuota" => $request->kuota,
+        "deskripsi_lowongan" => $request->deskripsi
+      ]);
+
+
+    //    hapus syarat
+       $lowongan->syarat()->delete();
+
+    //    masukkan syarat baru
+      foreach($request->syarat as $isi){
+        if(trim($isi) !== ""){
+            $lowongan->syarat()->create([
+                "isi_syarat" => $isi
+            ]);
+        }
+      }
+
+      return redirect()->back()->with("sukses","Berhasil mengedit lowongan");
+    }
+
 }

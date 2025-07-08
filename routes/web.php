@@ -308,6 +308,9 @@ Route::prefix("perusahaan")->group(function(){
 
                 // Halaman Edit lowongan
                 Route::get("/edit/{lowongan}",[LowonganController::class,"editLowongan"])->name("perusahaan.edit.lowongan");
+
+                // aksi halaman edit lowongan
+                Route::put("/edit/{lowongan}",[LowonganController::class,"updateLowongan"])->name("perusahaan.update.lowongan.aksi");
             });
         });
 

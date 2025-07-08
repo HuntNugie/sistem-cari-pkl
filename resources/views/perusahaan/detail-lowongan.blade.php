@@ -41,7 +41,7 @@
       </ul>
 
       <div class="mt-4 d-flex justify-content-end gap-3">
-        <a href="#" class="btn btn-warning">
+        <a href="{{ route("perusahaan.edit.lowongan",$lowongan->id) }}" class="btn btn-warning">
           <i class="bi bi-pencil-square"></i> Edit
         </a>
         <form action="{{ route("perusahaan.hapus.lowongan",$lowongan->id) }}" method="post">
