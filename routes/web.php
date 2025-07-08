@@ -302,6 +302,9 @@ Route::prefix("perusahaan")->group(function(){
 
                 // aksi hapus lowongan
                 Route::delete("/hapus/{lowongan}",[LowonganController::class,"destroyLowongan"])->name("perusahaan.hapus.lowongan");
+
+                // Halaman Detail lowongan
+                Route::get("/detail/{lowongan}",[LowonganController::class,"showLowongan"])->name("perusahaan.detail.lowongan");
             });
         });
 

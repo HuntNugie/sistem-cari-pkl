@@ -54,13 +54,17 @@
                                     <span class="badge bg-{{ $low->status == "tersedia" ? "success" : "danger" }} bg-opacity-75 px-3 py-2 rounded-pill text-white">{{ Str::upper($low->status) }}</span>
                                 </td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
-                                    <button type="button" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
-                                    <form action="{{ route("perusahaan.hapus.lowongan",$low->id) }}" method="post">
-                                    @csrf
-                                    @method("DELETE")
-                                        <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1 btn-konfirmasi" title="Hapus"><i class="mdi mdi-delete"></i></button>
-                                    </form>
+                                    <div class="d-flex justify-content-center align-items-center gap-1">
+                                        <form class="m-0 p-0" action="{{ route("perusahaan.detail.lowongan",$low->id) }}">
+                                            <button type="submit" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
+                                        </form>
+                                        <button type="button" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
+                                        <form action="{{ route("perusahaan.hapus.lowongan",$low->id) }}" method="post" class="m-0 p-0">
+                                            @csrf
+                                            @method("DELETE")
+                                            <button type="button" class="btn btn-outline-danger btn-sm rounded-circle mx-1 btn-konfirmasi" title="Hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

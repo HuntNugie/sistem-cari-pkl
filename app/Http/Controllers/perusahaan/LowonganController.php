@@ -65,4 +65,10 @@ class LowonganController extends Controller
         $lowongan->delete();
         return redirect()->back()->with("sukses","Berhasil menghapus lowongan");
     }
+
+    // halaman detail lowongan
+    public function showLowongan(Lowongan $lowongan){
+        $halaman = "Halaman detial lowongan";
+        return view("perusahaan.detail-lowongan",compact(["lowongan","halaman"]));
+    }
 }
