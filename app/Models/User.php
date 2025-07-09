@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\UserProfile;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -53,5 +55,8 @@ class User extends Authenticatable
     }
     public function user_profile():HasOne{
         return $this->HasOne(UserProfile::class,"user_id");
+    }
+    public function lamaran():HasMany{
+        return $this->hasMany(Lamar::class,"user_id");
     }
 }

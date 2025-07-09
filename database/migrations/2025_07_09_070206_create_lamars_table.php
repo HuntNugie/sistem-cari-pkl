@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained("users")->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId("lowongan_id")->constrained("lowongans")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string("alasan")->nullable();
             $table->string("surat_pengantar");
             $table->enum("status",["diterima","ditolak","pending"])->default("pending");
             $table->timestamps();

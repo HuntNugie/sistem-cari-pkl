@@ -69,9 +69,10 @@
 
         <!-- Tombol Ajukan -->
         <div class="text-end mt-4">
-          <a href="form-pendaftaran.html" class="btn btn-primary px-4">
-            <i class="bi bi-send me-2"></i> Ajukan PKL Sekarang
-          </a>
+         <!-- Tombol untuk membuka modal -->
+<button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#ajukanModal">
+  <i class="bi bi-send-fill me-1"></i> Lamar PKL
+</button>
         </div>
 
       </div>
@@ -79,4 +80,46 @@
 
   </div>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ajukanModal" tabindex="-1" aria-labelledby="ajukanModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header" style="background-color: #343a40;">
+        <h5 class="modal-title text-white" id="ajukanModalLabel">
+          <i class="bi bi-envelope-plus me-2"></i> Pengajuan PKL
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body bg-light">
+        <form action="{{ route("public.lamaran.aksi",$lowongan->id) }}" method="POST" enctype="multipart/form-data" id="formAjukan">
+          <!-- CSRF jika pakai Laravel -->
+            @csrf
+
+          <div class="mb-3">
+            <label for="fileSurat" class="form-label fw-semibold">Upload Surat Pengantar (PDF)</label>
+            <input type="file" class="form-control" id="fileSurat" name="surat_pengantar" accept=".pdf" required>
+            <div class="form-text">Hanya file PDF. Maksimal 2MB.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="alasan" class="form-label fw-semibold">Alasan Lamar</label>
+            <textarea class="form-control" id="alasan" name="alasan" rows="3" placeholder="Tulis alasan kamu memilih tempat PKL ini..." required></textarea>
+          </div>
+
+          <div class="d-flex justify-content-end mt-4">
+            <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
+              Batal
+            </button>
+            <button type="submit" class="btn text-white" style="background-color: #fd7e14;">
+              <i class="bi bi-send-check me-1"></i> Ajukan Sekarang
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection

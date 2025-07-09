@@ -32,6 +32,7 @@ use App\Http\Controllers\perusahaan\LowonganController;
 use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
 use App\Http\Controllers\public\BerandaController;
 use App\Http\Controllers\public\DaftarPklController;
+use App\Http\Controllers\public\LamaranController;
 use App\Models\Perusahaan;
 
 // landing page
@@ -43,8 +44,14 @@ Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
     // daftar seluruh pkl
     Route::get("/",[DaftarPklController::class,"daftarPkl"])->name("public.daftar.pkl");
 
-    // detail pkl
-    Route::get("/detail/{lowongan}",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl")->middleware("jagaDaftar");
+    Route::middleware("jagaDaftar")->group(function(){
+        // detail pkl
+        Route::get("/detail/{lowongan}",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl");
+
+        // aksi lamaran
+        Route::post("/lamar/{lowongan}",[LamaranController::class,"storeLamar"])->name("public.lamaran.aksi");
+    });
+
 
     // Route myprofile User
     Route::prefix("myprofile")->group(function(){
