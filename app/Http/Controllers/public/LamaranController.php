@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\public;
 
+use Exception;
 use App\Models\Lowongan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\pemberitahuanLamar;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class LamaranController extends Controller
 {
@@ -37,6 +41,18 @@ class LamaranController extends Controller
             "alasan" => $request->alasan,
             "surat_pengantar" => $request->surat_pengantar
         ]);
+        $email = $lowongan->perusahaan->email;
+        $namaSiswa = $user->name;
+        $jk = $user->user_profile->jk;
+        $asalSekolah = $user->user_profile->sekolah->nama_sekolah;
+        $judul = $lowongan->judul_lowongan;
+        try {
+             Mail::to($email)->send(new pemberitahuanLamar($namaSiswa,$jk,$judul,$asalSekolah));
+
+        } catch (Exception $e) {
+            //throw $th;
+            Log::error("gagal mengirim email = ".$e->getMessage());
+        }
 
         return redirect()->back()->with("sukses","Anda berhasil Melamar PKL untuk melihat perkembangan nya silahkan cek di riwayat lamaran");
     }
