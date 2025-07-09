@@ -18,7 +18,7 @@ class jagaDaftar
     {
 
         $user = Auth::user();
-        if(!$user->user_profile->sekolah_id || !$user->user_profile->jurusan_id || !$user->user_profile->kelas || !$user->user_profile->alamat || !$user->user_profile->telepon || !$user->user_profile->foto &&!$user->avatar || !$user->user_profile->tgl_lahir || !$user->user_profile->nis ) {
+        if(!$user->user_profile->sekolah_id || !$user->user_profile->jurusan_id || !$user->user_profile->kelas || !$user->user_profile->alamat || !$user->user_profile->telepon || !$user->user_profile->foto &&!$user->avatar || !$user->user_profile->tgl_lahir || !$user->user_profile->nis || !$user->user_profile->jk) {
             // Jika data tidak lengkap, redirect ke halaman profil
             return redirect()->back()->with('error', 'Lengkapi data profil Anda sebelum mendaftar PKL.');
         }

@@ -40,19 +40,22 @@ Route::get('/', [BerandaController::class,"index"])->name("beranda");
 
 
 // daftar pkl
-Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
+Route::middleware("auth")->group(function(){
     // daftar seluruh pkl
-    Route::get("/",[DaftarPklController::class,"daftarPkl"])->name("public.daftar.pkl");
+    Route::prefix("daftar-pkl")->group(function(){
 
-    Route::middleware("jagaDaftar")->group(function(){
-        // detail pkl
-        Route::get("/detail/{lowongan}",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl");
 
-        // aksi lamaran
-        Route::post("/lamar/{lowongan}",[LamaranController::class,"storeLamar"])->name("public.lamaran.aksi")->middleware("tolakPending");
+        Route::get("/",[DaftarPklController::class,"daftarPkl"])->name("public.daftar.pkl");
+
+        Route::middleware("jagaDaftar")->group(function(){
+            // detail pkl
+            Route::get("/detail/{lowongan}",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl");
+
+            // aksi lamaran
+            Route::post("/lamar/{lowongan}",[LamaranController::class,"storeLamar"])->name("public.lamaran.aksi")->middleware("tolakPending");
+        });
+
     });
-
-
     // Route myprofile User
     Route::prefix("myprofile")->group(function(){
 
