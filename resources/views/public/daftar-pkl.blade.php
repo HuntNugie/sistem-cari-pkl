@@ -26,12 +26,29 @@
     <!-- Search Bar -->
     <form class="search-bar mb-5">
       <div class="input-group shadow-sm">
-        <input type="text" id="searchInput" class="form-control" placeholder="Cari nama perusahaan, jurusan, atau kota...">
+        <input type="text" id="searchInput" class="form-control" name="search" placeholder="Cari nama perusahaan, jurusan, atau kota...">
         <button class="btn btn-primary" type="button" id="searchBtn">
           <i class="bi bi-search"></i>
         </button>
       </div>
     </form>
+    {{-- form untuk filter berdasarkan jurusan --}}
+<form method="GET" action="" class="d-inline">
+  <div class="input-group input-group-sm" style="max-width: 250px;">
+    <label class="input-group-text bg-light border-0 px-2" for="jurusanSelect">
+      <i class="bi bi-filter"></i>
+    </label>
+    <select name="jurusan" onchange="this.form.submit()" class="form-select form-select-sm" id="jurusanSelect">
+      <option value="">Semua Jurusan</option>
+      @foreach($jurusanList as $jurusan)
+        <option value="{{ $jurusan->slug }}" {{ request('jurusan_id') == $jurusan->id ? 'selected' : '' }}>
+          {{ $jurusan->nama_jurusan }}
+        </option>
+      @endforeach
+    </select>
+  </div>
+</form>
+
 
     <!-- List PKL Cards -->
     <div class="row" id="pklList">

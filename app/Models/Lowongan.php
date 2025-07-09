@@ -25,4 +25,11 @@ class Lowongan extends Model
             $query->where("judul_lowongan","LIKE","%".$keyword."%");
         });
     }
+    public function scopeFilterjurusan($query,$keyword){
+        return $query->when($keyword,function($query,$keyword){
+            $query->whereHas("jurusan",function($q) use($keyword){
+                $q->where("slug",$keyword);
+            });
+        });
+    }
 }
