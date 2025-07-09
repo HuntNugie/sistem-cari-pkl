@@ -45,7 +45,7 @@
           <div class="col-md-6">
             <p class="mb-1"><i class="bi bi-envelope me-2"></i><strong>Email:</strong> {{ $lowongan->perusahaan->email }}</p>
             <p class="mb-1"><i class="bi bi-telephone me-2"></i><strong>Telepon:</strong> {{ $lowongan->perusahaan->perusahaanProfile->telepon }}</p>
-            <p class="mb-1"><i class="bi bi-globe me-2"></i><strong>Website:</strong> <a href="#" target="_blank">{{ $lowongan->perusahaan->perusahaanProfile->website }}</a></p>
+            <p class="mb-1"><i class="bi bi-globe me-2"></i><strong>Website:</strong> <a href="{{ $lowongan->perusahaan->perusahaanProfile->website }}" target="_blank" >{{ $lowongan->perusahaan->perusahaanProfile->website }}</a></p>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
         <!-- Tombol Ajukan -->
         <div class="text-end mt-4 d-flex align-items-center justify-content-end gap-2">
             <!-- Tombol untuk membuka modal -->
-            @if ($user->status !== "pending")
+            @if (!auth()->guard("web")->user()->lamaran()->where("status","pending")->latest()->first())
 
             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#ajukanModal">
                 <i class="bi bi-send-fill me-1"></i> Lamar PKL

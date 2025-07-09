@@ -11,7 +11,7 @@
                         <span class="badge bg-primary bg-opacity-10 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Siswa PKL yang baru mendaftar</span>
                     </div>
                     <div>
-                        <img src="https://imgs.search.brave.com/u8H3BWoeboLS8ZzcK--kPKpplSeTX_xRbPZVFhmyJms/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvbWluaW1hbGlz/dC10eXBlLWNyZWF0/aXZlLWJ1c2luZXNz/LWxvZ28tdGVtcGxh/dGVfMTI4MzM0OC0y/MDQ5Mi5qcGc_c2Vt/dD1haXNfaHlicmlk/Jnc9NzQw" alt="Foto Perusahaan" class="img-fluid rounded-3 shadow" style="width: 200px; height: 200px; object-fit: cover;">
+                        <img src="{{ asset("storage") }}/{{ auth()->guard("perusahaan")->user()->perusahaanProfile->logo }}" alt="Foto Perusahaan" class="img-fluid rounded-3 shadow" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -37,12 +37,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($siswa as $sis)
+
                             <tr>
-                                <td class="fw-semibold text-dark">1</td>
-                                <td><strong class="text-dark">Ahmad Fauzi</strong></td>
-                                <td>SMK Negeri 1 Jakarta</td>
-                                <td>XII</td>
-                                <td>Teknik Komputer Jaringan</td>
+                                <td class="fw-semibold text-dark">{{ $loop->iteration }}</td>
+                                <td><strong class="text-dark">{{ $sis->name }}</strong></td>
+                                <td>{{ $sis->user_profile->sekolah->nama_sekolah }}</td>
+                                <td>{{ $sis->user_profile->kelas }}</td>
+                                <td>{{ $sis->user_profile->jurusan->nama_jurusan }}</td>
                                 <td>Laki-laki</td>
                                 <td>Web Developer</td>
                                 <td class="text-center">
@@ -59,50 +61,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="fw-semibold text-dark">2</td>
-                                <td><strong class="text-dark">Siti Nurhaliza</strong></td>
-                                <td>SMK Negeri 2 Bandung</td>
-                                <td>XI</td>
-                                <td>Multimedia</td>
-                                <td>Perempuan</td>
-                                <td>Desain Grafis</td>
-                                <td class="text-center">
-                                    <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill mx-1" title="Detail">
-                                            <i class="mdi mdi-eye"></i> Detail
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm rounded-pill mx-1" title="Konfirmasi">
-                                            <i class="mdi mdi-check"></i> Konfirmasi
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm rounded-pill mx-1" title="Tolak">
-                                            <i class="mdi mdi-close"></i> Tolak
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-semibold text-dark">3</td>
-                                <td><strong class="text-dark">Budi Santoso</strong></td>
-                                <td>SMK Negeri 3 Surabaya</td>
-                                <td>XII</td>
-                                <td>Rekayasa Perangkat Lunak</td>
-                                <td>Laki-laki</td>
-                                <td>Mobile Developer</td>
-                                <td class="text-center">
-                                    <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill mx-1" title="Detail">
-                                            <i class="mdi mdi-eye"></i> Detail
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-sm rounded-pill mx-1" title="Konfirmasi">
-                                            <i class="mdi mdi-check"></i> Konfirmasi
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm rounded-pill mx-1" title="Tolak">
-                                            <i class="mdi mdi-close"></i> Tolak
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>

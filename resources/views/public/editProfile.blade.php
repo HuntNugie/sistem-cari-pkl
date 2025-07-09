@@ -110,6 +110,14 @@
                 <div class="preview-name" id="previewName">👋 Halo, Siswa!</div>
             </div>
             <div class="col-md-6">
+                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+              <select name="jk" class="form-control" id="jenis_kelamin">
+                <option disabled selected>pilih jenis kelamin</option>
+                <option value="laki-laki" {{ auth()->user()->user_profile->jk === "laki-laki" ? "selected" : "" }}>laki-laki</option>
+                <option value="perempuan" {{ auth()->user()->user_profile->jk === "perempuan" ? "selected" : "" }}>perempuan</option>
+              </select>
+            </div>
+            <div class="col-md-6">
                 <label for="email" class="form-label">Alamat Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Email Aktif" value="{{ auth()->user()->email ?? "" }}" readonly>
             </div>

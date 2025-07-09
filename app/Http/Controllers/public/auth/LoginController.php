@@ -39,11 +39,11 @@ class LoginController extends Controller
     }
     public function handleGoogleCallback()
     {
-        $userGoogle = Socialite::driver('google')->user();
+        $userGoogle = Socialite::driver('google')->stateless()->user();
         $userManual = User::where("email",$userGoogle->getEmail())->first();
         if($userManual && !$userManual->google_id){
         //    jika pengguna sudah daftar dengan manual maka harus login manual
-            return redirect()->route("public.login")->withErrors(["gagal" => "Anda sudah terdaftar dengan akun manual silahkan login manual"]);
+            return redirect()->route("public.login")->with("gagal","Anda sudah terdaftar dengan akun manual silahkan login manual");
         }
 
         if($userManual && $userManual->google_id){

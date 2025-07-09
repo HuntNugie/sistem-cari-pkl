@@ -11,9 +11,37 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{ asset("auth/css/style.css") }}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack("style")
 </head>
 <body>
+      @session("sukses")
+    <script>
+        Swal.fire({
+  title: "{{ session("sukses") }}",
+  icon: "success",
+  draggable: true
+});
+    </script>
+    @endsession
+    @session("gagal")
+    <script>
+        Swal.fire({
+  icon: "error",
+  title: "{{ session("gagal") }}",
+  footer: '<a href="#">Why do I have this issue?</a>'
+});
+    </script>
+    @endsession
+@if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Terjadi Kesalahan!",
+            html: `{!! implode('<br>', $errors->all()) !!}`
+        });
+    </script>
+@endif
     @yield("auth")
 
   <!-- Bootstrap JS -->

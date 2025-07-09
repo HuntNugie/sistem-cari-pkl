@@ -35,6 +35,7 @@ class MyProfileController extends Controller
             'telepon' => 'required|string|max:20',
             'kelas' => 'required|string|max:10',
             'nis' => 'required|string|max:20',
+            'jk' => 'required'
               ]
         );
         // cek apakah user mau mengganti foto

@@ -127,6 +127,10 @@
                         <div class="info-label">Jurusan</div>
                         <div class="info-value">{{ auth()->user()->user_profile->jurusan->nama_jurusan ?? '-' }}</div>
                     </div>
+                    <div class="info-row">
+                        <div class="info-label">Jenis kelamin</div>
+                        <div class="info-value">{{ auth()->user()->user_profile->jk ?? '-' }}</div>
+                    </div>
                 </div>
                 <div class="profile-info-col">
                     <div class="info-row">
