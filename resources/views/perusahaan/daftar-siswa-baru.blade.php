@@ -41,12 +41,12 @@
 
                             <tr>
                                 <td class="fw-semibold text-dark">{{ $loop->iteration }}</td>
-                                <td><strong class="text-dark">{{ $sis->name }}</strong></td>
-                                <td>{{ $sis->user_profile->sekolah->nama_sekolah }}</td>
-                                <td>{{ $sis->user_profile->kelas }}</td>
-                                <td>{{ $sis->user_profile->jurusan->nama_jurusan }}</td>
-                                <td>Laki-laki</td>
-                                <td>Web Developer</td>
+                                <td><strong class="text-dark">{{ $sis->siswa->name }}</strong></td>
+                                <td>{{ $sis->siswa->user_profile->sekolah->nama_sekolah }}</td>
+                                <td>{{ $sis->siswa->user_profile->kelas }}</td>
+                                <td>{{ $sis->siswa->user_profile->jurusan->nama_jurusan }}</td>
+                                <td>{{ $sis->siswa->user_profile->jk }}</td>
+                                <td>{{ $sis->lowongan->judul_lowongan }}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
                                         <button type="button" class="btn btn-outline-primary btn-sm rounded-pill mx-1" title="Detail">
@@ -67,7 +67,7 @@
                     </table>
                 </div>
                 <div class="mt-4 text-end">
-                    <span class="badge bg-primary bg-opacity-25 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Total: 3 siswa</span>
+                    <span class="badge bg-primary bg-opacity-25 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Total: {{ $siswa->count() }} siswa</span>
                 </div>
             </div>
         </div>

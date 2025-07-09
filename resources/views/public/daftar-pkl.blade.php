@@ -41,7 +41,7 @@
     <select name="jurusan" onchange="this.form.submit()" class="form-select form-select-sm" id="jurusanSelect">
       <option value="">Semua Jurusan</option>
       @foreach($jurusanList as $jurusan)
-        <option value="{{ $jurusan->slug }}" {{ request('jurusan_id') == $jurusan->id ? 'selected' : '' }}>
+        <option value="{{ $jurusan->slug }}" {{ request('jurusan') == $jurusan->slug ? 'selected' : '' }}>
           {{ $jurusan->nama_jurusan }}
         </option>
       @endforeach
