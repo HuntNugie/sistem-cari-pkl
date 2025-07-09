@@ -68,11 +68,20 @@
         </div>
 
         <!-- Tombol Ajukan -->
-        <div class="text-end mt-4">
-         <!-- Tombol untuk membuka modal -->
-<button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#ajukanModal">
-  <i class="bi bi-send-fill me-1"></i> Lamar PKL
-</button>
+        <div class="text-end mt-4 d-flex align-items-center justify-content-end gap-2">
+            <!-- Tombol untuk membuka modal -->
+            @if ($user->status !== "pending")
+
+            <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#ajukanModal">
+                <i class="bi bi-send-fill me-1"></i> Lamar PKL
+            </button>
+            @else
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-secondary me-2" disabled>
+                    <i class="bi bi-x-circle me-1"></i> Belum dapat melamar kembali
+                </button>
+            </div>
+            @endif
         </div>
 
       </div>

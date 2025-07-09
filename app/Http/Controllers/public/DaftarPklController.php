@@ -5,6 +5,7 @@ namespace App\Http\Controllers\public;
 use App\Models\Lowongan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Lamar;
 
 class DaftarPklController extends Controller
 {
@@ -13,6 +14,7 @@ class DaftarPklController extends Controller
         return view("public.daftar-pkl",compact("lowongan"));
     }
     public function detailPkl(Lowongan $lowongan){
-        return view("public.detail-pkl",compact("lowongan"));
+        $user = Lamar::where("user_id",auth()->guard("web")->user()->id)->latest()->first();
+        return view("public.detail-pkl",compact(["lowongan","user"]));
     }
 }

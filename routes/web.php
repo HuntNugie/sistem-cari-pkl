@@ -49,7 +49,7 @@ Route::middleware("auth")->prefix("daftar-pkl")->group(function(){
         Route::get("/detail/{lowongan}",[DaftarPklController::class,"detailPkl"])->name("public.detail.pkl");
 
         // aksi lamaran
-        Route::post("/lamar/{lowongan}",[LamaranController::class,"storeLamar"])->name("public.lamaran.aksi");
+        Route::post("/lamar/{lowongan}",[LamaranController::class,"storeLamar"])->name("public.lamaran.aksi")->middleware("tolakPending");
     });
 
 
