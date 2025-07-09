@@ -7,18 +7,19 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    padding-top: 5rem;
+    padding-top: 120px; /* tambahkan lebih banyak padding agar tidak tertutup navbar */
   }
 </style>
+
 @endpush
 
 @section("content")
 
-<section class="py-5 bg-light detail-section">
+<section class="py-5 bg-light detail-section" style="margin-top: 50px">
   <div class="container" data-aos="fade-up">
 
     <!-- Tombol kembali -->
-    <a href="{{ route("public.daftar.pkl") }}" class="btn btn-secondary mb-3">
+    <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">
       <i class="bi bi-arrow-left-circle"></i> Kembali
     </a>
 

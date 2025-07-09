@@ -39,7 +39,7 @@ class LoginController extends Controller
     }
     public function handleGoogleCallback()
     {
-        $userGoogle = Socialite::driver('google')->stateless()->user();
+        $userGoogle = Socialite::driver('google')->user();
         $userManual = User::where("email",$userGoogle->getEmail())->first();
         if($userManual && !$userManual->google_id){
         //    jika pengguna sudah daftar dengan manual maka harus login manual

@@ -75,16 +75,16 @@ class VerifEmailController extends Controller
     }
     // menjalankan verifikasi email perusahaan
     public function verifikasiPerusahaan(Request $request){
+
         $request->validate([
             "email" => "required | email"
         ],[
             "email.required" => "Email wajib di isi",
             "email.email" => "yang anda inputkan bukan lah sebuah email",
         ]);
-
         // bikin generate otp
         $otp = random_int(100000, 999999);
-                $id = session("perusahaan_id");
+        $id = session("perusahaan_id");
         if(session()->has("perusahaan_id")){
             $perusahaan = Perusahaan::where("id",$id)->first();
             $perusahaan->email = $request->email;
@@ -105,19 +105,25 @@ class VerifEmailController extends Controller
                     session(["verifEmail" => true,"email_expired_at" => now(),"perusahaan_id" => $perusahaan->id]);
                     return redirect()->intended(route("perusahaan.otp"))->with("sukses","silahkan cek email anda");
                 }
-            }
+        }
         // kirim email
+
         if($request->has("email")){
             // kirim email nya
             Mail::to($request->email)->send(new verifEmail($otp));
             session(["verifEmail" => true,"email_expired_at" => now()]);
         }
+
         // tambahkan email ke database
         $perusahaan = Perusahaan::create([
             "email" => $request->email,
             "otp" => $otp
         ]);
         session(["perusahaan_id" => $perusahaan->id]);
+
+
+
+
         return redirect()->intended(route("perusahaan.otp"))->with("sukses","silahkan cek email anda");
 
     }

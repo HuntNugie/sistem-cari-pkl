@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_profiles', function (Blueprint $table) {
-            $table->dropColumn("jurusan_id");
-            $table->foreignId("jurusan_id")->nullable()->constrained('jurusans')->nullOnDelete();
+             $table->foreignId("jurusan_id")->nullable()->after("kelas")->constrained('jurusans')->nullOnDelete();
         });
     }
 
