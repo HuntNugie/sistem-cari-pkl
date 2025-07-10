@@ -19,7 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
             "terkonfirmasi" => App\Http\Middleware\terkonfirmasi::class,
             "superadmin" => App\Http\Middleware\superadmin::class,
             "jagaRegister" => App\Http\Middleware\jagaRegister::class,
-            "tolakPending" => App\Http\Middleware\TolakPending::class
+            "tolakPending" => App\Http\Middleware\TolakPending::class,
+            "jagaPdf" => App\Http\Middleware\jagaPdf::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

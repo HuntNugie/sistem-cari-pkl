@@ -53,36 +53,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>PT Maju Jaya</td>
-                                    <td>Administrasi Perkantoran</td>
-                                    <td><span class="badge bg-success">Diterima</span></td>
+                                @foreach($lamaran as $lamar)                                <tr>
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $lamar->lowongan->perusahaan->perusahaanProfile->nama_perusahaan }}</td>
+                                    <td>{{ $lamar->lowongan->judul_lowongan }}</td>
+                                    @if($lamar->status == "diterima")
+                                    <td><span class="badge bg-success">{{ $lamar->status }}</span></td>
+                                    @elseif($lamar->status == "ditolak")
+                                    <td><span class="badge bg-danger">{{ $lamar->status }}</span></td>
+                                    @else
+                                    <td><span class="badge bg-warning">{{ $lamar->status }}</span></td>
+                                    @endif
                                     <td>
-    <button class="btn btn-sm btn-primary me-1"><i class="bi bi-eye"></i> Lihat Surat</button>
-    <button class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
-</td>
+                                        @if($lamar->status == "diterima" || $lamar->status == "ditolak")
+                                        <form action="{{ route("public.pdf.lihat",$lamar->id) }}" method="get" target="_blank" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-primary me-1"><i class="bi bi-eye"></i> Lihat Surat</button>
+                                        </form>
+
+                                            <button class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
+                                        @endif
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>CV Sukses Bersama</td>
-                                    <td>Teknik Komputer</td>
-                                    <td><span class="badge bg-warning text-dark">Proses</span></td>
-                                    <td>
-    <button class="btn btn-sm btn-primary me-1"><i class="bi bi-eye"></i> Lihat Surat</button>
-    <button class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
-</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>PT Sejahtera Abadi</td>
-                                    <td>Akuntansi</td>
-                                    <td><span class="badge bg-danger">Ditolak</span></td>
-                                    <td>
-    <button class="btn btn-sm btn-primary me-1"><i class="bi bi-eye"></i> Lihat Surat</button>
-    <button class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
-</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

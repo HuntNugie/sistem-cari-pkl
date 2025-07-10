@@ -34,36 +34,34 @@
 <body>
 
   <div class="kop">
-    <h2>{{ $perusahaan->nama_perusahaan }}</h2>
-    <p>{{ $perusahaan->alamat }}</p>
-    <p>Telp: {{ $perusahaan->telepon }} | Website: {{ $perusahaan->website }}</p>
+    <h2>{{ $perusahaan->perusahaanProfile->nama_perusahaan }}</h2>
+    <p>{{ $perusahaan->perusahaanProfile->alamat }}</p>
+    <p>Telp: {{ $perusahaan->perusahaanProfile->telepon }} | Website: {{ $perusahaan->perusahaanProfile->website }}</p>
   </div>
 
   <div class="content">
-    <p><strong>Nomor:</strong> {{ $nomor_surat }}</p>
+    <p><strong>Nomor:</strong>1</p>
     <p><strong>Lampiran:</strong> -</p>
     <p><strong>Perihal:</strong> Pemberitahuan Penerimaan PKL</p>
 
-    <br>
 
-    <p>Yth. {{ $siswa->nama }}<br>
-    Siswa {{ $siswa->asal_sekolah }}<br>
+    <p>Yth. {{ $siswa->name }}<br>
+    Siswa {{ $siswa->user_profile->sekolah->nama_sekolah }}<br>
     Di Tempat</p>
 
-    <br>
 
     <p>Dengan hormat,</p>
 
-    <p>Bersama surat ini, kami dari <strong>{{ $perusahaan->nama_perusahaan }}</strong> menyampaikan bahwa saudara/i telah <strong>diterima</strong> untuk melaksanakan kegiatan Praktek Kerja Lapangan (PKL) di perusahaan kami melalui lowongan:</p>
+    <p>Bersama surat ini, kami dari <strong>{{ $perusahaan->perusahaanProfile->nama_perusahaan }}</strong> menyampaikan bahwa saudara/i telah <strong>diterima</strong> untuk melaksanakan kegiatan Praktek Kerja Lapangan (PKL) di perusahaan kami melalui lowongan:</p>
 
     <p>
       <strong>Judul Lowongan:</strong> {{ $lowongan->judul_lowongan }}<br>
-      <strong>Alamat PKL:</strong> {{ $perusahaan->alamat }}<br>
-      <strong>Jadwal Datang:</strong> {{ \Carbon\Carbon::parse($jadwal_datang)->translatedFormat('d F Y') }}
+      <strong>Alamat PKL:</strong> {{ $perusahaan->perusahaanProfile->alamat }}<br>
+      <strong>Jadwal Datang:</strong> {{ Carbon\Carbon::parse($surat->jadwal_kedatangan)->format("d F Y") }}
     </p>
 
     <p><strong>Catatan Tambahan:</strong><br>
-    {{ $catatan ?? 'Harap membawa laptop pribadi dan hadir pukul 08:00 WIB.' }}</p>
+    {{ $surat->catatan ?? '-' }}</p>
 
     <p>Diharapkan agar saudara/i dapat hadir sesuai jadwal dan membawa kelengkapan yang diperlukan, serta menjaga sikap profesional selama kegiatan berlangsung.</p>
 
@@ -71,13 +69,13 @@
   </div>
 
   <div class="footer">
-    <p>{{ $perusahaan->nama_perusahaan }}, {{ now()->translatedFormat('d F Y') }}</p>
+    <p>{{ $perusahaan->perusahaanProfile->nama_perusahaan }}, {{ $surat->created_at->translatedFormat('d F Y') }}</p>
   </div>
 
   <div class="ttd">
     <p><strong>Pimpinan Perusahaan</strong></p>
     <br><br><br>
-    <p><strong><u>{{ $perusahaan->pimpinan }}</u></strong></p>
+    <p><strong><u>{{ $perusahaan->perusahaanProfile->pemilik }}</u></strong></p>
   </div>
 
 </body>

@@ -72,8 +72,15 @@ Route::middleware("auth")->group(function(){
         Route::put("/update/{siswa}",[MyProfileController::class,"update"])->name("public.myprofile.update")->middleware("auth");
     });
 
-    // Route riwayat lamaran
-    Route::get("/riwayat-lamaran",[RiwayatLamaranController::class,"index"])->name("public.riwayat.lamaran");
+    Route::prefix("/riwayat-lamaran")->group(function(){
+        // Route riwayat lamaran
+        Route::get("/",[RiwayatLamaranController::class,"index"])->name("public.riwayat.lamaran");
+
+    // Route meelihat pdf
+        Route::middleware("jagaPdf")->prefix("pdf")->group(function(){
+            Route::get("/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDiterima"])->name("public.pdf.lihat");
+        });
+    });
 });
 
 // Halaman Logout
