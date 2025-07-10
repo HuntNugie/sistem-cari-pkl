@@ -74,8 +74,9 @@
 <!-- Modal -->
 <div class="modal fade" id="modalKonfirmasi" tabindex="-1" aria-labelledby="modalKonfirmasiLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"> {{-- Tambah modal-lg jika ingin lebih lebar --}}
-    <form action="" method="POST" class="modal-content shadow-lg rounded-4 border-0">
+    <form action="{{ route("perusahaan.terima.siswa.baru",$lamaran->id) }}" method="POST" class="modal-content shadow-lg rounded-4 border-0">
       @csrf
+      @method("PUT")
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title fw-bold" id="modalKonfirmasiLabel">
           <i class="bi bi-check2-circle me-2"></i> Konfirmasi Penerimaan PKL
@@ -85,13 +86,13 @@
 
       <div class="modal-body bg-light">
         <div class="mb-3">
-          <label for="jadwal_datang" class="form-label fw-semibold">Jadwal Kedatangan</label>
-          <input type="date" name="jadwal_datang" class="form-control rounded-3 shadow-sm" required>
+          <label for="jadwal_kedatangan" class="form-label fw-semibold">Jadwal Kedatangan</label>
+          <input type="date" name="jadwal_kedatangan" class="form-control rounded-3 shadow-sm" required>
         </div>
 
         <div class="mb-3">
-          <label for="alamat_pkl" class="form-label fw-semibold">Alamat PKL</label>
-          <textarea name="alamat_pkl" class="form-control rounded-3 shadow-sm" rows="2" required></textarea>
+          <label for="alamat" class="form-label fw-semibold">Alamat PKL</label>
+          <textarea name="alamat" class="form-control rounded-3 shadow-sm" rows="2" required></textarea>
         </div>
 
         <div class="mb-3">
@@ -117,8 +118,9 @@
 <!-- Modal -->
 <div class="modal fade" id="modalTolak" tabindex="-1" aria-labelledby="modalTolakLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Tambah modal-lg untuk memperlebar -->
-    <form action="" method="POST" class="modal-content shadow-lg rounded-4 border-0">
+    <form action="{{ route("perusahaan.tolak.siswa.baru",$lamaran->id) }}" method="POST" class="modal-content shadow-lg rounded-4 border-0">
       @csrf
+      @method("PUT")
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title fw-bold" id="modalTolakLabel">
           <i class="bi bi-x-octagon-fill me-2"></i> Tolak Lamaran PKL
@@ -129,8 +131,8 @@
       <div class="modal-body bg-light">
         <p class="mb-3">Silakan tulis alasan penolakan lamaran siswa dengan sopan dan jelas.</p>
         <div class="mb-3">
-          <label for="alasan_penolakan" class="form-label fw-semibold">Alasan Penolakan</label>
-          <textarea name="alasan_penolakan" class="form-control rounded-3 shadow-sm" id="alasan_penolakan" rows="4" placeholder="Contoh: Kuota sudah penuh, atau jurusan tidak sesuai" required></textarea>
+          <label for="alasan" class="form-label fw-semibold">Alasan Penolakan</label>
+          <textarea name="alasan" class="form-control rounded-3 shadow-sm" id="alasan" rows="4" placeholder="Contoh: Kuota sudah penuh, atau jurusan tidak sesuai" required></textarea>
         </div>
       </div>
 

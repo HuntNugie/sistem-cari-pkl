@@ -296,6 +296,12 @@ Route::prefix("perusahaan")->group(function(){
 
             // detail siswa baru
             Route::get("/detail/{lamaran}",[DaftarSiswaBaruController::class,"showSiswaBaru"])->name("perusahaan.detail.siswa.baru");
+
+            // aksi terima siswa baru
+            Route::put("/terima/{lamaran}",[DaftarSiswaBaruController::class,"diterima"])->name("perusahaan.terima.siswa.baru");
+
+            // aksi tolak siswa baru
+            Route::put("/tolak/{lamaran}",[DaftarSiswaBaruController::class,"ditolak"])->name("perusahaan.tolak.siswa.baru");
            });
 
 
