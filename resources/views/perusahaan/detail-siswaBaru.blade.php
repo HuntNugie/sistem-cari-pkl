@@ -49,9 +49,11 @@
       <div class="mt-4 d-flex justify-content-end gap-3">
         <!-- Tombol Tolak -->
         <div>
-            <button type="button" class="btn btn-danger btn-konfirmasi">
-            <i class="bi bi-x-circle"></i> Tolak
-          </button>
+            <!-- Tombol untuk membuka modal -->
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalTolak">
+            Tolak Lamaran
+        </button>
+
         </div>
 
         <div class="ms-4">
@@ -109,6 +111,41 @@
     </form>
   </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalTolak" tabindex="-1" aria-labelledby="modalTolakLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Tambah modal-lg untuk memperlebar -->
+    <form action="" method="POST" class="modal-content shadow-lg rounded-4 border-0">
+      @csrf
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title fw-bold" id="modalTolakLabel">
+          <i class="bi bi-x-octagon-fill me-2"></i> Tolak Lamaran PKL
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+
+      <div class="modal-body bg-light">
+        <p class="mb-3">Silakan tulis alasan penolakan lamaran siswa dengan sopan dan jelas.</p>
+        <div class="mb-3">
+          <label for="alasan_penolakan" class="form-label fw-semibold">Alasan Penolakan</label>
+          <textarea name="alasan_penolakan" class="form-control rounded-3 shadow-sm" id="alasan_penolakan" rows="4" placeholder="Contoh: Kuota sudah penuh, atau jurusan tidak sesuai" required></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer bg-white">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle"></i> Batal
+        </button>
+        <button type="submit" class="btn btn-danger">
+          <i class="bi bi-x-lg me-1"></i> Tolak Lamaran
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 
 @endsection
 
