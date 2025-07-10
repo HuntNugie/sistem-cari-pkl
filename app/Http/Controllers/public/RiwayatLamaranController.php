@@ -23,4 +23,14 @@ class RiwayatLamaranController extends Controller
         $namaPdf = "surat-pemberitahuan-diterima-{$siswa->name}.pdf";
         return $pdf->stream($namaPdf); 
     }
+    public function downloadPdfDiterima(Lamar $lamaran){
+        $siswa = auth()->guard("web")->user();
+        $surat = $lamaran->suratDiterima()->first();
+        $lowongan = $lamaran->lowongan;
+        $perusahaan = $lamaran->lowongan->perusahaan;
+        $pdf =Pdf::loadView("pdf.suratDiterima",compact(["lamaran","siswa","surat","perusahaan","lowongan"]));
+        $namaPdf = "surat-pemberitahuan-diterima-{$siswa->name}.pdf";
+        return $pdf->download($namaPdf); 
+    }
+
 }

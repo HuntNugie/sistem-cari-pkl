@@ -70,8 +70,12 @@
         <!-- Tombol Ajukan -->
         <div class="text-end mt-4 d-flex align-items-center justify-content-end gap-2">
             <!-- Tombol untuk membuka modal -->
-            @if (!auth()->guard("web")->user()->lamaran()->where("status","pending")->latest()->first())
-
+            @php              
+              $bolehMelamar = !auth()->user()->lamaran()
+                  ->whereIn('status', ['pending', 'diterima'])
+                  ->exists();
+            @endphp
+            @if ($bolehMelamar)
             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#ajukanModal">
                 <i class="bi bi-send-fill me-1"></i> Lamar PKL
             </button>

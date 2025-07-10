@@ -70,7 +70,9 @@
                                             <button type="submit" class="btn btn-sm btn-primary me-1"><i class="bi bi-eye"></i> Lihat Surat</button>
                                         </form>
 
-                                            <button class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
+                                          <form action="{{ route("public.pdf.download",$lamar->id) }}" method="get" target="_blank" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
+                                          </form>
                                         @endif
                                     </td>
                                 </tr>
