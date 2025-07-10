@@ -290,8 +290,14 @@ Route::prefix("perusahaan")->group(function(){
         // route jika status di ijinkan terkonfirmasi
         Route::middleware(["cekTerkonfirmasi"])->group(function(){
 
-            // daftar siswa baru
-            Route::get("/daftar-siswa-baru",[DaftarSiswaBaruController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru");
+           Route::prefix("daftar-siswa-baru")->group(function(){
+             // daftar siswa baru
+            Route::get("/",[DaftarSiswaBaruController::class,"daftarSiswaBaru"])->name("perusahaan.daftar.siswa.baru");
+
+            // detail siswa baru
+            Route::get("/detail/{lamaran}",[DaftarSiswaBaruController::class,"showSiswaBaru"])->name("perusahaan.detail.siswa.baru");
+           });
+
 
             // daftar siswa sedang pkl
             Route::get("/daftar-siswa-pkl",[DaftarSiswaPklController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");

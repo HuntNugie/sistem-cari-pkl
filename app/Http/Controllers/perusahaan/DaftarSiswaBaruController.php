@@ -19,4 +19,8 @@ class DaftarSiswaBaruController extends Controller
         })->get();
         return view("perusahaan.daftar-siswa-baru", ["halaman" => $halaman,"siswa" => $siswa]);
     }
+    public function showSiswaBaru(Lamar $lamaran){
+        $halaman = "Detail Siswa baru mendaftar";
+        return view("perusahaan.detail-siswaBaru",compact(["lamaran","halaman"]));
+    }
 }

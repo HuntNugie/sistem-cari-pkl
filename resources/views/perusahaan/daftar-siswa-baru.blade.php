@@ -49,15 +49,11 @@
                                 <td>{{ $sis->lowongan->judul_lowongan }}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <button type="button" class="btn btn-outline-primary btn-sm rounded-pill mx-1" title="Detail">
-                                            <i class="mdi mdi-eye"></i> Detail
+                                       <form action="{{ route("perusahaan.detail.siswa.baru",$sis->id) }}">
+                                         <button type="submit" class="btn btn-outline-primary btn-sm rounded-pill mx-1" title="Detail">
+                                            <i class="mdi mdi-eye"></i> Detail & konfirmasi
                                         </button>
-                                        <button type="button" class="btn btn-success btn-sm rounded-pill mx-1" title="Konfirmasi">
-                                            <i class="mdi mdi-check"></i> Konfirmasi
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm rounded-pill mx-1" title="Tolak">
-                                            <i class="mdi mdi-close"></i> Tolak
-                                        </button>
+                                       </form>
                                     </div>
                                 </td>
                             </tr>
