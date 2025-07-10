@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('surat_pemberitahuans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("lamar_id")->constrained("lamars")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date("jadwal_kedatangan");
+            $table->text("alamat");
+            $table->text("catatan")->nullable();
             $table->timestamps();
         });
     }

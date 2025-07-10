@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('surat_penolakan_pkls', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("lamar_id")->constrained("lamars")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string("alasan");
             $table->timestamps();
         });
     }
