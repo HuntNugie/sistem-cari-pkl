@@ -36,7 +36,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="{{ route("public.myprofile") }}" style="color:{{ request()->routeIs('public.myprofile') || request()->routeIs("public.myprofile.edit") ? "#ff6600" : "" }}">My Profile</a></li>
-              <li><a class="dropdown-item" href="#">Riwayat lamar</a></li>
+              <li><a class="dropdown-item" href="{{ route("public.riwayat.lamaran") }}">Riwayat lamar</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <form action="{{ route("public.logout") }}" method="post">

@@ -23,6 +23,34 @@
     </div>
 
     <div class="card-body bg-light px-5 py-4">
+      {{-- Foto Siswa --}}
+      <div class="mb-3 d-flex justify-content-center">
+        @php
+          $foto = $lamaran->siswa->user_profile->foto ?? null;
+          $avatar = $lamaran->siswa->avatar ?? null;
+          if($foto){
+            $imgSrc = asset('storage/'.$foto);
+          }elseif($avatar){
+            $imgSrc = $avatar;
+          }else{
+            $imgSrc = 'https://ui-avatars.com/api/?name='.urlencode($lamaran->siswa->name).'&background=0D8ABC&color=fff&size=400';
+          }
+        @endphp
+        <a href="#" data-bs-toggle="modal" data-bs-target="#modalFotoSiswa">
+          <img src="{{ $imgSrc }}" alt="Foto Siswa" class="rounded-circle shadow" style="width: 120px; height: 120px; object-fit: cover; cursor:pointer;">
+        </a>
+      </div>
+
+      <!-- Modal Foto Siswa -->
+      <div class="modal fade" id="modalFotoSiswa" tabindex="-1" aria-labelledby="modalFotoSiswaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-transparent border-0">
+            <div class="modal-body d-flex justify-content-center align-items-center p-0">
+              <img src="{{ $imgSrc }}" alt="Foto Siswa" class="img-fluid rounded shadow" style="max-width: 400px; max-height: 80vh; background: #fff;">
+            </div>
+          </div>
+        </div>
+      </div>
       <h5 class="fw-bold">{{ $lamaran->siswa->name }}</h5>
       <p class="text-bold">Melamar untuk: <strong>{{ $lamaran->lowongan->judul_lowongan }}</strong></p>
 
@@ -46,6 +74,21 @@
       <h6 class="fw-bold">Alasan Melamar</h6>
       <p>{{ $lamaran->alasan }}</p>
 
+      {{-- Surat Pengantar Sekolah --}}
+      <div class="mb-4">
+        <h6 class="fw-bold">Surat Pengantar Sekolah</h6>
+        @if($lamaran->surat_pengantar)
+          <a href="{{ asset('storage/'.$lamaran->surat_pengantar) }}" target="_blank" class="btn btn-primary mb-2">
+            <i class="bi bi-file-earmark-pdf"></i> Lihat Surat Pengantar (PDF)
+          </a>
+          <div class="ratio ratio-16x9" style="max-width:600px;">
+            <iframe src="{{ asset('storage/'.$lamaran->surat_pengantar) }}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        @else
+          <div class="alert alert-warning mb-0">Surat pengantar sekolah belum diunggah.</div>
+        @endif
+      </div>
+
       <div class="mt-4 d-flex justify-content-end gap-3">
         <!-- Tombol Tolak -->
         <div>
@@ -66,9 +109,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 <!-- Modal -->

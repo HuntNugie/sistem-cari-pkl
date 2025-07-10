@@ -2,9 +2,12 @@
 
 use App\Models\User;
 
+use App\Models\Sekolah;
 use App\Mail\verifEmail;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VerifOtpController;
@@ -12,28 +15,28 @@ use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\VerifEmailController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AjuanController;
+use App\Http\Controllers\public\BerandaController;
+use App\Http\Controllers\public\LamaranController;
+use App\Http\Controllers\public\RiwayatLamaranController;
+use App\Http\Controllers\public\DaftarPklController;
 use App\Http\Controllers\public\auth\LoginController;
-use App\Http\Controllers\public\auth\RegisterController;
-use App\Http\Controllers\admin\auth\LoginAdminController;
-use App\Http\Controllers\admin\DaftarSiswaAktifController;
-use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
-use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\perusahaan\LowonganController;
 use App\Http\Controllers\admin\InfoPerusahaanController;
 use App\Http\Controllers\admin\KritikDanSaranController;
 use App\Http\Controllers\admin\myprofileAdminController;
+use App\Http\Controllers\perusahaan\DashboardController;
+use App\Http\Controllers\public\auth\RegisterController;
+use App\Http\Controllers\admin\auth\LoginAdminController;
+use App\Http\Controllers\admin\DaftarSiswaAktifController;
+use App\Http\Controllers\perusahaan\DaftarSiswaPklController;
 use App\Http\Controllers\perusahaan\AjuanPerusahaanController;
+use App\Http\Controllers\perusahaan\DaftarSiswaBaruController;
+use App\Http\Controllers\perusahaan\DaftarRiwayatPklController;
+use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
-use App\Http\Controllers\perusahaan\DaftarRiwayatPklController;
-use App\Http\Controllers\perusahaan\DaftarSiswaBaruController;
-use App\Http\Controllers\perusahaan\DaftarSiswaPklController;
-use App\Http\Controllers\perusahaan\DashboardController;
-use App\Http\Controllers\perusahaan\LowonganController;
-use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
-use App\Http\Controllers\public\BerandaController;
-use App\Http\Controllers\public\DaftarPklController;
-use App\Http\Controllers\public\LamaranController;
-use App\Models\Perusahaan;
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
 
 // landing page
 Route::get('/', [BerandaController::class,"index"])->name("beranda");
@@ -68,6 +71,9 @@ Route::middleware("auth")->group(function(){
         // Aksi Edit myprofile user
         Route::put("/update/{siswa}",[MyProfileController::class,"update"])->name("public.myprofile.update")->middleware("auth");
     });
+
+    // Route riwayat lamaran
+    Route::get("/riwayat-lamaran",[RiwayatLamaranController::class,"index"])->name("public.riwayat.lamaran");
 });
 
 // Halaman Logout
