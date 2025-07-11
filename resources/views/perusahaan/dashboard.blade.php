@@ -8,7 +8,7 @@
                 <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
                     <i class="mdi mdi-account-plus text-white icon-lg"></i>
                     <div class="ml-3 ml-md-0 ml-xl-3">
-                        <h5 class="text-white font-weight-bold">{{ $jumlahSiswaBaru ?? 0 }} Siswa Baru</h5>
+                        <h5 class="text-white font-weight-bold">{{ $jmlSiswaBaru ?? 0 }} Siswa Baru</h5>
                         <p class="mt-2 text-white card-text">Siswa yang baru mendaftar</p>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
                     <i class="mdi mdi-school text-white icon-lg"></i>
                     <div class="ml-3 ml-md-0 ml-xl-3">
-                        <h5 class="text-white font-weight-bold">{{ $jumlahSiswaPkl ?? 0 }} Siswa PKL</h5>
+                        <h5 class="text-white font-weight-bold">{{ $jmlSiswaPkl ?? 0 }} Siswa PKL</h5>
                         <p class="mt-2 text-white card-text">Siswa yang sedang PKL</p>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
                     <i class="mdi mdi-briefcase text-white icon-lg"></i>
                     <div class="ml-3 ml-md-0 ml-xl-3">
-                        <h5 class="text-white font-weight-bold">{{ $jumlahLowongan ?? 0 }} Lowongan</h5>
+                        <h5 class="text-white font-weight-bold">{{ $jmlLowongan ?? 0 }} Lowongan</h5>
                         <p class="mt-2 text-white card-text">Lowongan PKL yang dibuat</p>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <i class="mdi mdi-account-multiple-plus me-2"></i>
                     Daftar 5 Siswa Baru Mendaftar
                 </h5>
-                <a href="#" class="btn btn-outline-primary btn-sm">
+                <a href="{{ route("perusahaan.daftar.siswa.baru") }}" class="btn btn-outline-primary btn-sm">
                     <i class="mdi mdi-eye"></i> Lihat Semua
                 </a>
             </div>
@@ -67,71 +67,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($siswaBaru as $siswa)
                             <tr>
                                 <td class="text-center">
-                                    <img src="images/faces/face1.jpg" alt="Herman Beck" class="rounded-circle" width="48" height="48">
+                                    <img src="{{ asset("storage") }}/{{ $siswa->siswa->user_profile->foto }}" alt="Herman Beck" class="rounded-circle" width="48" height="48">
                                 </td>
-                                <td class="fw-semibold">Herman Beck</td>
-                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
-                                <td>Web Developer</td>
+                                <td class="fw-semibold">{{ $siswa->siswa->name }}</td>
+                                <td><span class="badge bg-primary text-white">{{ $siswa->siswa->user_profile->jk }}</span></td>
+                                <td>{{ $siswa->lowongan->judul_lowongan }}</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-info">
-                                        <i class="mdi mdi-information-outline"></i> Detail
+                                    <a href="{{ route("perusahaan.detail.siswa.baru",$siswa->id) }}" class="btn btn-sm btn-outline-info">
+                                        <i class="mdi mdi-information-outline"></i> Detail & konfirmasi
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <img src="images/faces/face2.jpg" alt="Messsy Adam" class="rounded-circle" width="48" height="48">
-                                </td>
-                                <td class="fw-semibold">Messsy Adam</td>
-                                <td><span class="badge bg-danger text-white">Perempuan</span></td>
-                                <td>UI/UX Designer</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-info">
-                                        <i class="mdi mdi-information-outline"></i> Detail
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <img src="images/faces/face3.jpg" alt="John Richards" class="rounded-circle" width="48" height="48">
-                                </td>
-                                <td class="fw-semibold">John Richards</td>
-                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
-                                <td>Mobile Developer</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-info">
-                                        <i class="mdi mdi-information-outline"></i> Detail
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <img src="images/faces/face4.jpg" alt="Peter Meggik" class="rounded-circle" width="48" height="48">
-                                </td>
-                                <td class="fw-semibold">Peter Meggik</td>
-                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
-                                <td>Network Engineer</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-info">
-                                        <i class="mdi mdi-information-outline"></i> Detail
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <img src="images/faces/face5.jpg" alt="Edward" class="rounded-circle" width="48" height="48">
-                                </td>
-                                <td class="fw-semibold">Edward</td>
-                                <td><span class="badge bg-primary text-white">Laki-laki</span></td>
-                                <td>Data Analyst</td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-info">
-                                        <i class="mdi mdi-information-outline"></i> Detail
-                                    </a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

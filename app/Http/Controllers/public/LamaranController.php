@@ -39,7 +39,8 @@ class LamaranController extends Controller
         $user->lamaran()->create([
             "lowongan_id" => $lowongan_id,
             "alasan" => $request->alasan,
-            "surat_pengantar" => $request->surat_pengantar
+            "surat_pengantar" => $request->surat_pengantar,
+            "status" => "pending"
         ]);
         $email = $lowongan->perusahaan->email;
         $namaSiswa = $user->name;
