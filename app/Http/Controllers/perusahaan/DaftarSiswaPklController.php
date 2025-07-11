@@ -18,4 +18,9 @@ class DaftarSiswaPklController extends Controller
         })->get();
         return view("perusahaan.daftar-siswa-pkl", ["halaman" => $halaman,"siswa" => $siswa]);
     }
+
+    public function showSiswaPkl(Lamar $lamaran){
+        $halaman = "Detail siswa PKL";  
+        return view("perusahaan.detail-siswa-pkl",compact(["halaman","lamaran"]));
+    }
 }

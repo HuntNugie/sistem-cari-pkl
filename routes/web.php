@@ -328,14 +328,17 @@ Route::prefix("perusahaan")->group(function(){
             Route::put("/tolak/{lamaran}",[DaftarSiswaBaruController::class,"ditolak"])->name("perusahaan.tolak.siswa.baru");
            });
            Route::prefix("daftar-siswa-pkl")->group(function(){
-            // daftar siswa sedang pkl
-            Route::get("/",[DaftarSiswaPklController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");
+                // daftar siswa sedang pkl
+                Route::get("/",[DaftarSiswaPklController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");
 
-            // route untuk cetak siswa sedang pkl
-            Route::get("/cetak",[CetakController::class,"cetak"])->name("perusahaan.cetak.siswa.pkl");
+                // detail siswa pkl
+                Route::get("/detail/{lamaran}",[DaftarSiswaPklController::class,"showSiswaPkl"])->name("perusahaan.detail.siswa.pkl");
+                
+                // route untuk cetak siswa sedang pkl
+                Route::get("/cetak",[CetakController::class,"cetak"])->name("perusahaan.cetak.siswa.pkl");
 
-            // route untuk download laporan siswa
-            Route::get("/download",[CetakController::class,"download"])->name("perusahaan.download.siswa.pkl");
+                // route untuk download laporan siswa
+                Route::get("/download",[CetakController::class,"download"])->name("perusahaan.download.siswa.pkl");
            });
 
             

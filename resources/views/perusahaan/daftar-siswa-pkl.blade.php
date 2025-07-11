@@ -54,9 +54,11 @@
                                 <td>{{ $sis->lowongan->judul_lowongan }}</td>
                                 <td>{{ $sis->updated_at->format("d F Y") }}</td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" title="Detail">
-                                        <i class="mdi mdi-eye"></i> Detail
-                                    </button>
+                                    <form action="{{ route("perusahaan.detail.siswa.pkl",$sis->id) }}" method="get">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm rounded-pill" title="Detail">
+                                            <i class="mdi mdi-eye"></i> Detail
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
