@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\public;
 
 use Exception;
+use App\Models\Lamar;
 use App\Models\Lowongan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -26,7 +27,6 @@ class LamaranController extends Controller
         ]);
         // ambil data user yang sudah login
         $user = auth()->guard("web")->user();
-
         // Masukan kedalam storage
         if($request->has("surat_pengantar")){
             $file = $request->file("surat_pengantar");
@@ -53,8 +53,7 @@ class LamaranController extends Controller
         } catch (Exception $e) {
             //throw $th;
             Log::error("gagal mengirim email = ".$e->getMessage());
-        }
-
+        }        
         return redirect()->back()->with("sukses","Anda berhasil Melamar PKL untuk melihat perkembangan nya silahkan cek di riwayat lamaran");
     }
 }

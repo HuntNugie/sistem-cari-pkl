@@ -62,12 +62,11 @@
                                         <form class="m-0 p-0" action="{{ route("perusahaan.detail.lowongan",$low->id) }}">
                                             <button type="submit" class="btn btn-outline-primary btn-sm rounded-circle mx-1" title="Lihat"><i class="mdi mdi-eye"></i></button>
                                         </form>
-                                        <form action="{{ route("perusahaan.edit.lowongan",$low->id) }}">
-                                            <button type="submit" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
-                                        </form>
-                                        <a href="" class="btn btn-outline-success btn-sm rounded-circle mx-1" title="Konfirmasi Penuh">
-                                            <i class="mdi mdi-check-all"></i>
-                                        </a>
+                                      @if($low->status == "tersedia")
+                                      <form action="{{ route("perusahaan.edit.lowongan",$low->id) }}">
+                                        <button type="submit" class="btn btn-outline-warning btn-sm rounded-circle mx-1" title="Edit"><i class="mdi mdi-pencil"></i></button>
+                                    </form>
+                                      @endif
                                         <form action="{{ route("perusahaan.hapus.lowongan",$low->id) }}" method="post" class="m-0 p-0">
                                             @csrf
                                             @method("DELETE")

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Jurusan;
 use App\Models\Perusahaan;
+use App\Models\Lamar;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,6 +20,9 @@ class Lowongan extends Model
     }
     public function syarat():HasMany{
         return $this->hasMany(Syarat::class,"lowongan_id");
+    }
+    public function lamaran():HasMany{
+        return $this->hasMany(Lamar::class,"lowongan_id");
     }
     public function scopeFilter($query,$keyword){
         return $query->when($keyword,function($query,$keyword){

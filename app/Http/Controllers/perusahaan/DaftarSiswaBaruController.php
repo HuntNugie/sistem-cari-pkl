@@ -40,10 +40,13 @@ class DaftarSiswaBaruController extends Controller
             "alamat.required" => "Alamat PKL tidak boleh kosong",
             "catatan.string" => "Catatan harus string"
         ]);
+    
         $surat = $lamaran->suratDiterima()->create($valid);
         $lamaran->update([
             "status" => "diterima"
         ]);
+
+       
         $siswa = $lamaran->siswa;
         $email = $siswa->email;
         $nama = $siswa->name;
@@ -51,6 +54,13 @@ class DaftarSiswaBaruController extends Controller
         $judul = $lamaran->lowongan->judul_lowongan;
         $perusahaan = $lamaran->lowongan->perusahaan->perusahaanProfile->nama_perusahaan;
         Mail::to($email)->send(new lamar_diterima($nama,$sekolah,$judul,$perusahaan));
+
+        // jika lamaran di terima lebih besar atau sama dengan kuota maka akna berubah menjadi penuh
+        if(Lamar::where("lowongan_id",$lamaran->lowongan->id)->where("status","diterima")->count() >= $lamaran->lowongan->kuota){
+            $lamaran->lowongan()->update([
+                "status" => "penuh"
+            ]);
+        }
         return redirect()->route("perusahaan.daftar.siswa.baru")->with("sukses","Lamaran berhasil diterima");
     }
 
