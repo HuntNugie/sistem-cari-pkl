@@ -33,4 +33,24 @@ class RiwayatLamaranController extends Controller
         return $pdf->download($namaPdf); 
     }
 
+    public function showPdfDitolak(Lamar $lamaran){
+        $siswa = auth()->guard("web")->user();
+        $surat = $lamaran->suratDitolak()->first();
+        $lowongan = $lamaran->lowongan;
+        $perusahaan = $lamaran->lowongan->perusahaan;
+        $alasan = $surat->alasan;
+        $pdf =Pdf::loadView("pdf.suratDitolak",compact(["lamaran","siswa","surat","perusahaan","lowongan","alasan"]));
+        $namaPdf = "surat-pemberitahuan-ditolak-{$siswa->name}.pdf";
+        return $pdf->stream($namaPdf); 
+    }
+    public function downloadPdfDitolak(Lamar $lamaran){
+        $siswa = auth()->guard("web")->user();
+        $surat = $lamaran->suratDitolak()->first();
+        $lowongan = $lamaran->lowongan;
+        $perusahaan = $lamaran->lowongan->perusahaan;
+        $alasan = $surat->alasan;
+        $pdf =Pdf::loadView("pdf.suratDitolak",compact(["lamaran","siswa","surat","perusahaan","lowongan","alasan"]));
+        $namaPdf = "surat-pemberitahuan-ditolak-{$siswa->name}.pdf";
+        return $pdf->download($namaPdf); 
+    }
 }

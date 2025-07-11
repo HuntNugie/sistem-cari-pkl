@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\SuratPemberitahuan;
 use App\Http\Controllers\Controller;
 use App\Mail\lamar_diterima;
+use App\Mail\lamar_ditolak;
 use Illuminate\Support\Facades\Mail;
 
 class DaftarSiswaBaruController extends Controller
@@ -64,6 +65,13 @@ class DaftarSiswaBaruController extends Controller
         $lamaran->update([
             "status" => "ditolak"
         ]);
+        $siswa = $lamaran->siswa;
+        $email = $siswa->email;
+        $nama = $siswa->name;
+        $sekolah = $siswa->user_profile->sekolah->nama_sekolah;
+        $judul = $lamaran->lowongan->judul_lowongan;
+        $perusahaan = $lamaran->lowongan->perusahaan->perusahaanProfile->nama_perusahaan;
+        Mail::to($email)->send(new lamar_ditolak($nama,$sekolah,$judul,$perusahaan));
         return redirect()->route("perusahaan.daftar.siswa.baru")->with("sukses","Lamaran berhasil ditolak");
     }
 }

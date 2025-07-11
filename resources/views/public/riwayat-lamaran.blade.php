@@ -65,12 +65,19 @@
                                     <td><span class="badge bg-warning">{{ $lamar->status }}</span></td>
                                     @endif
                                     <td>
-                                        @if($lamar->status == "diterima" || $lamar->status == "ditolak")
-                                        <form action="{{ route("public.pdf.lihat",$lamar->id) }}" method="get" target="_blank" class="d-inline">
+                                        @if($lamar->status == "diterima")
+                                        <form action="{{ route("public.pdf.lihat.diterima",$lamar->id) }}" method="get" target="_blank" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-primary me-1"><i class="bi bi-eye"></i> Lihat Surat</button>
                                         </form>
 
-                                          <form action="{{ route("public.pdf.download",$lamar->id) }}" method="get" target="_blank" class="d-inline">
+                                          <form action="{{ route("public.pdf.download.diterima",$lamar->id) }}" method="get" target="_blank" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
+                                          </form>
+                                          @elseif($lamar->status == "ditolak")
+                                          <form action="{{ route("public.pdf.lihat.ditolak",$lamar->id) }}" method="get" target="_blank" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i> Lihat Surat</button>
+                                          </form>
+                                          <form action="{{ route("public.pdf.download.ditolak",$lamar->id) }}" method="get" target="_blank" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
                                           </form>
                                         @endif

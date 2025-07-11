@@ -79,10 +79,16 @@ Route::middleware("auth")->group(function(){
     // Route meelihat pdf
         Route::middleware("jagaPdf")->prefix("pdf")->group(function(){
             // route untuk melihat pdf diterima
-            Route::get("/diterima/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDiterima"])->name("public.pdf.lihat");
+            Route::get("/diterima/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDiterima"])->name("public.pdf.lihat.diterima");
 
             // route untuk mendownload pdf diterima
-            Route::get("/diterima/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDiterima"])->name("public.pdf.download");
+            Route::get("/diterima/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDiterima"])->name("public.pdf.download.diterima");
+
+            // route untuk melihat pdf ditolak
+            Route::get("/ditolak/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDitolak"])->name("public.pdf.lihat.ditolak");
+
+            // route untuk mendownload pdf ditolak
+            Route::get("/ditolak/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDitolak"])->name("public.pdf.download.ditolak");
         });
     });
 });
