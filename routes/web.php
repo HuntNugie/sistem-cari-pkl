@@ -333,6 +333,9 @@ Route::prefix("perusahaan")->group(function(){
 
             // route untuk cetak siswa sedang pkl
             Route::get("/cetak",[CetakController::class,"cetak"])->name("perusahaan.cetak.siswa.pkl");
+
+            // route untuk download laporan siswa
+            Route::get("/download",[CetakController::class,"download"])->name("perusahaan.download.siswa.pkl");
            });
 
             

@@ -22,10 +22,10 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <a href="{{ route('perusahaan.cetak.siswa.pkl') }}" class="btn btn-outline-danger rounded-pill mb-2" >
+                        <a href="{{ route('perusahaan.cetak.siswa.pkl') }}" class="btn btn-outline-danger rounded-pill mb-2" target="_blank">
                             <i class="mdi mdi-printer"></i> Print daftar siswa PKL
                         </a>
-                        <a href="" class="btn btn-outline-primary rounded-pill mb-2">
+                        <a href="{{ route('perusahaan.download.siswa.pkl') }}" class="btn btn-outline-primary rounded-pill mb-2" target="_blank">
                             <i class="mdi mdi-download"></i> Download Laporan
                         </a>
                     </div>
