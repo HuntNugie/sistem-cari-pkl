@@ -20,7 +20,7 @@
           <span></span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('perusahaan.daftar.lowongan') }}">
+          <a class="nav-link {{ request()->routeIs("perusahaan.daftar.lowongan") ? "active" : "" }}" href="{{ route('perusahaan.daftar.lowongan') }}">
             <i class="mdi mdi-briefcase menu-icon"></i>
             <span class="menu-title">Daftar lowongan PKL</span>
           </a>
@@ -30,13 +30,13 @@
           <span></span>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="{{ route('perusahaan.daftar.siswa.baru') }}">
+          <a class="nav-link  {{ request()->routeIs("perusahaan.daftar.siswa.baru") ? "active" : "" }}" href="{{ route('perusahaan.daftar.siswa.baru') }}">
             <i class="mdi mdi-school menu-icon"></i>
             <span class="menu-title">Siswa baru</span>
           </a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="{{ route('perusahaan.daftar.siswa.pkl') }}" >
+          <a class="nav-link  {{ request()->routeIs("perusahaan.daftar.siswa.pkl") ? "active" : "" }}" href="{{ route('perusahaan.daftar.siswa.pkl') }}" >
             <i class="mdi mdi-hard-hat menu-icon"></i>
             <span class="menu-title">Siswa PKL</span>
           </a>
@@ -46,7 +46,7 @@
           <span></span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('perusahaan.daftar.riwayat') }}">
+          <a class="nav-link  {{ request()->routeIs("perusahaan.daftar.riwayat") ? "active" : "" }}" href="{{ route('perusahaan.daftar.riwayat') }}">
             <i class="mdi mdi-file-document-box-outline menu-icon"></i>
             <span class="menu-title">Riwayat Siswa PKl</span>
           </a>
