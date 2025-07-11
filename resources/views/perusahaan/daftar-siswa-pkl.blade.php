@@ -21,9 +21,14 @@
                             <button class="btn btn-light border-0" type="button"><i class="mdi mdi-magnify text-primary"></i></button>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-danger rounded-pill mb-2" onclick="window.print()">
-                        <i class="mdi mdi-printer"></i> Print daftar siswa PKl
-                    </button>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('perusahaan.cetak.siswa.pkl') }}" class="btn btn-outline-danger rounded-pill mb-2" >
+                            <i class="mdi mdi-printer"></i> Print daftar siswa PKL
+                        </a>
+                        <a href="" class="btn btn-outline-primary rounded-pill mb-2">
+                            <i class="mdi mdi-download"></i> Download Laporan
+                        </a>
+                    </div>
                 </div>
                 <div class="table-responsive rounded-4 shadow-sm">
                     <table class="table align-middle table-hover bg-white rounded-4 overflow-hidden">

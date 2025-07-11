@@ -37,6 +37,7 @@ use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
+use App\Http\Controllers\perusahaan\CetakController;
 
 // landing page
 Route::get('/', [BerandaController::class,"index"])->name("beranda");
@@ -308,7 +309,7 @@ Route::prefix("perusahaan")->group(function(){
     // route untuk auth perusahaan setelah login
    Route::middleware(['auth:perusahaan'])->group(function () {
         // dashboard perusahaan
-        Route::get("/dashboard",[DashboardController::class,"dashboard"])->name("perusahaan.dashboard")->middleware(["auth:perusahaan"]);
+        Route::get("/dashboard",[DashboardController::class,"dashboard"])->name("perusahaan.dashboard");
 
         // route jika status di ijinkan terkonfirmasi
         Route::middleware(["cekTerkonfirmasi"])->group(function(){
@@ -326,10 +327,15 @@ Route::prefix("perusahaan")->group(function(){
             // aksi tolak siswa baru
             Route::put("/tolak/{lamaran}",[DaftarSiswaBaruController::class,"ditolak"])->name("perusahaan.tolak.siswa.baru");
            });
-
-
+           Route::prefix("daftar-siswa-pkl")->group(function(){
             // daftar siswa sedang pkl
-            Route::get("/daftar-siswa-pkl",[DaftarSiswaPklController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");
+            Route::get("/",[DaftarSiswaPklController::class,"daftarSiswaPkl"])->name("perusahaan.daftar.siswa.pkl");
+
+            // route untuk cetak siswa sedang pkl
+            Route::get("/cetak",[CetakController::class,"cetak"])->name("perusahaan.cetak.siswa.pkl");
+           });
+
+            
 
             // daftar siswa sedang pkl
             Route::get("/daftar-siswa-riwayat",[DaftarRiwayatPklController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat");
