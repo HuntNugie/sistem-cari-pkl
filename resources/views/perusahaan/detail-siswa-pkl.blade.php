@@ -4,12 +4,6 @@
   .modal-content {
     border-radius: 1rem;
   }
-  .foto-siswa-detail {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    cursor: pointer;
-  }
 </style>
 @endpush
 @section("content")
@@ -60,15 +54,44 @@
         <div class="col-md-6">
           <p><strong>Telepon:</strong> {{ $lamaran->siswa->user_profile->telepon }}</p>
           <p><strong>Alamat:</strong> {{ $lamaran->siswa->user_profile->alamat }}</p>
+          <p><strong>Sedang PKL:</strong> {{ $lamaran->lowongan->judul_lowongan }}</p>
           <p><strong>Status PKL:</strong> <span class="badge bg-success">Sedang PKL</span></p>
         </div>
       </div>
       <div class="mt-4 d-flex justify-content-end gap-3">
-        <button type="button" class="btn btn-outline-success">
+       <form action="{{ route("perusahaan.konfirmasi.siswa.pkl",$lamaran->id) }}" method="post">
+        @csrf
+        @method("put")
+        <button type="button" class="btn btn-outline-success btn-konfirmasi">
           <i class="mdi mdi-check"></i> Konfirmasi Siswa Selesai PKL
         </button>
+       </form>
       </div>
     </div>
   </div>
 </div>
+
+
+
 @endsection
+@push('script')
+<script>
+  document.querySelectorAll('.btn-konfirmasi').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Apakah siswa telah menyelesaikan pkl nya?",
+            text: "Konfirmasi selesai pkl {{ $lamaran->siswa->name }}",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Ya, selesai!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+</script>
+@endpush

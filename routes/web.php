@@ -78,19 +78,38 @@ Route::middleware("auth")->group(function(){
         Route::get("/",[RiwayatLamaranController::class,"index"])->name("public.riwayat.lamaran");
 
     // Route meelihat pdf
-        Route::middleware("jagaPdf")->prefix("pdf")->group(function(){
-            // route untuk melihat pdf diterima
-            Route::get("/diterima/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDiterima"])->name("public.pdf.lihat.diterima");
+        
+        Route::prefix("pdf")->group(function(){
+      
+            // Route pdf diterima
+            Route::middleware("jagaPdf")->prefix("diterima")->group(function(){
+                    // route untuk melihat pdf diterima
+                    Route::get("/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDiterima"])->name("public.pdf.lihat.diterima");
 
-            // route untuk mendownload pdf diterima
-            Route::get("/diterima/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDiterima"])->name("public.pdf.download.diterima");
+                    // route untuk mendownload pdf diterima
+                    Route::get("/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDiterima"])->name("public.pdf.download.diterima");
+            });
 
-            // route untuk melihat pdf ditolak
-            Route::get("/ditolak/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDitolak"])->name("public.pdf.lihat.ditolak");
+            // Route pdf ditolak
+            Route::middleware("jagaPdfTolak")->prefix("ditolak")->group(function(){
+                    // route untuk melihat pdf ditolak
+                    Route::get("/lihat/{lamaran}",[RiwayatLamaranController::class, "showPdfDitolak"])->name("public.pdf.lihat.ditolak");
 
-            // route untuk mendownload pdf ditolak
-            Route::get("/ditolak/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDitolak"])->name("public.pdf.download.ditolak");
+                    // route untuk mendownload pdf ditolak
+                    Route::get("/download/{lamaran}",[RiwayatLamaranController::class, "downloadPdfDitolak"])->name("public.pdf.download.ditolak");
+            });
+
+            // Route pdf sertifikat
+            Route::middleware("jagaSertifikat")->prefix("sertifikat")->group(function(){
+                
+                    // Route untuk sertifikat
+                    Route::get("lihat/{lamaran}",[RiwayatLamaranController::class, "showSertifikat"])->name("public.pdf.lihat.sertifikat");
+
+                    // Route untuk download sertifikat
+                    Route::get("download/{lamaran}",[RiwayatLamaranController::class, "downloadSertifikat"])->name("public.pdf.download.sertifikat");
+            });
         });
+    
     });
 });
 
@@ -334,6 +353,9 @@ Route::prefix("perusahaan")->group(function(){
                 // detail siswa pkl
                 Route::get("/detail/{lamaran}",[DaftarSiswaPklController::class,"showSiswaPkl"])->name("perusahaan.detail.siswa.pkl");
                 
+                // route untuk konfirmasi siswa selesai pkl
+                Route::put("/konfirmasi/{lamaran}",[DaftarSiswaPklController::class, "konfirmasi"])->name("perusahaan.konfirmasi.siswa.pkl");
+
                 // route untuk cetak siswa sedang pkl
                 Route::get("/cetak",[CetakController::class,"cetak"])->name("perusahaan.cetak.siswa.pkl");
 
@@ -396,7 +418,9 @@ Route::prefix("perusahaan")->group(function(){
 });
 
 
-
+// Route::get("/tes",function(){
+//     return view("pdf.sertifikat");
+// });
 // Route::get("/hapus",function(){
 //     User::truncate();
 //     session()->invalidate();

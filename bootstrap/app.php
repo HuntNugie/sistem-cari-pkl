@@ -20,7 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
             "superadmin" => App\Http\Middleware\superadmin::class,
             "jagaRegister" => App\Http\Middleware\jagaRegister::class,
             "tolakPending" => App\Http\Middleware\TolakPending::class,
-            "jagaPdf" => App\Http\Middleware\jagaPdf::class
+            "jagaPdf" => App\Http\Middleware\jagaPdf::class,
+            "jagaPdfTolak" => App\Http\Middleware\jagaPdfTolak::class,
+            "jagaSertifikat" => App\Http\Middleware\jagaSertifikat::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

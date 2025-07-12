@@ -53,4 +53,11 @@ class RiwayatLamaranController extends Controller
         $namaPdf = "surat-pemberitahuan-ditolak-{$siswa->name}.pdf";
         return $pdf->download($namaPdf); 
     }
+
+    public function showSertifikat(Lamar $lamaran){
+
+    }
+    public function downloadSertifikat(Lamar $lamaran){
+        
+    }
 }

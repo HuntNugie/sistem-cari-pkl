@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class jagaPdf
+class jagaPdfTolak
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class jagaPdf
     {
         $lamaran = $request->route("lamaran");
         $user = auth()->guard("web")->user();
-        if(!$lamaran || $lamaran->user_id !== $user->id || $lamaran->status !== "diterima" ){
+        if(!$lamaran || $lamaran->user_id !== $user->id || $lamaran->status !== "ditolak" ){
             return redirect()->back()->with("gagal","anda tidak dapat mengakses halaman ini");
         }
         return $next($request);

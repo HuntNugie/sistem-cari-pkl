@@ -73,7 +73,7 @@
                                           <form action="{{ route("public.pdf.download.diterima",$lamar->id) }}" method="get" target="_blank" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-download"></i> Download</button>
                                           </form>
-                                          @elseif($lamar->status == "ditolak")
+                                        @elseif($lamar->status == "ditolak")
                                           <form action="{{ route("public.pdf.lihat.ditolak",$lamar->id) }}" method="get" target="_blank" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i> Lihat Surat</button>
                                           </form>
