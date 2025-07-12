@@ -17,8 +17,8 @@ class TolakPending
     {
         $user = auth()->guard("web")->user();
         foreach ($user->lamaran as $isi) {
-             if($isi->status === "pending"){
-                return redirect()->back()->with("gagal","Maaf anda tidak dapat melamar kembali karena sebelumnya sudah melakukan lamaran ");
+             if($isi->status === "pending" || $isi->status === "diterima" || $isi->status === "selesai") {
+                return redirect()->back()->with("gagal","Maaf anda tidak dapat melamar kembali ");
             }
         }
 

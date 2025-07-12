@@ -72,7 +72,7 @@
             <!-- Tombol untuk membuka modal -->
             @php              
               $bolehMelamar = !auth()->user()->lamaran()
-                  ->whereIn('status', ['pending', 'diterima'])
+                  ->whereIn('status', ['pending', 'diterima', 'selesai'])
                   ->exists();
             @endphp
             @if ($bolehMelamar)

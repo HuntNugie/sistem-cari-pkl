@@ -10,15 +10,26 @@
                     <h4 class="mb-0">Profil Siswa</h4>
                 </div>
                 <div class="card-body text-center">
-                    <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=0D8ABC&color=fff&size=200" class="img-fluid rounded-circle shadow mb-3" alt="Foto Profil" style="width:120px;height:120px;object-fit:cover;">
+                    @php
+                        $avatar = auth()->user()->avatar ?? null;
+                        $foto = auth()->user()->user_profile->foto ?? null;
+                        if($foto){
+                            $imgSrc = asset('storage/'.$foto);
+                        }elseif($avatar){
+                            $imgSrc = $avatar;
+                        }else{
+                            $imgSrc = 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name).'&background=0D8ABC&color=fff&size=200';
+                        }
+                    @endphp
+                    <img src="{{ $imgSrc }}" class="img-fluid rounded-circle shadow mb-3" alt="Foto Profil" style="width:120px;height:120px;object-fit:cover;">
                     <h5 class="fw-bold mb-1">{{ auth()->user()->name }}</h5>
                     <p class="text-muted mb-0">{{ auth()->user()->email }}</p>
                     <hr>
                     <div class="text-start ms-2">
                         <p class="mb-1"><strong>Asal Sekolah:</strong> {{ auth()->user()->user_profile->sekolah->nama_sekolah ?? '-' }}</p>
                         <p class="mb-1"><strong>Jurusan:</strong> {{ auth()->user()->user_profile->jurusan->nama_jurusan ?? '-' }}</p>
-                        <p class="mb-1"><strong>Jenis Kelamin:</strong>{{auth()->user()->user_profile->jk}}</p>
-                        <p class="mb-1"><strong>Telepon:</strong> {{auth()->user()->user_profile->telepon}}</p>
+                        <p class="mb-1"><strong>Jenis Kelamin:</strong> {{ auth()->user()->user_profile->jk ?? '-' }}</p>
+                        <p class="mb-1"><strong>Telepon:</strong> {{ auth()->user()->user_profile->telepon ?? '-' }}</p>
                     </div>
                 </div>
             </div>
