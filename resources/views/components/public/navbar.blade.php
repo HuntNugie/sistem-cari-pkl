@@ -36,7 +36,10 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="{{ route("public.myprofile") }}" style="color:{{ request()->routeIs('public.myprofile') || request()->routeIs("public.myprofile.edit") ? "#ff6600" : "" }}">My Profile</a></li>
-              <li><a class="dropdown-item" href="{{ route("public.riwayat.lamaran") }}">Riwayat lamar</a></li>
+              <li><a class="dropdown-item" href="{{ route("public.riwayat.lamaran") }}">Riwayat lamaran</a></li>
+              @if(auth()->guard("web")->user()->lamaran()->where( "status","selesai")->exists())
+                <li><a class="dropdown-item" href="{{ route("public.sertifikat") }}"> Sertifikat </a></li>
+              @endif
               <li><hr class="dropdown-divider"></li>
               <li>
                 <form action="{{ route("public.logout") }}" method="post">

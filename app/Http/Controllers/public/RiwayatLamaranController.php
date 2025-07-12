@@ -54,10 +54,5 @@ class RiwayatLamaranController extends Controller
         return $pdf->download($namaPdf); 
     }
 
-    public function showSertifikat(Lamar $lamaran){
 
-    }
-    public function downloadSertifikat(Lamar $lamaran){
-        
-    }
 }

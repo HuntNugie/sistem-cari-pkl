@@ -38,6 +38,7 @@ use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
 use App\Http\Controllers\perusahaan\CetakController;
+use App\Http\Controllers\public\SertifikatController;
 
 // landing page
 Route::get('/', [BerandaController::class,"index"])->name("beranda");
@@ -102,11 +103,13 @@ Route::middleware("auth")->group(function(){
             // Route pdf sertifikat
             Route::middleware("jagaSertifikat")->prefix("sertifikat")->group(function(){
                 
+                    // halaman sertifikat
+                    Route::get("/",[SertifikatController::class,"index"])->name("public.sertifikat");
                     // Route untuk sertifikat
-                    Route::get("lihat/{lamaran}",[RiwayatLamaranController::class, "showSertifikat"])->name("public.pdf.lihat.sertifikat");
+                    Route::get("lihat/{lamaran}",[SertifikatController::class, "showSertifikat"])->name("public.pdf.lihat.sertifikat");
 
                     // Route untuk download sertifikat
-                    Route::get("download/{lamaran}",[RiwayatLamaranController::class, "downloadSertifikat"])->name("public.pdf.download.sertifikat");
+                    Route::get("download/{lamaran}",[SertifikatController::class, "downloadSertifikat"])->name("public.pdf.download.sertifikat");
             });
         });
     
@@ -418,9 +421,9 @@ Route::prefix("perusahaan")->group(function(){
 });
 
 
-// Route::get("/tes",function(){
-//     return view("pdf.sertifikat");
-// });
+Route::get("/tes",function(){
+    return view("pdf.sertifikat");
+});
 // Route::get("/hapus",function(){
 //     User::truncate();
 //     session()->invalidate();
