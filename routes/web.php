@@ -370,8 +370,15 @@ Route::prefix("perusahaan")->group(function(){
 
             // daftar siswa riwayat perusahaan
             Route::prefix("daftar-siswa-riwayat")->group(function(){
+                
+                // halaman daftar riwayat siswa pkl
                 Route::get("/",[DaftarRiwayatPklController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat");
+
+                // detail riwayat siswa pkl
                 Route::get("/detail/{lamaran}",[DaftarRiwayatPklController::class,"showRiwayat"])->name("perusahaan.detail.riwayat");
+
+                // aksi cetak riwayat siswa pkl
+                Route::get("/cetak",[CetakController::class,"cetakRiwayat"])->name("perusahaan.cetak.riwayat");
             });
 
             // Halaman lowongan
@@ -414,11 +421,11 @@ Route::prefix("perusahaan")->group(function(){
         // route jika tidak di ijinkan terkonfirmasi
         Route::middleware("terkonfirmasi")->group(function(){
 
-        // ajuan konfirmasi
-        Route::get("/ajuan-konfirmasi",[AjuanPerusahaanController::class,"showAjuan"])->name("perusahaan.ajuan");
+            // ajuan konfirmasi
+            Route::get("/ajuan-konfirmasi",[AjuanPerusahaanController::class,"showAjuan"])->name("perusahaan.ajuan");
 
-        // ajuan konfirmasi aksi
-        Route::post("/ajuan-konfirmasi",[AjuanPerusahaanController::class,"aksiAjuan"])->name("perusahaan.ajuan.aksi");
+            // ajuan konfirmasi aksi
+            Route::post("/ajuan-konfirmasi",[AjuanPerusahaanController::class,"aksiAjuan"])->name("perusahaan.ajuan.aksi");
         });
    });
 });

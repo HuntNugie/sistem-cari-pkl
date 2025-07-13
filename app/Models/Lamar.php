@@ -30,4 +30,14 @@ class Lamar extends Model
     {
         return $this->hasOne(SuratPenolakanPkl::class,"lamar_id");
     }
+
+    public function scopeRiwayat($query,$sekolah){
+        $query->when($sekolah, function($query,$sekolah){
+            $query->whereHas("siswa",function($query) use($sekolah){
+                $query->whereHas("user_profile",function($query) use($sekolah){
+                    $query->where("sekolah_id",$sekolah);
+                });
+            });
+        });
+    }
 }

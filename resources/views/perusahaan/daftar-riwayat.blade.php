@@ -21,7 +21,7 @@
                             <button class="btn btn-light border-0" type="button"><i class="mdi mdi-magnify text-primary"></i></button>
                         </div>
                     </div>
-                        <button type="button" class="btn btn-outline-danger rounded-pill mb-2" onclick="window.print()">
+                        <button type="button" class="btn btn-outline-danger rounded-pill mb-2" data-bs-toggle="modal" data-bs-target="#modalPrintSiswa">
                             <i class="mdi mdi-printer"></i> Print riwayat siswa PKL
                         </button>
                 </div>
@@ -69,4 +69,145 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- Modal Cetak Laporan -->
+<div class="modal fade" id="modalPrintSiswa" data-bs-focus="false" tabindex="-1" aria-labelledby="modalPrintSiswaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{{ route("perusahaan.cetak.riwayat") }}" target="_blank" method="GET" class="modal-content shadow-lg rounded-4 border-0">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold" id="modalPrintSiswaLabel">
+                    <i class="mdi mdi-printer me-2"></i> Cetak Laporan Siswa PKL
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+
+            <div class="modal-body bg-light">
+                <div class="mb-3">
+                    <label for="jumlah_siswa" class="form-label fw-semibold">Jumlah Siswa</label>
+                    <input type="number" name="jumlah" class="form-control rounded-3 shadow-sm" id="jumlah_siswa" min="1" value="10" required>
+                    <small class="text-muted">Masukkan jumlah siswa terbaru yang ingin dicetak</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="filter_sekolah" class="form-label fw-semibold">Filter Sekolah (Opsional)</label>
+                    <input type="text" id="search_sekolah" class="form-control mb-2" placeholder="Cari nama sekolah...">
+                    <select name="sekolah" class="form-control" id="filter_sekolah" size="6">
+                        <option value="">Semua sekolah</option>
+                        @foreach($sekolah as $skl)
+                            <option value="{{ $skl->id }}">{{ $skl->nama_sekolah }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer bg-white">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Batal
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="mdi mdi-printer me-1"></i> Cetak Laporan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
+
+<style>
+    /* Kustomisasi tampilan Select2 agar lebih modern */
+    .select2-container--bootstrap-5 .select2-selection {
+        border-radius: 0.75rem !important; /* Sudut lebih tumpul */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+        padding: 0.5rem 1rem !important; /* Menambah padding vertikal */
+        height: auto !important;
+    }
+
+    .select2-container--bootstrap-5 .select2-dropdown {
+        border-radius: 0.75rem !important; /* Sudut lebih tumpul untuk dropdown */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+        border: none !important;
+    }
+
+    .select2-container--bootstrap-5 .select2-results__option--highlighted {
+        background-color: #4f46e5 !important; /* Warna highlight lebih gelap */
+        color: white !important;
+        border-radius: 0.5rem;
+    }
+
+    .select2-container--bootstrap-5 .select2-results__option {
+        padding: 0.75rem 1rem !important; /* Padding lebih nyaman */
+        list-style: none !important;
+        background-image: none !important; /* Pastikan tidak ada marker */
+    }
+
+    .select2-container--bootstrap-5 .select2-results__options {
+        padding: 0.5rem !important;
+        list-style: none !important;
+    }
+
+    /* Pastikan tidak ada bullet pada item ter-render */
+    .select2-container--bootstrap-5 .select2-selection__rendered,
+    .select2-container--bootstrap-5 .select2-selection__rendered li {
+        list-style: none !important;
+    }
+</style>
+@push('style')
+{{-- Aset untuk Select2 --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5.min.css" />
+<style>
+    #dropdown_sekolah {
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        border: 1px solid #e5e7eb;
+        z-index: 1055;
+    }
+    #dropdown_sekolah .dropdown-item {
+        cursor: pointer;
+        transition: background 0.15s;
+        border-radius: 0.5rem;
+    }
+    #dropdown_sekolah .dropdown-item:hover, #dropdown_sekolah .dropdown-item:focus {
+        background: #4f46e5;
+        color: #fff;
+    }
+    </style>
+@endpush
+
+@push('script')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search_sekolah');
+    const select = document.getElementById('filter_sekolah');
+    const allOptions = Array.from(select.options);
+
+    searchInput.addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        select.innerHTML = '';
+        allOptions.forEach(opt => {
+            if (opt.text.toLowerCase().includes(filter) || opt.value === '') {
+                select.appendChild(opt);
+            }
+        });
+        // Jika search kosong, pilih option pertama (Semua Sekolah)
+        if (filter === '' && select.options.length > 0) select.selectedIndex = 0;
+    });
+
+    // Reset ke default (Semua Sekolah) saat modal dibuka
+    const modal = document.getElementById('modalPrintSiswa');
+    if (modal) {
+        modal.addEventListener('show.bs.modal', function() {
+            searchInput.value = '';
+            select.innerHTML = '';
+            allOptions.forEach(opt => select.appendChild(opt));
+            select.selectedIndex = 0;
+        });
+    }
+});
+</script>
+@endpush
+

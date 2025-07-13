@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\perusahaan;
 
 use App\Models\Lamar;
+use App\Models\Sekolah;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class DaftarRiwayatPklController extends Controller
         $riwayat = Lamar::where("status","selesai")->whereHas("lowongan",function($query){
             $query->where("perusahaan_id",auth()->guard("perusahaan")->user()->id);
         })->get();
-        return view("perusahaan.daftar-riwayat", ["halaman" => $halaman,"riwayats" => $riwayat]);
+        $sekolah = Sekolah::all();
+        return view("perusahaan.daftar-riwayat", ["halaman" => $halaman,"riwayats" => $riwayat,"sekolah" => $sekolah]);
     }
     public function showRiwayat(Lamar $lamaran){
         $halaman = "Detail Riwayat siswa pkl";
