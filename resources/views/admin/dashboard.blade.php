@@ -67,7 +67,7 @@
                           </div>
                         </td>
                         <td class="border-bottom-0">
-                            <a href="#" class="btn btn-sm btn-primary">Detail</a>
+                            <a href="{{ route("admin.ajuan.detail",[$value->id]) }}" class="btn btn-sm btn-primary">Detail</a>
                         </td>
                       </tr>
                       @empty
