@@ -26,30 +26,25 @@
                     </thead>
                     <tbody>
                         <!-- Data siswa akan ditampilkan di sini -->
+                        @forelse ($siswa as $item)
                         <tr>
-                            <td>1</td>
-                            <td>Nama Siswa</td>
-                            <td>Asal Sekolah</td>
-                            <td>123456</td>
-                            <td>XII IPA 1</td>
-                            <td>Laki-laki</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->user_profile->sekolah->nama_sekolah ?? "-" }}</td>
+                            <td>{{ $item->user_profile->nis }}</td>
+                            <td>{{ $item->user_profile->kelas }}</td>
+                            <td>{{ $item->user_profile->jenis_kelamin }}</td>
                             <td>
                                 <button class="btn btn-info btn-sm">Detail</button>
                                 <button class="btn btn-danger btn-sm">Hapus</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Nama Siswa 2</td>
-                            <td>Asal Sekolah 2</td>
-                            <td>654321</td>
-                            <td>XII IPS 2</td>
-                            <td>Perempuan</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
-                                <button class="btn btn-danger btn-sm">Hapus</button>
-                            </td>
-                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center">Tidak ada data siswa aktif</td>
+                            </tr>
+                        @endforelse
+                            {{ $siswa->links("pagination::bootstrap-5") }}
                         <!-- Tambahkan baris lain sesuai kebutuhan -->
                     </tbody>
                 </table>

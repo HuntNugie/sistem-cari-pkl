@@ -13,7 +13,7 @@
                 <ul class="timeline-widget mb-0 position-relative mb-n5">
                   @foreach($siswa as $item)
                   <li class="timeline-item d-flex position-relative overflow-hidden">
-                    <div class="timeline-time text-dark flex-shrink-0 text-end">{{ $item->created_at->format('H:i') }}</div>
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">{{ $item->created_at->format('d F Y') }}</div>
                     <div class="timeline-badge-wrap d-flex flex-column align-items-center">
                       <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
                       <span class="timeline-badge-border d-block flex-shrink-0"></span>
@@ -164,7 +164,7 @@
         </div>
 
         <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a></p>
+          <p class="mb-0 fs-4">Design and Developed by NGK Company Distributed by <a href="https://themewagon.com">SICAPE</a></p>
         </div>
       </div>
 

@@ -59,4 +59,15 @@ class User extends Authenticatable
     public function lamaran():HasMany{
         return $this->hasMany(Lamar::class,"user_id");
     }
+    public function scopeFilter($query,$keyword){
+        return $query->when($keyword,function($query,$keyword){
+            $query->where("name","LIKE","%{$keyword}%")
+            ->orWhereHas("user_profile",function($query) use($keyword){
+                $query->where("nis","LIKE","%{$keyword}%")
+                ->orWhereHas("sekolah",function($query) use($keyword){
+                    $query->where("nama_sekolah","LIKE","%{$keyword}%");
+                });
+            });
+        });
+    }
 }
