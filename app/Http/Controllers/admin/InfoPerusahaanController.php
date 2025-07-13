@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Models\Perusahaan_profile;
 use App\Http\Controllers\Controller;
+use App\Models\Perusahaan;
 
 class InfoPerusahaanController extends Controller
 {
@@ -16,6 +17,9 @@ class InfoPerusahaanController extends Controller
         // }
 
         return view("admin.perusahaan-konf",compact("perusahaan"));
+    }
+    public function detailPerkonf(Perusahaan $perusahaan){
+        return view("admin.detail-perusahaankonf",compact("perusahaan"));
     }
 
     // halaman perusahaan belum terkonfirmasi

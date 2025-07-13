@@ -223,9 +223,13 @@ Route::prefix("admin")->group(function(){
             Route::get("/detail/{siswa}",[AdminDaftarSiswaPklController::class,"detailSiswaPkl"])->name("admin.siswa.pkl.detail");
         });
 
-        //Halaman daftar perusahaan terkonfirmasi
-        Route::get("/perusahaan-terkonfirmasi",[InfoPerusahaanController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi");
+        Route::prefix("perusahaan-terkonfirmasi")->group(function(){
+            //Halaman daftar perusahaan terkonfirmasi
+            Route::get("/",[InfoPerusahaanController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi");
 
+            // halaman detail perusahaan terkonfirmasi
+            Route::get("/detail/{perusahaan}",[InfoPerusahaanController::class,"detailPerkonf"])->name("admin.perusahaan.terkonfirmasi.detail");
+        });
         //Halaman daftar perusahaan belum terkonfirmasi
         Route::get("/perusahaan-belum-terkonfirmasi",[InfoPerusahaanController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi");
 

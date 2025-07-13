@@ -40,7 +40,9 @@
                                 <img src="{{ asset('storage') }}/{{ $konfir->logo ?? "-" }}" alt="Logo PT Maju Jaya" width="50">
                             </td>
                             <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
+                                <form action="{{ route('admin.perusahaan.terkonfirmasi.detail', $konfir->perusahaan_id) }}" method="get">
+                                    <button type="submit" class="btn btn-info btn-sm">Detail</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
