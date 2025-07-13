@@ -79,9 +79,9 @@ Route::middleware("auth")->group(function(){
         Route::get("/",[RiwayatLamaranController::class,"index"])->name("public.riwayat.lamaran");
 
     // Route meelihat pdf
-        
+
         Route::prefix("pdf")->group(function(){
-      
+
             // Route pdf diterima
             Route::middleware("jagaPdf")->prefix("diterima")->group(function(){
                     // route untuk melihat pdf diterima
@@ -102,7 +102,7 @@ Route::middleware("auth")->group(function(){
 
             // Route pdf sertifikat
             Route::middleware("jagaSertifikat")->prefix("sertifikat")->group(function(){
-                
+
                     // halaman sertifikat
                     Route::get("/",[SertifikatController::class,"index"])->name("public.sertifikat");
                     // Route untuk sertifikat
@@ -112,7 +112,7 @@ Route::middleware("auth")->group(function(){
                     Route::get("download/{lamaran}",[SertifikatController::class, "downloadSertifikat"])->name("public.pdf.download.sertifikat");
             });
         });
-    
+
     });
 });
 
@@ -355,7 +355,7 @@ Route::prefix("perusahaan")->group(function(){
 
                 // detail siswa pkl
                 Route::get("/detail/{lamaran}",[DaftarSiswaPklController::class,"showSiswaPkl"])->name("perusahaan.detail.siswa.pkl");
-                
+
                 // route untuk konfirmasi siswa selesai pkl
                 Route::put("/konfirmasi/{lamaran}",[DaftarSiswaPklController::class, "konfirmasi"])->name("perusahaan.konfirmasi.siswa.pkl");
 
@@ -366,10 +366,13 @@ Route::prefix("perusahaan")->group(function(){
                 Route::get("/download",[CetakController::class,"download"])->name("perusahaan.download.siswa.pkl");
            });
 
-            
 
-            // daftar siswa sedang pkl
-            Route::get("/daftar-siswa-riwayat",[DaftarRiwayatPklController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat");
+
+            // daftar siswa riwayat perusahaan
+            Route::prefix("daftar-siswa-riwayat")->group(function(){
+                Route::get("/",[DaftarRiwayatPklController::class,"daftarRiwayat"])->name("perusahaan.daftar.riwayat");
+                Route::get("/detail/{lamaran}",[DaftarRiwayatPklController::class,"showRiwayat"])->name("perusahaan.detail.riwayat");
+            });
 
             // Halaman lowongan
             Route::prefix("lowongan")->group(function(){

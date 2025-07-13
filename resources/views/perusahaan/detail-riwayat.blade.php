@@ -58,42 +58,8 @@
           <p><strong>Status PKL:</strong> <span class="badge bg-success">{{ $lamaran->status === "diterima" ? "SEDANG PKL" : $lamaran->status }}</span></p>
         </div>
       </div>
-      @if ($lamaran->status === "diterima")
-           <div class="mt-4 d-flex justify-content-end gap-3">
-       <form action="{{ route("perusahaan.konfirmasi.siswa.pkl",$lamaran->id) }}" method="post">
-        @csrf
-        @method("put")
-        <button type="button" class="btn btn-outline-success btn-konfirmasi">
-          <i class="mdi mdi-check"></i> Konfirmasi Siswa Selesai PKL
-        </button>
-       </form>
-      </div>
-      @endif
     </div>
   </div>
 </div>
 
-
-
 @endsection
-@push('script')
-<script>
-  document.querySelectorAll('.btn-konfirmasi').forEach(button => {
-    button.addEventListener('click', function () {
-        const form = this.closest('form');
-        Swal.fire({
-            title: "Apakah siswa telah menyelesaikan pkl nya?",
-            text: "Konfirmasi selesai pkl {{ $lamaran->siswa->name }}",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Ya, selesai!",
-            cancelButtonText: "Batal"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit();
-            }
-        });
-    });
-});
-</script>
-@endpush

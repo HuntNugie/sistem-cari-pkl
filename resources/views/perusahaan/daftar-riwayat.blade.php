@@ -34,58 +34,31 @@
                                 <th class="text-white">Asal Sekolah</th>
                                 <th class="text-white">Jenis Kelamin</th>
                                 <th class="text-white">Jenis PKL</th>
-                                <th class="text-white">Awal PKL</th>
                                 <th class="text-white">Akhir PKL</th>
                                 <th class="text-white">Status</th>
                                 <th class="text-center text-white">Detail</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($riwayats as $riwayat)
                             <tr>
-                                <td class="fw-semibold text-dark">1</td>
-                                <td><strong class="text-dark">Ahmad Fauzi</strong></td>
-                                <td>SMK Negeri 1 Jakarta</td>
-                                <td>Laki-laki</td>
-                                <td>Web Developer</td>
-                                <td>2024-02-01</td>
-                                <td>2024-05-30</td>
+                                <td class="fw-semibold text-dark">{{ $loop->iteration }}</td>
+                                <td><strong class="text-dark">{{ $riwayat->siswa->name }}</strong></td>
+                                <td>{{ $riwayat->siswa->user_profile->sekolah->nama_sekolah }}</td>
+                                <td>{{ $riwayat->siswa->user_profile->jk }}</td>
+                                <td>{{ $riwayat->lowongan->judul_lowongan }}</td>
+                                <td>{{ $riwayat->updated_at->format("d F Y") }}</td>
                                 <td><span class="badge bg-success">Selesai</span></td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" title="Detail">
+                                    <form action="{{ route("perusahaan.detail.riwayat",$riwayat->id) }}" method="get">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm rounded-pill" title="Detail">
                                         <i class="mdi mdi-eye"></i> Detail
                                     </button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="fw-semibold text-dark">2</td>
-                                <td><strong class="text-dark">Siti Nurhaliza</strong></td>
-                                <td>SMK Negeri 2 Bandung</td>
-                                <td>Perempuan</td>
-                                <td>Desain Grafis</td>
-                                <td>2024-01-10</td>
-                                <td>2024-04-10</td>
-                                <td><span class="badge bg-success">Selesai</span></td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" title="Detail">
-                                        <i class="mdi mdi-eye"></i> Detail
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-semibold text-dark">3</td>
-                                <td><strong class="text-dark">Budi Santoso</strong></td>
-                                <td>SMK Negeri 3 Surabaya</td>
-                                <td>Laki-laki</td>
-                                <td>Mobile Developer</td>
-                                <td>2023-12-01</td>
-                                <td>2024-03-01</td>
-                                <td><span class="badge bg-success">Selesai</span></td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" title="Detail">
-                                        <i class="mdi mdi-eye"></i> Detail
-                                    </button>
-                                </td>
-                            </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
