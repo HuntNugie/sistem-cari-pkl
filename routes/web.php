@@ -208,6 +208,9 @@ Route::prefix("admin")->group(function(){
             //Halaman daftar siswa aktif
             Route::get("/",[DaftarSiswaAktifController::class,"siswaAktif"])->name("admin.siswa.aktif");
 
+            // detail siswa aktif
+            Route::get("/detail/{siswa}",[DaftarSiswaAktifController::class,"detailSiswaAktif"])->name("admin.siswa.aktif.detail");
+
             // Aksi delete siswa aktif
             Route::delete("/hapus/{user}",[DaftarSiswaAktifController::class,"destroySiswaAktif"])->name("admin.siswa.aktif.hapus");
         });

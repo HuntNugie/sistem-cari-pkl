@@ -7,7 +7,7 @@
             <!-- Search Form -->
             <form method="GET" action="" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Cari nama siswa, NIS, atau kelas..." value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="Cari nama siswa, NIS, atau sekolah..." value="{{ request('search') }}">
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </form>
@@ -33,9 +33,11 @@
                             <td>{{ $item->user_profile->sekolah->nama_sekolah ?? "-" }}</td>
                             <td>{{ $item->user_profile->nis }}</td>
                             <td>{{ $item->user_profile->kelas }}</td>
-                            <td>{{ $item->lamaran()->latest()->first()->status ?? "-" }}</td>
+                            <td>{{ $item->lamaran()->where("status","selesai")->first()->status ?? "Belum PKL" }}</td>
                             <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
+                                <form action="{{ route('admin.siswa.aktif.detail', $item->id) }}" method="get" class="d-inline">
+                                    <button type="submit" class="btn btn-info btn-sm">Detail</button>
+                                </form>
                                 <form action="{{ route('admin.siswa.aktif.hapus', $item->id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method('delete')

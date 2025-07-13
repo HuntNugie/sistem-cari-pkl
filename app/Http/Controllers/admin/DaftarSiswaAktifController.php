@@ -17,6 +17,10 @@ class DaftarSiswaAktifController extends Controller
         }
         return view("admin.siswa-aktif", compact(['siswa']));
     }
+
+    public function detailSiswaAktif(User $siswa){
+        return view("admin.detail-siswa", compact(['siswa']));
+    }
     public function destroySiswaAktif(User $user){
         $user->delete();
         return redirect()->route("admin.siswa.aktif")->with("sukses","Data berhasil dihapus");
