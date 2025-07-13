@@ -232,8 +232,9 @@ Route::prefix("admin")->group(function(){
 
            
         });
-         // aksi hapus perusahaan terkonfirmasi
+         // aksi hapus perusahaan 
          Route::delete("perusahaan/hapus/{perusahaan}",[InfoPerusahaanController::class,"destroyPerusahaan"])->name("admin.perusahaan.hapus");
+
         //Halaman daftar perusahaan belum terkonfirmasi
         Route::get("/perusahaan-belum-terkonfirmasi",[InfoPerusahaanController::class,"pernonf"])->name("admin.perusahaan.belum.terkonfirmasi");
 
@@ -277,6 +278,9 @@ Route::prefix("admin")->group(function(){
 
             // mengupdate konfirmasi ajuan perusahaan
             Route::put("/konfirmasi/{pengajuan}",[AjuanController::class,"konfirmasiAjuan"])->name("admin.ajuan.aksi");
+
+            // detail ajuan perusahaan
+            Route::get("/detail/{pengajuan}",[AjuanController::class,"detailAjuan"])->name("admin.ajuan.detail");
         });
 
     });

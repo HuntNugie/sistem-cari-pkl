@@ -40,7 +40,9 @@
                                 <div class="d-flex gap-2 flex-wrap">
                                     <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasi{{ $non+1 }}">Konfirmasi</button>
                                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#tolak{{ $non+1 }}" >Tolak</button>
-                                    <button class="btn btn-info btn-sm">Detail</button>
+                                    <form action="{{ route("admin.ajuan.detail",[$key->id]) }}" method="get">
+                                        <button type="submit" class="btn btn-info btn-sm">Detail</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

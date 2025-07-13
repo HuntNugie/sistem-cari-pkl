@@ -49,4 +49,7 @@ class AjuanController extends Controller
         }
     }
 
+    public function detailAjuan(Pengajuan $pengajuan){
+        return view("admin.detail-ajuan",compact("pengajuan"));
+    }
 }
