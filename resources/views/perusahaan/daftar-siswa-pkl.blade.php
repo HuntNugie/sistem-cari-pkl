@@ -11,7 +11,7 @@
                         <span class="badge bg-primary bg-opacity-10 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #2563eb !important;">Siswa yang sedang menjalani PKL</span>
                     </div>
                     <div class="d-flex flex-column align-items-end gap-2">
-                        <img src="https://imgs.search.brave.com/u8H3BWoeboLS8ZzcK--kPKpplSeTX_xRbPZVFhmyJms/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvbWluaW1hbGlz/dC10eXBlLWNyZWF0/aXZlLWJ1c2luZXNz/LWxvZ28tdGVtcGxh/dGVfMTI4MzM0OC0y/MDQ5Mi5qcGc_c2Vt/dD1haXNfaHlicmlk/Jnc9NzQw" alt="Foto Perusahaan" class="img-fluid rounded-3 shadow" style="width: 200px; height: 200px; object-fit: cover;">
+                        <img src="{{ asset("storage/") }}/{{ auth()->guard("perusahaan")->user()->perusahaanProfile->logo }}" alt="Foto Perusahaan" class="img-fluid rounded-3 shadow" style="width: 200px; height: 200px; object-fit: cover;">
                     </div>
                 </div>
                 <div class="row mb-4">

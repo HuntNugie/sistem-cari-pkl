@@ -9,14 +9,18 @@ use App\Http\Controllers\Controller;
 
 class DaftarRiwayatPklController extends Controller
 {
-    public function daftarRiwayat()
+    public function daftarRiwayat(Request $request)
     {
         $halaman = "Daftar riwayat";
         $riwayat = Lamar::where("status","selesai")->whereHas("lowongan",function($query){
             $query->where("perusahaan_id",auth()->guard("perusahaan")->user()->id);
-        })->get();
+        });
+        if($request->has("search")){
+            $riwayat = $riwayat->filter($request->search);
+
+        }
         $sekolah = Sekolah::all();
-        return view("perusahaan.daftar-riwayat", ["halaman" => $halaman,"riwayats" => $riwayat,"sekolah" => $sekolah]);
+        return view("perusahaan.daftar-riwayat", ["halaman" => $halaman,"riwayats" => $riwayat->get(),"sekolah" => $sekolah]);
     }
     public function showRiwayat(Lamar $lamaran){
         $halaman = "Detail Riwayat siswa pkl";

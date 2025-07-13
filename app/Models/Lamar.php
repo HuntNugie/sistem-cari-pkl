@@ -40,4 +40,11 @@ class Lamar extends Model
             });
         });
     }
+    public function scopeFilter($query,$keyword){
+        $query->when($keyword, function($query,$keyword){
+            $query->whereHas("siswa",function($query) use($keyword){
+                $query->where("name","like","%{$keyword}%");
+            });
+        });
+    }
 }
