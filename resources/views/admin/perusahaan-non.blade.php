@@ -38,7 +38,11 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-2 flex-wrap">
-                                    <button class="btn btn-danger btn-sm btn-konfirmasi">Hapus</button>
+                                    <form action="{{ route('admin.perusahaan.hapus', $non->perusahaan_id) }}" method="post">
+                                        @csrf
+                                        @method("delete")
+                                        <button type="button" class="btn btn-danger btn-sm btn-konfirmasi">Hapus</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

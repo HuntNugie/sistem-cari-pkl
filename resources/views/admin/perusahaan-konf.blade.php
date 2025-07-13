@@ -43,7 +43,7 @@
                                 <form action="{{ route('admin.perusahaan.terkonfirmasi.detail', $konfir->perusahaan_id) }}" method="get" class="d-inline">
                                     <button type="submit" class="btn btn-info btn-sm">Detail</button>
                                 </form>
-                                <form action="{{ route('admin.perusahaan.terkonfirmasi.hapus', $konfir->perusahaan_id) }}" method="post" class="d-inline">
+                                <form action="{{ route('admin.perusahaan.hapus', $konfir->perusahaan_id) }}" method="post" class="d-inline">
                                     @csrf
                                     @method("delete")
                                     <button type="button" class="btn btn-danger btn-sm btn-konfirmasi">Hapus</button>

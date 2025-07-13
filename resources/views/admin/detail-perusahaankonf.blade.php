@@ -64,10 +64,37 @@
                     </div>
                     <div class="mt-4 text-center d-flex justify-content-center gap-2">
                         <a href="{{ route('admin.perusahaan.terkonfirmasi') }}" class="btn btn-secondary">Kembali</a>
+                        <form action="{{ route("admin.perusahaan.hapus",$perusahaan->id) }}" method="post">
+                            @csrf
+                            @method("delete")
+                            <button type="button" class="btn btn-danger btn-konfirmasi">Hapus</button>
+                        </form>s
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+          document.querySelectorAll('.btn-konfirmasi').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Yakin ingin menghapus?",
+            text: "Data ini tidak bisa dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+    </script>
+@endpush

@@ -25,12 +25,12 @@ class InfoPerusahaanController extends Controller
     }
 
     // hapus perusahaan terkonfirmasi
-    public function destroyPerkonf(Perusahaan $perusahaan){
+    public function destroyPerusahaan(Perusahaan $perusahaan){
         if($perusahaan->perusahaanProfile->logo && Storage::disk("public")->exists($perusahaan->perusahaanProfile->logo) ){
             Storage::disk("public")->delete($perusahaan->perusahaanProfile->logo);
         }
         $perusahaan->delete();
-        return redirect()->route("admin.perusahaan.terkonfirmasi")->with("sukses","Perusahaan berhasil dihapus");
+        return redirect()->back()->with("sukses","Perusahaan berhasil dihapus");
     }
     // halaman perusahaan belum terkonfirmasi
     public function pernonf(Request $request){
