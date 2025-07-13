@@ -10,11 +10,15 @@ class DaftarSiswaAktifController extends Controller
 {
         // halaman siswa aktif
     public function siswaAktif(Request $request){
-        $siswa = User::paginate(5)->withQueryString();
+        $siswa = User::with("user_profile")->paginate(5)->withQueryString();
         if($request->has("search")){
             $siswa = User::filter($request->search)->paginate(5)->withQueryString();
 
         }
         return view("admin.siswa-aktif", compact(['siswa']));
+    }
+    public function destroySiswaAktif(User $user){
+        $user->delete();
+        return redirect()->route("admin.siswa.aktif")->with("sukses","Data berhasil dihapus");
     }
 }

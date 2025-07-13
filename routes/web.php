@@ -204,8 +204,13 @@ Route::prefix("admin")->group(function(){
         // Halaman Dashboard admin
         Route::get("/dashboard",[AdminDashboardController::class,"dashboard"])->name("admin.dashboard");
 
-        //Halaman daftar siswa aktif
-        Route::get("/siswa-aktif",[DaftarSiswaAktifController::class,"siswaAktif"])->name("admin.siswa.aktif");
+        Route::prefix("siswa-aktif")->group(function(){
+            //Halaman daftar siswa aktif
+            Route::get("/",[DaftarSiswaAktifController::class,"siswaAktif"])->name("admin.siswa.aktif");
+
+            // Aksi delete siswa aktif
+            Route::delete("/hapus/{user}",[DaftarSiswaAktifController::class,"destroySiswaAktif"])->name("admin.siswa.aktif.hapus");
+        });
 
         //Halaman daftar siswa pkl
         Route::get("/siswa-pkl",[AdminDaftarSiswaPklController::class,"siswaPkl"])->name("admin.siswa.pkl");
