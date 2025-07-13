@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Models\Perusahaan_profile;
 use App\Http\Controllers\Controller;
-use App\Models\Perusahaan;
+use Illuminate\Support\Facades\Storage;
 
 class InfoPerusahaanController extends Controller
 {
@@ -18,10 +19,19 @@ class InfoPerusahaanController extends Controller
 
         return view("admin.perusahaan-konf",compact("perusahaan"));
     }
+    
     public function detailPerkonf(Perusahaan $perusahaan){
         return view("admin.detail-perusahaankonf",compact("perusahaan"));
     }
 
+    // hapus perusahaan terkonfirmasi
+    public function destroyPerkonf(Perusahaan $perusahaan){
+        if($perusahaan->perusahaanProfile->logo && Storage::disk("public")->exists($perusahaan->perusahaanProfile->logo) ){
+            Storage::disk("public")->delete($perusahaan->perusahaanProfile->logo);
+        }
+        $perusahaan->delete();
+        return redirect()->route("admin.perusahaan.terkonfirmasi")->with("sukses","Perusahaan berhasil dihapus");
+    }
     // halaman perusahaan belum terkonfirmasi
     public function pernonf(Request $request){
         $perusahaan = Perusahaan_profile::where("status", "belum terkonfirmasi")->filter($request->search)->paginate(5)->withQueryString();

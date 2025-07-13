@@ -38,7 +38,7 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-2 flex-wrap">
-                                    <button class="btn btn-info btn-sm">Detail</button>
+                                    <button class="btn btn-danger btn-sm btn-konfirmasi">Hapus</button>
                                 </div>
                             </td>
                         </tr>
@@ -52,3 +52,24 @@
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+          document.querySelectorAll('.btn-konfirmasi').forEach(button => {
+    button.addEventListener('click', function () {
+        const form = this.closest('form');
+        Swal.fire({
+            title: "Yakin ingin menghapus?",
+            text: "Data ini tidak bisa dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+});
+    </script>
+@endpush
