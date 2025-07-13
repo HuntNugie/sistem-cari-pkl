@@ -49,7 +49,7 @@
             </p>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 text-center">
-            <img src="assets/img/search-pkl.jpg" alt="Cari PKL" class="img-fluid">
+            <img src="{{ asset("pencarian.png") }}" alt="Cari PKL" class="img-fluid">
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
             </p>
             <ul>
               <li><i class="bi bi-check2-all"></i> Deskripsi instansi, bidang usaha, dan kebutuhan siswa.</li>
-              <li><i class="bi bi-check2-all"></i> Ulasan dari peserta PKL sebelumnya.</li>
+              <li><i class="bi bi-check2-all"></i> Instansi yang terverifikasi</li>
               <li><i class="bi bi-check2-all"></i> Informasi kontak dan lokasi map.</li>
             </ul>
           </div>

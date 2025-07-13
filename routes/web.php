@@ -215,8 +215,13 @@ Route::prefix("admin")->group(function(){
             Route::delete("/hapus/{user}",[DaftarSiswaAktifController::class,"destroySiswaAktif"])->name("admin.siswa.aktif.hapus");
         });
 
-        //Halaman daftar siswa pkl
-        Route::get("/siswa-pkl",[AdminDaftarSiswaPklController::class,"siswaPkl"])->name("admin.siswa.pkl");
+        Route::prefix("siswa-pkl")->group(function(){
+            //Halaman daftar siswa pkl
+            Route::get("/",[AdminDaftarSiswaPklController::class,"siswaPkl"])->name("admin.siswa.pkl");
+
+            // detail siswa pkl
+            Route::get("/detail/{siswa}",[AdminDaftarSiswaPklController::class,"detailSiswaPkl"])->name("admin.siswa.pkl.detail");
+        });
 
         //Halaman daftar perusahaan terkonfirmasi
         Route::get("/perusahaan-terkonfirmasi",[InfoPerusahaanController::class,"perkonf"])->name("admin.perusahaan.terkonfirmasi");

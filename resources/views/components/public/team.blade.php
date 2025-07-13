@@ -14,7 +14,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member">
               <div class="member-img">
-                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <img src="{{ asset("nugie.jpeg") }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -23,8 +23,8 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
+                <h4>Nugie kurniawan</h4>
+                <span>Founder & Developer SICAPE</span>
               </div>
             </div>
           </div><!-- End Team Member -->
@@ -32,7 +32,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="team-member">
         <!-- Well begun is half done. - Aristotle -->      <div class="member-img">
-                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <img src="{{ asset("febi.jpeg") }}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -42,7 +42,7 @@
               </div>
               <div class="member-info">
                 <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
+                <span>Kelompok</span>
               </div>
             </div>
           </div><!-- End Team Member -->

@@ -1458,6 +1458,12 @@ section,
   overflow: hidden;
 }
 
+.team .team-member .member-img img:not(.member-nugie) {
+  width: 375px;
+  height: 453px;
+  object-fit: cover;
+}
+
 .team .team-member .social {
   position: absolute;
   left: 0;

@@ -7,7 +7,7 @@
             <!-- Search Form -->
             <form class="mb-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari nama siswa, sekolah, atau tempat PKL...">
+                    <input type="text" class="form-control" name="search" placeholder="Cari nama siswa, sekolah, atau tempat PKL...">
                     <button class="btn btn-primary" type="submit">Cari</button>
                 </div>
             </form>
@@ -25,27 +25,24 @@
                     </thead>
                     <tbody>
                         <!-- Data siswa PKL akan ditampilkan di sini -->
+                        @forelse ($siswa as $item)
                         <tr>
-                            <td>1</td>
-                            <td>Nama Siswa</td>
-                            <td>SMK Negeri 1</td>
-                            <td>PT. Maju Jaya</td>
-                            <td>Laki-laki</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->user_profile->sekolah->nama_sekolah }}</td>
+                            <td>{{ $item->lamaran()->where("status","diterima")->first()->lowongan->perusahaan->perusahaanProfile->nama_perusahaan }}</td>
+                            <td>{{ $item->user_profile->jk }}</td>
                             <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
+                                <form action="{{ route('admin.siswa.pkl.detail', $item->id) }}" method="get">
+                                    <button type="submit" class="btn btn-info btn-sm">Detail</button>
+                                </form>
                             </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>2</td>
-                            <td>Nama Siswa 2</td>
-                            <td>SMK Negeri 2</td>
-                            <td>CV. Sukses Bersama</td>
-                            <td>Perempuan</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
-                            </td>
+                            <td colspan="6" class="text-center">Tidak ada data siswa PKL</td>
                         </tr>
-                        <!-- Tambahkan baris lain sesuai kebutuhan -->
+                        @endforelse
                     </tbody>
                 </table>
             </div>

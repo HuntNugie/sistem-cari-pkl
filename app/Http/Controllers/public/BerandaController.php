@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class BerandaController extends Controller
 {
     public function index(){
-        $lowongan = Lowongan::where("status","tersedia")->limit(3)->get();
+        $lowongan = Lowongan::where("status","tersedia")->latest()->take(3)->get();
         return view("public.index",compact("lowongan"));
     }
 }
