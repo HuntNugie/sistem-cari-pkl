@@ -379,6 +379,9 @@ Route::prefix("perusahaan")->group(function(){
 
                 // aksi cetak riwayat siswa pkl
                 Route::get("/cetak",[CetakController::class,"cetakRiwayat"])->name("perusahaan.cetak.riwayat");
+
+                // aksi downloaad riwayat siswa pkl
+                Route::get("/download",[CetakController::class,"downloadRiwayat"])->name("perusahaan.download.riwayat");
             });
 
             // Halaman lowongan

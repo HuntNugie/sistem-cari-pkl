@@ -31,8 +31,18 @@ class CetakController extends Controller
         $sekolah = $request->sekolah;
         $riwayats = Lamar::whereHas("lowongan",function($q) use($perusahaan){
             $q->where("perusahaan_id",$perusahaan->id);
-        })->where("status","selesai")->riwayat($sekolah)->limit($jumlah)->get();
+        })->where("status","selesai")->riwayat($sekolah)->limit($jumlah)->orderBy("created_at","desc")->get();
         $pdf = Pdf::loadView('pdf.laporanRiwayat',compact(['perusahaan','riwayats']));
         return $pdf->stream("laporan-riwayat-pkl-{$perusahaan->perusahaanProfile->nama_perusahaan}.pdf");
+    }
+    public function downloadRiwayat(Request $request){
+        $perusahaan = auth()->guard("perusahaan")->user();
+        $jumlah = $request->jumlah;
+        $sekolah = $request->sekolah;
+        $riwayats = Lamar::whereHas("lowongan",function($q) use($perusahaan){
+            $q->where("perusahaan_id",$perusahaan->id);
+        })->where("status","selesai")->riwayat($sekolah)->limit($jumlah)->get();
+        $pdf = Pdf::loadView('pdf.laporanRiwayat',compact(['perusahaan','riwayats']));
+        return $pdf->download("laporan-riwayat-pkl-{$perusahaan->perusahaanProfile->nama_perusahaan}-".now()->format("d F Y").".pdf");
     }
 }

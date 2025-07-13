@@ -24,6 +24,9 @@
                         <button type="button" class="btn btn-outline-danger rounded-pill mb-2" data-bs-toggle="modal" data-bs-target="#modalPrintSiswa">
                             <i class="mdi mdi-printer"></i> Print riwayat siswa PKL
                         </button>
+                        <button type="button" class="btn btn-outline-primary rounded-pill mb-2" data-bs-toggle="modal" data-bs-target="#modalDownloadSiswa">
+                            <i class="mdi mdi-download"></i> Download Laporan
+                        </button>
                 </div>
                 <div class="table-responsive rounded-4 shadow-sm">
                     <table class="table align-middle table-hover bg-white rounded-4 overflow-hidden">
@@ -115,6 +118,48 @@
     </div>
 </div>
 
+<!-- Modal Download Laporan -->
+<div class="modal fade" id="modalDownloadSiswa" data-bs-focus="false" tabindex="-1" aria-labelledby="modalDownloadSiswaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{{ route("perusahaan.download.riwayat") }}" target="_blank" method="GET" class="modal-content shadow-lg rounded-4 border-0">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title fw-bold" id="modalDownloadSiswaLabel">
+                    <i class="mdi mdi-download me-2"></i> Download Laporan Siswa PKL
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+
+            <div class="modal-body bg-light">
+                <div class="mb-3">
+                    <label for="jumlah_siswa_download" class="form-label fw-semibold">Jumlah Siswa</label>
+                    <input type="number" name="jumlah" class="form-control rounded-3 shadow-sm" id="jumlah_siswa_download" min="1" value="10" required>
+                    <small class="text-muted">Masukkan jumlah siswa terbaru yang ingin didownload</small>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="filter_sekolah_download" class="form-label fw-semibold">Filter Sekolah (Opsional)</label>
+                    <input type="text" id="search_sekolah_download" class="form-control mb-2" placeholder="Cari nama sekolah...">
+                    <select name="sekolah" class="form-control" id="filter_sekolah_download" size="6">
+                        <option value="">Semua sekolah</option>
+                        @foreach($sekolah as $skl)
+                            <option value="{{ $skl->id }}">{{ $skl->nama_sekolah }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer bg-white">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Batal
+                </button>
+                <button type="submit" class="btn btn-success">
+                    <i class="mdi mdi-download me-1"></i> Download Laporan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
 
 <style>
@@ -181,6 +226,7 @@
 @push('script')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Modal Cetak
     const searchInput = document.getElementById('search_sekolah');
     const select = document.getElementById('filter_sekolah');
     const allOptions = Array.from(select.options);
@@ -193,11 +239,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 select.appendChild(opt);
             }
         });
-        // Jika search kosong, pilih option pertama (Semua Sekolah)
         if (filter === '' && select.options.length > 0) select.selectedIndex = 0;
     });
-
-    // Reset ke default (Semua Sekolah) saat modal dibuka
     const modal = document.getElementById('modalPrintSiswa');
     if (modal) {
         modal.addEventListener('show.bs.modal', function() {
@@ -205,6 +248,31 @@ document.addEventListener('DOMContentLoaded', function() {
             select.innerHTML = '';
             allOptions.forEach(opt => select.appendChild(opt));
             select.selectedIndex = 0;
+        });
+    }
+
+    // Modal Download
+    const searchInputDownload = document.getElementById('search_sekolah_download');
+    const selectDownload = document.getElementById('filter_sekolah_download');
+    const allOptionsDownload = Array.from(selectDownload.options);
+
+    searchInputDownload.addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        selectDownload.innerHTML = '';
+        allOptionsDownload.forEach(opt => {
+            if (opt.text.toLowerCase().includes(filter) || opt.value === '') {
+                selectDownload.appendChild(opt);
+            }
+        });
+        if (filter === '' && selectDownload.options.length > 0) selectDownload.selectedIndex = 0;
+    });
+    const modalDownload = document.getElementById('modalDownloadSiswa');
+    if (modalDownload) {
+        modalDownload.addEventListener('show.bs.modal', function() {
+            searchInputDownload.value = '';
+            selectDownload.innerHTML = '';
+            allOptionsDownload.forEach(opt => selectDownload.appendChild(opt));
+            selectDownload.selectedIndex = 0;
         });
     }
 });
