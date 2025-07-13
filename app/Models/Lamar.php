@@ -45,6 +45,7 @@ class Lamar extends Model
             $query->whereHas("siswa",function($query) use($keyword){
                 $query->where("name","like","%{$keyword}%");
             });
+            
         });
     }
 }

@@ -18,7 +18,7 @@
                       <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
                       <span class="timeline-badge-border d-block flex-shrink-0"></span>
                     </div>
-                    <div class="timeline-desc fs-3 text-dark mt-n1"> {{ $item->name }} </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1"> {{ $item->name ?? "-"}} </div>
                   </li>
                   @endforeach
                 </ul>
@@ -40,10 +40,10 @@
                           <h6 class="fw-semibold mb-0">Nama perusahaan</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Bidang perusahaan</h6>
+                          <h6 class="fw-semibold mb-0">Pemilik</h6>
                         </th>
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Untuk jurusan</h6>
+                          <h6 class="fw-semibold mb-0">Nomor izin usaha</h6>
                         </th>
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Detail</h6>
@@ -51,74 +51,28 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @forelse($perngajuan as $key => $value)
+                        
                       <tr>
-                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{ $loop->iteration }}</h6></td>
                         <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
+                            <h6 class="fw-semibold mb-1">{{ $value->perusahaan->perusahaanProfile->nama_perusahaan }}</h6>
                         </td>
                         <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">Elite Admin</p>
+                          <p class="mb-0 fw-normal">{{ $value->perusahaan->perusahaanProfile->pemilik }}</p>
                         </td>
                         <td class="border-bottom-0">
                           <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-primary rounded-3 fw-semibold">TKJ</span>
+                            <span class="badge bg-primary rounded-3 fw-semibold">{{ $value->perusahaan->perusahaanProfile->nomor_izin_usaha }}</span>
                           </div>
                         </td>
                         <td class="border-bottom-0">
                             <a href="#" class="btn btn-sm btn-primary">Detail</a>
                         </td>
                       </tr>
-                      <tr>
-                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">Andrew McDownland</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">Real Homes WP Theme</p>
-                        </td>
-                        <td class="border-bottom-0">
-                          <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-secondary rounded-3 fw-semibold">RPL</span>
-                          </div>
-                        </td>
-                        <td class="border-bottom-0">
-                             <a href="#" class="btn btn-sm btn-primary">Detail</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">3</h6></td>
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">Christopher Jamil</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">MedicalPro WP Theme</p>
-                        </td>
-                        <td class="border-bottom-0">
-                          <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-danger rounded-3 fw-semibold">Mesin</span>
-                          </div>
-                        </td>
-                        <td class="border-bottom-0">
-                           <a href="#" class="btn btn-sm btn-primary">Detail</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="border-bottom-0"><h6 class="fw-semibold mb-0">4</h6></td>
-                        <td class="border-bottom-0">
-                            <h6 class="fw-semibold mb-1">Nirav Joshi</h6>
-                        </td>
-                        <td class="border-bottom-0">
-                          <p class="mb-0 fw-normal">Hosting Press HTML</p>
-                        </td>
-                        <td class="border-bottom-0">
-                          <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-success rounded-3 fw-semibold">Farmasi</span>
-                          </div>
-                        </td>
-                        <td class="border-bottom-0">
-                            <a href="#" class="btn btn-sm btn-primary">Detail</a>
-                        </td>
-                      </tr>
+                      @empty
+                        
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -140,7 +94,7 @@
                 </h5>
                 <div class="d-flex justify-content-between align-items-center">
                 <h4 class="fw-bold mb-0">{{ $jumlah }}</h4>
-                <a href="#" class="btn btn-outline-primary">Pergi ke halaman</a>
+                <a href="{{ route("admin.siswa.aktif") }}" class="btn btn-outline-primary">Pergi ke halaman</a>
                 </div>
             </div>
             </div>
@@ -160,8 +114,8 @@
                 Siswa sedang PKL
                 </h5>
                 <div class="d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold mb-0">80</h4>
-                <a href="#" class="btn btn-outline-primary">Pergi ke halaman</a>
+                <h4 class="fw-bold mb-0">{{ $jmlSiswaPkl }}</h4>
+                <a href="{{ route("admin.siswa.pkl") }}" class="btn btn-outline-primary">Pergi ke halaman</a>
                 </div>
             </div>
             </div>
@@ -180,8 +134,8 @@
                 Perusahaan Terkonfirmasi
                 </h5>
                 <div class="d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold mb-0">25</h4>
-                <a href="#" class="btn btn-outline-primary">Pergi ke halaman</a>
+                <h4 class="fw-bold mb-0">{{ $jmlPerusahaanKonf }}</h4>
+                <a href="{{ route("admin.perusahaan.terkonfirmasi") }}" class="btn btn-outline-primary">Pergi ke halaman</a>
                 </div>
             </div>
             </div>
@@ -201,8 +155,8 @@
                 Perusahaan Belum Dikonfirmasi
                 </h5>
                 <div class="d-flex justify-content-between align-items-center">
-                <h4 class="fw-bold mb-0">12</h4>
-                <a href="#" class="btn btn-outline-primary">Pergi ke halaman</a>
+                <h4 class="fw-bold mb-0">{{ $jmlPerusahaanNonf }}</h4>
+                <a href="{{ route("admin.perusahaan.belum.terkonfirmasi") }}" class="btn btn-outline-primary">Pergi ke halaman</a>
                 </div>
             </div>
             </div>
