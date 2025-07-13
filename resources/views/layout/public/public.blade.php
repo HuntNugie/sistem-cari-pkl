@@ -3,6 +3,7 @@
 
 <head>
     <x-public.header/>
+
 </head>
 
 <body class="index-page">
