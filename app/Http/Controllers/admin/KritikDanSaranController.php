@@ -12,7 +12,8 @@ class KritikDanSaranController extends Controller
 {
       // halaman kritik dan saran
     public function kritikSaran(){
-        return view("admin.kritik-saran");
+        $kritik = KritikSaran::latest()->get();
+        return view("admin.kritik-saran",compact("kritik"));
     }
 
     // Aksi kritik dan saran user
