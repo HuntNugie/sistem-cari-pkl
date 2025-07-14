@@ -11,8 +11,9 @@
     </style>
 @endpush
 @section("content")
- <div class="container mt-5 mb-5">
+ <div class="container mt-5 mb-5" style="padding-top: 80px;">
     <h2 class="mb-4 text-center">📬 Kritik & Saran dari Pengguna</h2>
+    <div class="saran-list" style="max-height: 60vh; overflow-y: auto; padding-right: 15px;">
     @forelse($kritik as $item)
          <!-- Data 1 -->
     <div class="card mb-3 shadow-sm saran-card">
@@ -32,7 +33,8 @@
     <div class="alert alert-info text-center">
       Belum ada kritik atau saran yang masuk.
     </div>
-    @endforelse
+        @endforelse
+</div>
 
   </div>
 @endsection
