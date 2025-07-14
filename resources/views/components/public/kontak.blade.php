@@ -1,5 +1,30 @@
 <div>
    <section id="kontak" class="contact section">
+      <style>
+          /* Style turunan dari php-email-form agar tampilan tetap konsisten */
+          .styled-form .form-control{
+              padding:12px 15px;
+              border-radius:4px;
+              box-shadow:none;
+              font-size:14px;
+          }
+          .styled-form .form-control:focus{
+              border-color:#4154f1;
+              box-shadow:0 0 0 0.2rem rgba(65,84,241,.25);
+          }
+          .styled-form button[type="submit"]{
+              background-image:linear-gradient(90deg,#ff8800 0%, #ff5e00 100%);
+              border:0;
+              padding:10px 30px;
+              color:#fff;
+              transition:0.4s;
+              border-radius:4px;
+          }
+          .styled-form button[type="submit"]:hover{
+              background:#ff9900;
+          }
+      </style>
+
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -39,7 +64,7 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="{{ route("admin.kritik.saran.aksi") }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="{{ route('admin.kritik.saran.aksi') }}" method="post" class="styled-form" data-aos="fade-up" data-aos-delay="200">
               @csrf
               <div class="row gy-4">
 
@@ -60,9 +85,10 @@
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  @if(session('sukses'))
+                      <div class="alert alert-success">{{ session('sukses') }}</div>
+                  @endif
+
 
                   <button type="submit">Send Message</button>
                 </div>

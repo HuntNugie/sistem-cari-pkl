@@ -260,8 +260,7 @@ Route::prefix("admin")->group(function(){
         //Halamam kritik dan saran
         Route::get("/kritik-saran",[KritikDanSaranController::class,"kritikSaran"])->name("admin.kritik.saran");
 
-        // aksi kritik dan saran
-        Route::post("/kritik-saran",[KritikDanSaranController::class, "storeKritikSaran"])->name("admin.kritik.saran.aksi");
+       
         // halaman my profile admin
         Route::prefix("myprofile")->group(function(){
             // Halaman utama myprofile
@@ -460,10 +459,12 @@ Route::prefix("perusahaan")->group(function(){
    });
 });
 
+ // aksi kritik dan saran
+ Route::post("/kritik-saran",[KritikDanSaranController::class, "storeKritikSaran"])->name("admin.kritik.saran.aksi");
 
-Route::get("/tes",function(){
-    return view("pdf.sertifikat");
-});
+// Route::get("/tes",function(){
+//     return view("pdf.sertifikat");
+// });
 // Route::get("/hapus",function(){
 //     User::truncate();
 //     session()->invalidate();

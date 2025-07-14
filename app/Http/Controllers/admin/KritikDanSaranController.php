@@ -38,6 +38,6 @@ class KritikDanSaranController extends Controller
         $subjek = $request->subjek;
         $pesan = $request->pesan;
         Mail::to("huntcode99@gmail.com")->send(new KritikSaranMail($nama,$email,$subjek,$pesan));
-        return redirect()->back()->with("sukses","Kritik dan saran berhasil dikirim terima kasih atas kritik dan saran nya");
+        return redirect()->to("/#kontak")->with("sukses","Kritik dan saran berhasil dikirim terima kasih atas kritik dan saran nya");
     }
 }
