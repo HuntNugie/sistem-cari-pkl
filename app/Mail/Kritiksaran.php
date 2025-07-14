@@ -31,7 +31,7 @@ class Kritiksaran extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subjek,
+            subject: $this->subjek." dari : ".$this->email,
         );
     }
 
@@ -41,7 +41,7 @@ class Kritiksaran extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.kritik-saran',
         );
     }
 
