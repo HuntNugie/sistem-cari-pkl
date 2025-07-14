@@ -1,4 +1,3 @@
-<div>
       <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Sicape</title>
@@ -26,4 +25,4 @@
   <link href="{{ asset("assets/css/main.css") }}" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack("style")
-</div>
+
