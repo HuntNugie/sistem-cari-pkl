@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
   <title>Login Page</title>
 
+  <link rel="shortcut icon" sizes="128x128" href="{{ asset("Logo putihh.png") }}" type="image/png">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
