@@ -41,7 +41,7 @@
       <img class="user" src="{{ asset("Logo putihh.png") }}" alt="User">
       <h3 class="mb-2">Reset Password</h3>
       <h5 class="mb-4 text-warning">Masukkan Password Baru Anda</h5>
-      <form action="" method="post">
+      <form action="{{ route("public.reset.password.aksi") }}" method="post">
         @csrf
         <div class="mb-3 text-start">
           <label for="password" class="form-label">Password Baru</label>
