@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             "jagaPdfTolak" => App\Http\Middleware\jagaPdfTolak::class,
             "jagaSertifikat" => App\Http\Middleware\jagaSertifikat::class,
             "cekEmailForgot" => App\Http\Middleware\cekEmailForgot::class,
+            "cekOtpForgot" => App\Http\Middleware\cekOtpForgot::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

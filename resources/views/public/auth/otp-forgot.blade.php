@@ -47,7 +47,7 @@
       <img src="{{ asset("Logo putihh.png") }}" alt="User" class="otp-image mx-auto">
       <h4 class="mb-3">Verifikasi Kode OTP Forgot Password</h4>
         <h5>Lihat kode otp di email {{ $email ?? ""}}</h5>
-      <form action="{{ route('public.otp.aksi') }}" method="post">
+      <form action="{{ route('public.otp.forgot.aksi') }}" method="post">
         @csrf
         <div class="mb-3 text-start">
           <label for="otp" class="form-label">Masukkan Kode OTP</label>
@@ -62,7 +62,7 @@
       <div class="text-center mt-3">
         <p id="timer" class="mb-1 text-warning">Waktu tersisa: 05:00</p>
         <a href="{{ route("public.verifEmail.forgot") }}" id="editEmail" class="resend-link text-decoration-none d-block mt-1">Salah email ? Edit email</a>
-        <a href="{{ route("public.resend") }}" id="resendLink" class="resend-link disabled text-decoration-none d-block mt-1">Tidak ada kode otp ? Kirim ulang kode</a>
+        <a href="{{ route("public.resend.otp") }}" id="resendLink" class="resend-link disabled text-decoration-none d-block mt-1">Tidak ada kode otp ? Kirim ulang kode</a>
       </div>
     </div>
   </div>

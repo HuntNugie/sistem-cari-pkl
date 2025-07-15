@@ -190,11 +190,16 @@ Route::middleware("cekAuth")->group(function(){
         Route::get("/otp",[ForgotPasswordController::class,"showOtp"])->name("public.otp.forgot")->middleware("cekEmailForgot");
 
         // aksi halaman Otp forgot password user
+        Route::post("/otp",[ForgotPasswordController::class,"cekOtp"])->name("public.otp.forgot.aksi");
 
         // halaman reset password user
-        Route::get("/reset",[ForgotPasswordController::class,"showReset"])->name("public.reset.password");
+        Route::get("/reset",[ForgotPasswordController::class,"showReset"])->name("public.reset.password")->middleware("cekOtpForgot");
 
         // aksi halaman reset password user
+
+
+        // resend otp
+        Route::get("/resend",[ForgotPasswordController::class,"resendOtp"])->name("public.resend.otp");
     });
 });
 

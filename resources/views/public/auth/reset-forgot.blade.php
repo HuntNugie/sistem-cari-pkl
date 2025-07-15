@@ -44,11 +44,6 @@
       <form action="" method="post">
         @csrf
         <div class="mb-3 text-start">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email aktif" value="{{ $email ?? old('email') }}" required readonly>
-        </div>
-
-        <div class="mb-3 text-start">
           <label for="password" class="form-label">Password Baru</label>
           <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password baru" required>
         </div>
