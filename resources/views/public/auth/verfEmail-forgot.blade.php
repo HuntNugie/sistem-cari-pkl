@@ -40,7 +40,7 @@
         @csrf
         <div class="mb-3 text-start">
           <label for="email" class="form-label">Alamat Email</label>
-          <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email aktif" value="{{ $email }}" required>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email aktif" value="" required>
         </div>
 
         <div class="d-grid">

@@ -17,9 +17,10 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AjuanController;
 use App\Http\Controllers\public\BerandaController;
 use App\Http\Controllers\public\LamaranController;
-use App\Http\Controllers\public\RiwayatLamaranController;
+use App\Http\Controllers\perusahaan\CetakController;
 use App\Http\Controllers\public\DaftarPklController;
 use App\Http\Controllers\public\auth\LoginController;
+use App\Http\Controllers\public\SertifikatController;
 use App\Http\Controllers\perusahaan\LowonganController;
 use App\Http\Controllers\admin\InfoPerusahaanController;
 use App\Http\Controllers\admin\KritikDanSaranController;
@@ -27,18 +28,18 @@ use App\Http\Controllers\admin\myprofileAdminController;
 use App\Http\Controllers\perusahaan\DashboardController;
 use App\Http\Controllers\public\auth\RegisterController;
 use App\Http\Controllers\admin\auth\LoginAdminController;
+use App\Http\Controllers\public\RiwayatLamaranController;
 use App\Http\Controllers\admin\DaftarSiswaAktifController;
 use App\Http\Controllers\perusahaan\DaftarSiswaPklController;
 use App\Http\Controllers\perusahaan\AjuanPerusahaanController;
 use App\Http\Controllers\perusahaan\DaftarSiswaBaruController;
+use App\Http\Controllers\public\auth\ForgotPasswordController;
 use App\Http\Controllers\perusahaan\DaftarRiwayatPklController;
 use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
-use App\Http\Controllers\perusahaan\CetakController;
-use App\Http\Controllers\public\SertifikatController;
 
 // landing page
 Route::get('/', [BerandaController::class,"index"])->name("beranda");
@@ -175,6 +176,23 @@ Route::middleware("cekAuth")->group(function(){
         // aksi untuk memasukkan data diri
         Route::post("/isi-data",[RegisterController::class,"register"])->name("public.register.aksi");
       });
+    });
+    
+    // Route untuk forgot password
+    Route::prefix("forgot-password")->group(function(){
+        // halaman email forgot password user
+       Route::get("/",[ForgotPasswordController::class,"show"])->name("public.verifEmail.forgot");
+
+        // aksi halaman email forgot password user
+
+        // Halaman Otp forgot passwrod user
+        Route::get("/otp",[ForgotPasswordController::class,"showOtp"])->name("public.otp.forgot");
+        // aksi halaman Otp forgot password user
+
+        // halaman reset password user
+        Route::get("/reset",[ForgotPasswordController::class,"showReset"])->name("public.reset.password");
+        
+        // aksi halaman reset password user
     });
 });
 

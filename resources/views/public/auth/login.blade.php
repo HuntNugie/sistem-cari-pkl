@@ -18,7 +18,7 @@
         <label>
           <input type="checkbox" name="remember"> Remember me
         </label>
-        <a href="#">Forgot Password?</a>
+        <a href="{{ route("public.verifEmail.forgot") }}">Forgot Password?</a>
       </div>
 
       <input type="submit" value="Login">
