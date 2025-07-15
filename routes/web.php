@@ -184,14 +184,16 @@ Route::middleware("cekAuth")->group(function(){
        Route::get("/",[ForgotPasswordController::class,"show"])->name("public.verifEmail.forgot");
 
         // aksi halaman email forgot password user
+        Route::post("/",[ForgotPasswordController::class,"cekEmail"])->name("public.verifEmail.forgot.aksi");
 
         // Halaman Otp forgot passwrod user
-        Route::get("/otp",[ForgotPasswordController::class,"showOtp"])->name("public.otp.forgot");
+        Route::get("/otp",[ForgotPasswordController::class,"showOtp"])->name("public.otp.forgot")->middleware("cekEmailForgot");
+
         // aksi halaman Otp forgot password user
 
         // halaman reset password user
         Route::get("/reset",[ForgotPasswordController::class,"showReset"])->name("public.reset.password");
-        
+
         // aksi halaman reset password user
     });
 });

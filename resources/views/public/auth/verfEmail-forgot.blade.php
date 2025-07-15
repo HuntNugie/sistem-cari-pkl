@@ -36,11 +36,11 @@
       <h3 class="mb-2">Forgot password</h3>
       <h5 class="mb-4 text-warning">Verifikasi Email</h5>
 
-      <form action="{{ route('public.verifEmail.aksi') }}" method="post">
+      <form action="{{ route('public.verifEmail.forgot.aksi') }}" method="post">
         @csrf
         <div class="mb-3 text-start">
           <label for="email" class="form-label">Alamat Email</label>
-          <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email aktif" value="" required>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email aktif" value="{{ old("email") }}" required>
         </div>
 
         <div class="d-grid">
