@@ -33,7 +33,7 @@
  <div class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="loginBox text-center">
       <img class="user" src="{{ asset("Logo putihh.png") }}" alt="User">
-      <h3 class="mb-2">Register Siswa</h3>
+      <h3 class="mb-2">Forgot password</h3>
       <h5 class="mb-4 text-warning">Verifikasi Email</h5>
 
       <form action="{{ route('public.verifEmail.aksi') }}" method="post">
