@@ -42,7 +42,7 @@
                       Remember me
                     </label>
                   </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+                  <a href="{{ route("perusahaan.verifEmail.forgot") }}" class="auth-link text-black">Forgot password?</a>
                 </div>
                 <div class="my-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">LOGIN</button>
