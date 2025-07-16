@@ -16,7 +16,7 @@
                             <span id="timer" class="badge badge-info">05:00</span>
                             <small class="text-muted ml-2">Kode OTP berlaku selama 5 menit</small>
                         </div>
-                        <form class="pt-3" method="POST" action="{{ route("perusahaan.otp.aksi") }}">
+                        <form class="pt-3" method="POST" action="{{ route("perusahaan.otp.forgot.aksi") }}">
                             @csrf
                             <div class="form-group">
                                 <label>Kode OTP</label>
@@ -33,7 +33,7 @@
                                 <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Verifikasi OTP</button>
                             </div>
                             <div class="mt-3 text-center">
-                                <a href="{{ route("perusahaan.resendOtp") }}" id="resend-btn" class="btn btn-link text-primary p-0 disabled" tabindex="-1" aria-disabled="true">Kirim ulang</a>
+                                <a href="{{ route("perusahaan.resend.otp") }}" id="resend-btn" class="btn btn-link text-primary p-0 disabled" tabindex="-1" aria-disabled="true">Kirim ulang</a>
                             </div>
                             <div class="text-center mt-4 font-weight-light">
                                Salah email ? <a href="{{ route('perusahaan.verifEmail.forgot') }}" class="text-primary">edit email</a>

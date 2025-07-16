@@ -380,8 +380,16 @@ Route::prefix("perusahaan")->group(function(){
             // halaman otp forgot password perusahaan
             Route::get("/otp",[PerusahaanForgotPasswordController::class,"showOtp"])->name("perusahaan.otp.forgot")->middleware("cekEmailForgot");
             
+            // aksi otp forgot password perusahaan
+            Route::post("/otp",[PerusahaanForgotPasswordController::class,"cekOtp"])->name("perusahaan.otp.forgot.aksi")->middleware("cekEmailForgot");
+
             // halaman reset password perusahaan
             Route::get("/reset",[PerusahaanForgotPasswordController::class,"showReset"])->name("perusahaan.reset.password")->middleware("cekOtpForgot");
+
+            // aksi reset password perusahaan
+            Route::post("/reset",[PerusahaanForgotPasswordController::class,"reset"])->name("perusahaan.reset.password.aksi")->middleware("cekOtpForgot");
+            // resend otp
+            Route::get("/resend",[PerusahaanForgotPasswordController::class,"resendOtp"])->name("perusahaan.resend.otp")->middleware("cekEmailForgot");
         });
 
     });

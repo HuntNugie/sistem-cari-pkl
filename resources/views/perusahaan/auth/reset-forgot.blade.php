@@ -11,7 +11,7 @@
               </div>
               <h4>Reset password Perusahaan</h4>
               <h6 class="font-weight-light">Masukkan password baru</h6>
-              <form class="pt-3" method="post" action="{{ route("perusahaan.register.aksi") }}">
+              <form class="pt-3" method="post" action="{{ route("perusahaan.reset.password.aksi") }}">
                 @csrf
                 <div class="form-group">
                   <label>Password baru</label>
