@@ -23,7 +23,7 @@ class ForgotPasswordController extends Controller
 
     // halaman reset password
     public function showReset(){
-        return view("perusahaan.auth.reset-password");
+        return view("perusahaan.auth.reset-forgot");
     }
 
     // aksi halaman reset password

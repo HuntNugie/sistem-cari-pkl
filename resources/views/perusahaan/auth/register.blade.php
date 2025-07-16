@@ -1,14 +1,14 @@
 @extends("layout.perusahaan.perusahaan")
 
 @section("auth")
-)
+
   <div class="container-fluid page-body-wrapper full-page-wrapper d-flex">
       <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
         <div class="row flex-grow">
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <img src="../../images/logo.svg" alt="logo">
+                <img src="{{ asset("Logo hitam.png") }}" alt="logo">
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Join us today! It takes only few steps</h6>
