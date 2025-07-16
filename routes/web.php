@@ -38,8 +38,10 @@ use App\Http\Controllers\perusahaan\DaftarRiwayatPklController;
 use App\Http\Controllers\perusahaan\MyProfilePerusahaanController;
 use App\Http\Controllers\perusahaan\auth\LoginPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
+use App\Http\Controllers\perusahaan\auth\ForgotPasswordController as PerusahaanForgotPasswordController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
+
 
 // landing page
 Route::get('/', [BerandaController::class,"index"])->name("beranda");
@@ -365,6 +367,18 @@ Route::prefix("perusahaan")->group(function(){
                 })->name("perusahaan.resendOtp");
 
             });
+        });
+
+        // route untuk forgot password
+        Route::prefix("forgot-password")->group(function(){
+            // halaman email forgot password perusahaan
+            Route::get("/",[PerusahaanForgotPasswordController::class,"show"])->name("perusahaan.verifEmail.forgot");
+
+            // halaman otp forgot password perusahaan
+            Route::get("/otp",[PerusahaanForgotPasswordController::class,"showOtp"])->name("perusahaan.otp.forgot");
+            
+            // halaman reset password perusahaan
+            Route::get("/reset",[PerusahaanForgotPasswordController::class,"showReset"])->name("perusahaan.reset.password");
         });
 
     });
