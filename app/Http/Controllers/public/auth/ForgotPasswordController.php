@@ -30,6 +30,13 @@ class ForgotPasswordController extends Controller
             return back()->with("gagal","Email tidak terdaftar");
         }
         $user = User::where("email", $email)->first();
+        // cek jika user sebelumnya sudah berhasil registrasi
+        if($user->password == null){
+            return back()->with("gagal","anda sebelumnya belum selesai registrasi silahkan registrasi ulang");
+        }
+        if($user->google_id){
+            return back()->with("gagal","anda sudah login dengan google tidak bisa mengubah password");
+        }
         $otp = random_int(100000, 999999);
         $user->otp = $otp;
         $user->save();

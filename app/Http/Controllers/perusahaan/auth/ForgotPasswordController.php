@@ -30,6 +30,10 @@ class ForgotPasswordController extends Controller
         $email = $request->email;
         $perusahaan = Perusahaan::where("email",$email)->first();
       
+        // cek jika sebelumnya sudah berhasil login dengan mengecek password nya kosong atau tidak
+        if($perusahaan->password == null){
+            return back()->with("gagal","anda Sebelumnya belum selesai registrasi silahkan registrasi ulang");
+        }
         $otp = random_int(100000, 999999);
         $perusahaan->otp = $otp;
         $perusahaan->save();
