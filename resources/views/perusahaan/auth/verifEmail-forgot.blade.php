@@ -14,7 +14,7 @@
                             </div>
                             <h4>Verifikasi Email Forgot Password</h4>
                             <h6 class="font-weight-light">Masukkan email yang sudah terdaftar</h6>
-                            <form class="pt-3" method="POST" action="{{ route('perusahaan.verifEmail.aksi') }}">
+                            <form class="pt-3" method="POST" action="{{ route('perusahaan.verifEmail.forgot.aksi') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label>Email</label>

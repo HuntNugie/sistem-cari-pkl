@@ -374,11 +374,14 @@ Route::prefix("perusahaan")->group(function(){
             // halaman email forgot password perusahaan
             Route::get("/",[PerusahaanForgotPasswordController::class,"show"])->name("perusahaan.verifEmail.forgot");
 
+            // aksi email forgot password perusahaan
+            Route::post("/",[PerusahaanForgotPasswordController::class,"cekEmail"])->name("perusahaan.verifEmail.forgot.aksi");
+
             // halaman otp forgot password perusahaan
-            Route::get("/otp",[PerusahaanForgotPasswordController::class,"showOtp"])->name("perusahaan.otp.forgot");
+            Route::get("/otp",[PerusahaanForgotPasswordController::class,"showOtp"])->name("perusahaan.otp.forgot")->middleware("cekEmailForgot");
             
             // halaman reset password perusahaan
-            Route::get("/reset",[PerusahaanForgotPasswordController::class,"showReset"])->name("perusahaan.reset.password");
+            Route::get("/reset",[PerusahaanForgotPasswordController::class,"showReset"])->name("perusahaan.reset.password")->middleware("cekOtpForgot");
         });
 
     });
