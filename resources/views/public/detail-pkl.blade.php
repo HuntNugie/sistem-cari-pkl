@@ -38,7 +38,7 @@
         <!-- Info Utama -->
         <div class="row g-4 mb-4">
           <div class="col-md-6">
-            <p class="mb-1"><i class="bi bi-mortarboard me-2"></i><strong>Jurusan Diterima:</strong> {{ $lowongan->jurusan->singkatan }}</p>
+            <p class="mb-1"><i class="bi bi-mortarboard me-2"></i><strong>Jurusan Diterima:</strong> {{ $lowongan->jurusan->singkatan }} ({{ $lowongan->jurusan->nama_jurusan }})</p>
             <p class="mb-1"><i class="bi bi-people me-2"></i><strong>Kuota:</strong> {{ $lowongan->kuota }} siswa</p>
             <p class="mb-1"><i class="bi bi-check-circle me-2"></i><strong>Status:</strong> <span class="badge bg-success">Tersedia</span></p>
           </div>
