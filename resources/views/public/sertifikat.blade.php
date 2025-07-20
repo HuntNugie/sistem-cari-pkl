@@ -49,8 +49,8 @@
                         <p class="mb-3">Selamat, Anda telah menyelesaikan PKL di perusahaan tersebut. Silakan cetak atau unduh sertifikat Anda melalui tombol di bawah ini.</p>
                     </div>
                     <div class="d-flex gap-3">
-                        <a href="{{ route("public.pdf.lihat.sertifikat",$lamaran->id) }}" class="btn btn-primary"><i class="bi bi-printer"></i> Cetak Sertifikat</a>
-                        <a href="{{ route("public.pdf.download.sertifikat",$lamaran->id) }}" class="btn btn-success"><i class="bi bi-download"></i> Download Sertifikat</a>
+                        <a href="{{ route("public.pdf.lihat.sertifikat",$lamaran->id) }}" class="btn btn-primary" target="_blank"><i class="bi bi-printer"></i> Cetak Sertifikat</a>
+                        <a href="{{ route("public.pdf.download.sertifikat",$lamaran->id) }}" class="btn btn-success" target="_blank"><i class="bi bi-download"></i> Download Sertifikat</a>
                     </div>
                 </div>
             </div>
