@@ -15,7 +15,7 @@
             <div class="d-flex align-items-start gap-3 mb-3">
               <img src="{{ asset("storage") }}/{{ $lowongan->perusahaan->perusahaanProfile->logo ?? "-" }}" alt="Foto Perusahaan" class="rounded-circle border shadow-sm" width="60" height="60">
               <div>
-                <h6 class="mb-1 fw-bold">{{ $lowongan->perusahaan->perusahaanProfile->nama_perusahaan }}</h6>
+                <h6 class="mb-1 fw-bold"><a class="text-decoration-none text-dark" href="{{ route("public.info.perusahaan",$lowongan->perusahaan->id) }}">{{ $lowongan->perusahaan->perusahaanProfile->nama_perusahaan }}</a></h6>
                 <span class="badge bg-success">{{ $lowongan->status }}</span>
                 <p class="mb-0 small text-muted">{{ $lowongan->jurusan->singkatan }} | Kuota: {{ $lowongan->kuota }} siswa</p>
             </div>

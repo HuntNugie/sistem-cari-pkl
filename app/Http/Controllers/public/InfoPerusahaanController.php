@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 class InfoPerusahaanController extends Controller
 {
     public function show(Perusahaan $perusahaan){
-        return view("public.detail-perusahaan",compact("perusahaan"));
+        $lowongans = $perusahaan->lowongan()->where("status","tersedia")->get();
+        return view("public.detail-perusahaan",compact("perusahaan","lowongans"));
     }
 }

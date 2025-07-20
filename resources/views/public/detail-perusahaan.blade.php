@@ -80,7 +80,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($perusahaan->lowongan as $lowongan)
+                        @forelse ($lowongans as $lowongan)
                         <tr>
                             <td class="fw-medium">{{ $lowongan->judul_lowongan }}</td>
                             <td>{{ $lowongan->jurusan->nama_jurusan }}</td>
