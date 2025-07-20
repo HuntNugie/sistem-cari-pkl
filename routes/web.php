@@ -41,6 +41,7 @@ use App\Http\Controllers\perusahaan\auth\RegisterPerusahaanController;
 use App\Http\Controllers\perusahaan\auth\ForgotPasswordController as PerusahaanForgotPasswordController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\DaftarSiswaPklController as AdminDaftarSiswaPklController;
+use App\Http\Controllers\public\InfoPerusahaanController as InfoPerusahaanSiswaController;
 
 
 // landing page
@@ -62,7 +63,9 @@ Route::middleware("auth")->group(function(){
             // aksi lamaran
             Route::post("/lamar/{lowongan}",[LamaranController::class,"storeLamar"])->name("public.lamaran.aksi")->middleware("tolakPending");
         });
-
+        
+         // halaman info perusahaan
+         Route::get("/info-perusahaan/{perusahaan}",[InfoPerusahaanSiswaController::class,"show"])->name("public.info.perusahaan");
     });
     // Route myprofile User
     Route::prefix("myprofile")->group(function(){
@@ -117,6 +120,8 @@ Route::middleware("auth")->group(function(){
         });
 
     });
+
+   
 });
 
 // Halaman Logout
