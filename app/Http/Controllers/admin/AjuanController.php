@@ -45,7 +45,7 @@ class AjuanController extends Controller
                 ]
             );
             $this->emailAjuan($pengajuan,pemberitahuan_ditolak::class);
-            return redirect()->back()->with("sukses","Berhasil Menolak perusahaan".$pengajuan->perusahaan->perusahaanProfile->nama_perusahaan);
+            return redirect()->back()->with("sukses","Berhasil Menolak perusahaan ".$pengajuan->perusahaan->perusahaanProfile->nama_perusahaan);
         }
     }
 

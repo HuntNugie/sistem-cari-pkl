@@ -14,7 +14,6 @@
 
         @if (auth()->guard("perusahaan")->user()->perusahaanProfile->status == "terkonfirmasi")
 
-
         <li class="nav-item sidebar-category">
           <p>Lowongan PKL</p>
           <span></span>
