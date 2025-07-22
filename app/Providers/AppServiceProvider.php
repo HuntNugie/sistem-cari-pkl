@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Middleware\Authenticate;
+use URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,12 +21,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-            Authenticate::redirectUsing(function ($request) {
+
+        if(app()->environment('production') || str_contains(request()->getHost(),'ngrok')){
+            URL::forceScheme('https');
+        }
+        Authenticate::redirectUsing(function ($request) {
                 return match(true){
                     $request->is('admin/*') => route('admin.login'),
                     $request->is('perusahaan/*') => route('perusahaan.login'),
                     default => route('public.login'),
                 };
          });
+
+
     }
 }

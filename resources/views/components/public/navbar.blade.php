@@ -23,8 +23,8 @@
            <!-- Dropdown avatar -->
            @auth
 
-           <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+           <li class="dropdown">
+               <a href="#"><span>
                 @if (auth()->user()->user_profile->foto)
                      <img src="{{asset("storage") }}/{{ auth()->user()->user_profile->foto }}" alt="User" class="rounded-circle me-2" width="35" height="35">
                 @elseif (auth()->user()->avatar)
@@ -33,20 +33,19 @@
                      <img src="https://imgs.search.brave.com/DkxRxFg6OEhXbIGUQg14SHcmtPzWgVOKqolWbV9fESE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aW5zdGFncmFtLWRl/ZmF1bHQtdXNlci1w/cm9maWxlLXBpYy1m/bGlwLWZsb3BzLXYw/LWc5ODNvZmxmZWc0/ZDEuanBnP3dpZHRo/PTI2MiZmb3JtYXQ9/cGpwZyZhdXRvPXdl/YnAmcz1jNmVjMjMw/NTE5OWM2MzNmYzZk/NDYwMjM4ZDA0MDlm/NDE4MTJmZTc1" alt="User" class="rounded-circle me-2" width="35" height="35">
                 @endif
             {{ auth()->user()->name }}
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="{{ route("public.myprofile") }}" style="color:{{ request()->routeIs('public.myprofile') || request()->routeIs("public.myprofile.edit") ? "#ff6600" : "" }}">My Profile</a></li>
-              <li><a class="dropdown-item" href="{{ route("public.riwayat.lamaran") }}">Riwayat lamaran</a></li>
+            </span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+              <li><a href="{{ route("public.myprofile") }}" style="color:{{ request()->routeIs('public.myprofile') || request()->routeIs("public.myprofile.edit") ? "#ff6600" : "" }}">My Profile</a></li>
+              <li><a href="{{ route("public.riwayat.lamaran") }}">Riwayat lamaran</a></li>
               @if(auth()->guard("web")->user()->lamaran()->where( "status","selesai")->exists())
-                <li><a class="dropdown-item" href="{{ route("public.sertifikat") }}"> Sertifikat </a></li>
+                <li><a href="{{ route("public.sertifikat") }}"> Sertifikat </a></li>
               @endif
-              <li><hr class="dropdown-divider"></li>
               <li>
-                <form action="{{ route("public.logout") }}" method="post">
+                <form action="{{ route("public.logout") }}" method="post" class="">
                     @csrf
-                    <button type="submit" class="dropdown-item text-danger" >Logout</button>
+                    <button type="submit" class="dropdown-item text-danger">Logout</button>
                 </form>
-            </li>
+              </li>
             </ul>
         </li>
         @endauth
