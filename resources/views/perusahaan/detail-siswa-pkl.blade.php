@@ -19,11 +19,8 @@
       <div class="mb-3 d-flex justify-content-center">
         @php
           $foto = $lamaran->siswa->user_profile->foto ?? null;
-          $avatar = $lamaran->siswa->avatar ?? null;
           if($foto){
             $imgSrc = asset('storage/'.$foto);
-          }elseif($avatar){
-            $imgSrc = $avatar;
           }else{
             $imgSrc = 'https://ui-avatars.com/api/?name='.urlencode($lamaran->siswa->name).'&background=0D8ABC&color=fff&size=400';
           }

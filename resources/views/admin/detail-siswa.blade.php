@@ -12,8 +12,6 @@
                           $avatar = $siswa->avatar ?? null;
                           if($foto){
                             $imgSrc = asset('storage/'.$foto);
-                          }elseif($avatar){
-                            $imgSrc = $avatar;
                           }else{
                             $imgSrc = 'https://ui-avatars.com/api/?name='.urlencode($siswa->name).'&background=0D8ABC&color=fff&size=400';
                           }
