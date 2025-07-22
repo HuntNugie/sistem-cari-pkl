@@ -11,12 +11,9 @@
                 </div>
                 <div class="card-body text-center">
                     @php
-                        $avatar = auth()->user()->avatar ?? null;
                         $foto = auth()->user()->user_profile->foto ?? null;
                         if($foto){
                             $imgSrc = asset('storage/'.$foto);
-                        }elseif($avatar){
-                            $imgSrc = $avatar;
                         }else{
                             $imgSrc = 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name).'&background=0D8ABC&color=fff&size=200';
                         }

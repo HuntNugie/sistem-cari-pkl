@@ -33,7 +33,13 @@
                             <td>{{ $item->user_profile->sekolah->nama_sekolah ?? "-" }}</td>
                             <td>{{ $item->user_profile->nis }}</td>
                             <td>{{ $item->user_profile->kelas }}</td>
-                            <td>{{ $item->lamaran()->where("status","selesai")->first()->status ?? "Belum PKL" }}</td>
+                            @if($item->lamaran()->where("status","selesai")->first())
+                                <td>{{ $item->lamaran()->where("status","selesai")->first()->status }}</td>
+                            @elseif($item->lamaran()->where("status","diterima")->first())
+                                <td>Sedang PKL</td>
+                            @else
+                                <td>Belum PKL</td>
+                            @endif
                             <td>
                                 <form action="{{ route('admin.siswa.aktif.detail', $item->id) }}" method="get" class="d-inline">
                                     <button type="submit" class="btn btn-info btn-sm">Detail</button>
