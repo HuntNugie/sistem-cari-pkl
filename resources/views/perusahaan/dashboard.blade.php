@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="card-footer bg-white border-top-0">
-                <a href="#" class="btn btn-primary w-100 fw-semibold">
+                <a href="{{ route("perusahaan.daftar.siswa.baru") }}" class="btn btn-primary w-100 fw-semibold">
                     <i class="mdi mdi-arrow-right-bold-circle-outline me-1"></i>
                     Lihat Selengkapnya
                 </a>

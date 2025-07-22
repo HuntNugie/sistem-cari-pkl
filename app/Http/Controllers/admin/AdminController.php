@@ -83,6 +83,6 @@ class AdminController extends Controller
     public function ubahRole(Admin $admin,$role){
         $admin->role = $role;
         $admin->save();
-        return redirect()->back()->with("sukses","Berhasil mengubah ".$admin->profile->name." menjadi super admin");
+        return redirect()->back()->with("sukses","Berhasil mengubah ".$admin->profile->name." menjadi ".$role);
     }
 }

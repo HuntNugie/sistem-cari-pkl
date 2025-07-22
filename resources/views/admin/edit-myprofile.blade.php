@@ -7,7 +7,7 @@
             <div class="row align-items-center w-100">
                 <div class="col-md-3 text-center mb-4 mb-md-0">
                     <div class="position-relative d-inline-block">
-                        <img src="{{ asset('images/default-profile.png') }}" alt="Foto Profil" class="rounded-circle border border-3 border-light shadow" width="170" height="170">
+                        <img src="{{ asset('storage') }}/{{ Auth::guard('admin')->user()->profile->foto ?? 'images/default-profile.png' }}" alt="Foto Profil" class="rounded-circle border border-3 border-light shadow" width="170" height="170">
                         <span class="position-absolute bottom-0 end-0 translate-middle p-2 bg-success border border-light rounded-circle">
                             <i class="bi bi-check-circle-fill text-white"></i>
                         </span>
