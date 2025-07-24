@@ -72,7 +72,7 @@
                     </table>
                 </div>
                 <div class="mt-4 text-end">
-                    <span class="badge bg-secondary bg-opacity-25 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #64748b !important;">Total: 3 siswa</span>
+                    <span class="badge bg-secondary bg-opacity-25 fw-semibold px-3 py-2 rounded-pill text-white" style="background: #64748b !important;">Total: {{ $riwayats->count() }} siswa</span>
                 </div>
             </div>
         </div>

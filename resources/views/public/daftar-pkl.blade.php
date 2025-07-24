@@ -52,7 +52,7 @@
 
     <!-- List PKL Cards -->
     <div class="row" id="pklList">
-
+      {{ $lowongan->links("pagination::bootstrap-5") }}
         @foreach ($lowongan as $low)
 
         <!-- Card 1 -->
